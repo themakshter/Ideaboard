@@ -1,4 +1,4 @@
 comp6205cw
 ==========
 
-Web Development coursework for module
+Web Development coursework for COMP6205
