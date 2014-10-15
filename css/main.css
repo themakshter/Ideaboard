@@ -1,26 +1,42 @@
+body{
+     font-size: 16px;   
+}
+
 #page-heading {
     text-align: center;
 }
-table,
-td,
-th {
-    border: 2px solid;
+
+table,th,td{
+    border:1px solid; 
+    padding: 8px;
 }
+
 th {
     text-align: center;
 }
+.legend{
+     font-weight: bold;   
+}
+
 table {
     display: table;
     width: 100%;
 }
 .equi-width {
-    width: 10%;
+    width: 8%;
 }
 caption {
     font-size: 20px;
 }
-.tick {
+.ali {
     background-color: #8ACE65;
+    border: 1px solid;
+    border-color: black;
+}
+.michael {
+    background-color: #FF8C8C;
+    border: 1px solid;
+    border-color: black;
 }
 .dummy {
     height: 50px;
@@ -33,4 +49,37 @@ footer {
 }
 .clickable {
     cursor: pointer;
+}
+#board {
+    height: 75%;
+    width: 75%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.box {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 25px;
+    width: 25%;
+} 
+.both {
+    border: 1px solid;
+    border-color: black;
+    background: -moz-linear-gradient(-45deg, #FF8C8C 50%, #8ACE65 50%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(50%, #FF8C8C), color-stop(50%, #9cf767));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(-45deg, #FF8C8C 50%, #8ACE65 50%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(-45deg, #FF8C8C 50%, #8ACE65 50%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(-45deg, #FF8C8C 50%, #8ACE65 50%);
+    /* IE10+ */
+    background: linear-gradient(135deg, #FF8C8C 50%, #8ACE65 50%);
+    /* W3C */
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#FF8C8C', endColorstr='#8ACE65', GradientType=1);
+    /* IE6-9 fallback on horizontal gradient */
 }
