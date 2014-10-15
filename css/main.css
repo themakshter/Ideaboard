@@ -4,7 +4,45 @@
 
 table, td,th
 {
-	border: 2px;
-	border-style: solid;
-	border-collapse: collapse;
+	border: 2px solid;
+    
+}
+
+th{
+    text-align: center;   
+}
+
+table{
+    display: table;
+    width: 100%;
+}
+
+.equi-width{
+    width: 10%;   
+}
+
+caption
+{
+    font-size: 20px;   
+}
+
+h3{
+    text-align: center;
+}
+
+.tick{
+    background-color: #8ACE65;   
+}
+
+.dummy{
+    height: 50px;   
+}
+
+footer{
+ background-color: #EEEEEE;   
+}
+
+#chart{
+    border: 1px solid;
+    
 }
