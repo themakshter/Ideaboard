@@ -13,7 +13,7 @@
 
 <body>
     <div class="container">
-        <h1 id="page-heading">COMP6205 Project Brief <small>(mak1g11, mrt1g11)</small></h1>
+        <h1 id="page-heading">COMP6205 Project Brief <br><small>(mak1g11, mrt1g11)</small></h1>
         <h2 class="text-center">Idea Board</h2>
         <div class="panel-group" id="accoridon">
             <div class="panel panel-default">
@@ -216,37 +216,52 @@
                 </div>
                 <div id="technologies" class="panel-collapse collapse">
                     <div class="panel-body">
+                        <p>For the back end of our application, we will be using a combination of <strong><a href="http://backbonejs.org/">Backbone.js</a></strong> and <strong><a href="http://nodejs.org/">node.js</a></strong> while using a <strong><a href="http://www.mongodb.org/">MongoDB</a></strong> or <strong>SQL</strong> database. The front end will be written in a combination of HTML5, CSS3 and JavaScript. Some libraries which will be in use include <strong><a class="" href="http://jquery.com/">jQuery</a></strong>,<strong><a href="https://github.com/raphaelcruzeiro/jquery-notebook">jQuery-Notebook</a></strong> and the <strong><a href="http://getbootstrap.com/">Bootstrap framework</a></strong>.</p>
                         <ul>
-                            <li>Backbone.js</li>
-                            <li>JQuery</li>
-                            <li>Node js</li>
-                            <li>SQL</li>
-                            <li>Bootstrap</li>
-                            <li>jquery notebook</li>
+                            <li>Back End</li>
+                            <ul>
+                                <li><a href="http://backbonejs.org/">Backbone.js</a>
+                                </li>
+                                <li><a href="http://nodejs.org/">node.js</a>
+                                </li>
+                            </ul>
+                            <li>Database</li>
+                            <ul>
+                                <li><a href="http://www.mongodb.org/">MongoDB</a> or SQL</li>
+                            </ul>
+                            <li>Front End</li>
+                            <ul>
+                                <li>HTML5</li>
+                                <li>CSS3</li>
+                                <li>JavaScript</li>
+                            </ul>
+                            <li>Frameworks</li>
+                            <ul>
+                                <li><a class="" href="http://jquery.com/">jQuery</a>
+                                </li>
+                                <li><a href="https://github.com/raphaelcruzeiro/jquery-notebook">jQuery-Notebook</a>
+                                </li>
+                                <li><a href="http://getbootstrap.com/">Bootstrap framework</a>
+                                </li>
+                            </ul>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="panel panel-default">
-                <div data-toggle="collapse" data-parent="#accordion" href="#implementation" class="panel-heading clickable">
-                    <h4 class="panel-title">Implementation Schedule</h4>
+                <div data-toggle="collapse" data-parent="#accordion" href="#plan" class="panel-heading clickable">
+                    <h4 class="panel-title">Project Plan</h4>
                 </div>
-                <div id="implementation" class="panel-collapse collapse">
+                <div id="plan" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <img id="chart" class="img-responsive" src="img/gantt_chart.png" />
+                        <p class="text-justify">For the coming week or so, we will spend time designing the front end and back end of our application, creating wireframes and going over tutorials and documentation. After that, we will be setting up our server and backend, writing tests for our work in parallel.  With our server running, we will build the application itself using HTML, CSS and JavaScript. As our application is mostly visual, this will take most of our time. We will also be aiming to test our application as we go. <br>As we go through our project, we will aim to write documentation in parallel so that we do not have to rush at the end. Therefore the technical manual will start the moment we initiate setting up our back end and we will start writing the user manual once roughly halfway through our front end application design. </p>
+                        <figure><img id="chart" class="img-responsive" src="img/gantt_chart.png" /><figcaption class="text-center"><strong>Ideaboard implementation schedule</strong></figcaption></figure>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="dummy"></div>
 </body>
-<footer id="footer">
-    <div class="container">
-        <br>
-        <h4>Ideaboard Brief 2014</h4>
-    </div>
-    <br>
-</footer>
 
 </html>

@@ -1,23 +1,21 @@
-body{
-     font-size: 16px;   
+body {
+    font-size: 16px;
 }
-
 #page-heading {
     text-align: center;
 }
-
-table,th,td{
-    border:1px solid; 
+table,
+th,
+td {
+    border: 1px solid;
     padding: 8px;
 }
-
 th {
     text-align: center;
 }
-.legend{
-     font-weight: bold;   
+.legend {
+    font-weight: bold;
 }
-
 table {
     display: table;
     width: 100%;
@@ -57,14 +55,13 @@ footer {
     margin-left: auto;
     margin-right: auto;
 }
-
 .box {
     display: block;
     margin-left: auto;
     margin-right: auto;
     height: 25px;
     width: 25%;
-} 
+}
 .both {
     border: 1px solid;
     border-color: black;
@@ -83,3 +80,4 @@ footer {
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#FF8C8C', endColorstr='#8ACE65', GradientType=1);
     /* IE6-9 fallback on horizontal gradient */
 }
+#footer {}
