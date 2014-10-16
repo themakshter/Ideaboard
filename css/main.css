@@ -1,5 +1,6 @@
 body {
     font-size: 16px;
+    background-color: #DBE0DB;
 }
 #page-heading {
     text-align: center;
@@ -36,6 +37,11 @@ caption {
     border: 1px solid;
     border-color: black;
 }
+.container
+{
+    max-width: 700px;
+}
+
 .dummy {
     height: 50px;
 }
