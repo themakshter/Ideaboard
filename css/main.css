@@ -2,6 +2,11 @@ body {
     font-size: 16px;
     background-color: #DBE0DB;
 }
+p,ol,li
+{
+    max-width: 800px;
+    margin-right: auto;
+}
 #page-heading {
     text-align: center;
 }
@@ -39,7 +44,7 @@ caption {
 }
 .container
 {
-    max-width: 850px;
+    max-width: 1200px;
 }
 
 .dummy {
