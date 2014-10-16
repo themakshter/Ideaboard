@@ -46,13 +46,6 @@ caption {
 {
     max-width: 1200px;
 }
-
-.dummy {
-    height: 50px;
-}
-footer {
-    background-color: #EEEEEE;
-}
 #chart {
     border: 1px solid;
 }
@@ -91,4 +84,3 @@ footer {
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#65CECE', endColorstr='pink', GradientType=1);
     /* IE6-9 fallback on horizontal gradient */
 }
-#footer {}
