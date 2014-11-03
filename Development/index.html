@@ -23,21 +23,38 @@
   <script src="libs/backbone-min.js" type="text/javascript"></script>
   <script src="libs/backbone-localStorage-min.js" type="text/javascript"></script>  
   <script src="libs/bootstrap-3.3.0-dist/dist/js/bootstrap.min.js"></script>
+  
+
   <!-- =============== -->
   <!-- Javascript code -->
   <!-- =============== -->
   <script type="text/javascript">
 	// your JS code goes here
-	 var AppView = Backbone.View.extend({
-	  el: $('#container'),
-	  // template 
-	  template: _.template("<h3>Hello <%= who %><h3>"),
-	  initialize: function(){
-		this.render();
-	  },
-	  render: function(){
-		this.$el.html(this.template({who: 'world!'}));
-	  }
+	var app = {}; // create namespace for our app
+
+    app.Note = Backbone.Model.extend({
+    	defaults:{
+    		text:''
+    	}
+    });
+    app.NoteCollumn = Backbone.Collection.extend({
+    	model: app.Note
+    });
+    app.Idea
+	var AppView = Backbone.View.extend({
+		el: $('#container'),
+		// template 
+		template: _.template(
+	  		"<h3>Hello <%= who %><h3><% %>"
+	  	),
+
+	  	initialize: function(){
+			this.render();
+	  	},
+
+		render: function(){
+			this.$el.html(this.template({who: 'world!'}));
+		}
 	});
 
 	var appView = new AppView();
