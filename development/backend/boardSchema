@@ -1,0 +1,14 @@
+{
+			boardName : String,
+			boardAuthor: String,
+			boardColour: String,
+			columns: [{
+						columnName: String,
+						notes: [{
+									noteName: String,
+									noteColour: String,
+									noteContent : String,
+						}]
+			  }]
+		}
+

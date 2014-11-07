@@ -1,0 +1,37 @@
+{
+	"_id": ObjectId("545b8ba5d82f0e3a8c4a19e0"),
+	"boardName": "testBoard1",
+	"author": "testAuthor1",
+	"colour": "testColour1",
+	"columns": [{
+		"columnName": "testColumn1",
+		"notes": [{
+			"notesName": "testNote1",
+			"noteColour": "testColour2",
+			"noteContent": "This is a test note 1 on testColumn1"
+		}, {
+			"notesName": "testNote2",
+			"noteColour": "testColour3",
+			"noteContent": "This is a test note 2 on testColumn1"
+		}, {
+			"notesName": "testNote3",
+			"noteColour": "testColour4",
+			"noteContent": "This is a test note 3 on testColumn1"
+		}]
+	}, {
+		"columnName": "testColumn2",
+		"notes": [{
+			"notesName": "testNote1",
+			"noteColour": "testColour2",
+			"noteContent": "This is a test note 1 on testColumn2"
+		}, {
+			"notesName": "testNote2",
+			"noteColour": "testColour3",
+			"noteContent": "This is a test note 2 on testColumn2"
+		}, {
+			"notesName": "testNote3",
+			"noteColour": "testColour4",
+			"noteContent": "This is a test note 3 on testColumn2"
+		}]
+	}]
+}
