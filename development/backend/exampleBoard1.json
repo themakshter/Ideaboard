@@ -1,5 +1,5 @@
 {
-	"_id": ObjectId("545b8ba5d82f0e3a8c4a19e0"),
+	"_id": "545b8ba5d82f0e3a8c4a19e0",
 	"boardName": "testBoard1",
 	"author": "testAuthor1",
 	"colour": "testColour1",

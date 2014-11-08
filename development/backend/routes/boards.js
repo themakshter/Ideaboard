@@ -1,13 +1,13 @@
 var mongo = require("mongodb");
 
 var Server = mongo.Server,
-	db = mongo.Db,
+	Db = mongo.Db,
 	BSON = mongo.BSONPure;
 
 var dbName = 'ideaboardDB';
 
 var server = new Server('localhost',27017, {auto_reconnect: true});
-db = new db(dbName,server);
+db = new Db(dbName,server);
 
 db.open(function(err, db){
 	if(!err){
@@ -96,27 +96,82 @@ var populateDB = function(){
 		{
 			name : "testBoard1",
 			author: "testBoard1Author",
-			colour : "testColour2"
+			colour : "testColour2",
+			columns: [{
+				_id : new BSON.ObjectID(),
+				name:"testBoard1Column1"
+			},{
+				_id : new BSON.ObjectID(),
+				name:"testBoard1Column2"
+			},{
+				_id : new BSON.ObjectID(),
+				name:"testBoard1Column3"
+			}
+			]
 		},
 		{
 			name : "testBoard2",
 			author: "testBoard2Author",
-			colour : "testColour2"
+			colour : "testColour2",
+			columns: [{
+				_id : new BSON.ObjectID(),
+				name:"testBoard2Column1"
+			},{
+				_id : new BSON.ObjectID(),
+				name:"testBoard2Column2"
+			},{
+				_id : new BSON.ObjectID(),
+				name:"testBoard2Column3"
+			}
+			]
 		},
 		{
 			name : "testBoard3",
 			author: "testBoard3Author",
-			colour : "testColour3"
+			colour : "testColour3",
+			columns: [{
+				_id : new BSON.ObjectID(),
+				name:"testBoard3Column1"
+			},{
+				_id : new BSON.ObjectID(),
+				name:"testBoard3Column2"
+			},{
+				_id : new BSON.ObjectID(),
+				name:"testBoard3Column3"
+			}
+			]
 		},
 		{
 			name : "testBoard4",
 			author: "testBoard4Author",
-			colour : "testColour4"
+			colour : "testColour4",
+			columns: [{
+				_id : new BSON.ObjectID(),
+				name:"testBoard4Column1"
+			},{
+				_id : new BSON.ObjectID(),
+				name:"testBoard4Column2"
+			},{
+				_id : new BSON.ObjectID(),
+				name:"testBoard4Column3"
+			}
+			]
 		},
 		{
 			name : "testBoard5",
 			author: "testBoard5Author",
-			colour : "testColour5"
+			colour : "testColour5",
+			columns: [{
+				_id : new BSON.ObjectID(),
+				name:"testBoard5Column1"
+			},{
+				_id : new BSON.ObjectID(),
+				name:"testBoard5Column2"
+			},{
+				_id : new BSON.ObjectID(),
+				name:"testBoard5Column3"
+			}
+			]
 		},
 	];
 
