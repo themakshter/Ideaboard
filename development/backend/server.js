@@ -1,10 +1,14 @@
 
 var express = require("express");
+	db = require("./routes/db.js");
 	boards = require("./routes/boards.js");
 	columns = require("./routes/columns.js");
+
 var app = express();
 
 var port = 3000;
+
+db.openDatabase("ideaboardDB");
 
 app.get('/boards', boards.findAll);
 app.get('/boards/:id', boards.findById);

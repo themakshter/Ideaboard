@@ -1,12 +1,6 @@
 var mongo = require('mongodb');
 
-var Server = mongo.Server,
-	Db = mongo.Db,
-	BSON = mongo.BSONPure;
-
-var dbName = 'ideaboardDB';
-
-var server = new Server('localhost',27017,{auto_reconnect: true});
+var	BSON = mongo.BSONPure;
 
 exports.findAll = function(req,res){
 	var boardId = req.params.boardId;
