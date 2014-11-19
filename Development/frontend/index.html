@@ -11,53 +11,84 @@
   <!-- ========= -->
   <!-- Your HTML -->
   <!-- ========= -->
-  <h1>IdeaBoard</h1>
-  <hr />
+    <nav class="navbar navbar-inverse">
+        <a class="navbar-brand">IdeaBoard</a>
+        <p class="navbar-text navbar-right userField" ></p>
+    </nav>
+    <div id="container">Loading...</div>
+    <!-- ========= -->
+    <!-- Libraries -->
+    <!-- ========= -->
+    <script src="libs/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <script src="libs/underscore-min.js" type="text/javascript"></script>
+    <script src="libs/backbone-min.js" type="text/javascript"></script>
+    <script src="libs/backbone-localStorage-min.js" type="text/javascript"></script>  
+    <script src="libs/bootstrap-3.3.0-dist/dist/js/bootstrap.min.js"></script>
 
-  <div id="container">Loading...</div>
-  <!-- ========= -->
-  <!-- Libraries -->
-  <!-- ========= -->
-  <script src="libs/jquery-2.1.1.min.js" type="text/javascript"></script>
-  <script src="libs/underscore-min.js" type="text/javascript"></script>
-  <script src="libs/backbone-min.js" type="text/javascript"></script>
-  <script src="libs/backbone-localStorage-min.js" type="text/javascript"></script>  
-  <script src="libs/bootstrap-3.3.0-dist/dist/js/bootstrap.min.js"></script>
-  
+	<script type="foo/bar" id='boardTemplate'>
+	    <h3>Hello <%= who %></h3>
+	</script>
 
-  <!-- =============== -->
-  <!-- Javascript code -->
-  <!-- =============== -->
-  <script type="text/javascript">
+	<!-- =============== -->
+	<!-- Javascript code -->
+	<!-- =============== -->
+	<script type="text/javascript">
+	var apiURL = 'http://localhost:3000';
+	showBoard('546a841460abfa1f17e76b81');
+	function showBoard(boardID)
+	{
+		var container = $("#container");
+		container.empty();
+	
+		$.get(apiURL+'/boards/'+boardID,function(data)
+		{
+			$(".userField").text(data.author);
+ 		});
+ 		$.get(apiURL+'/boards/'+boardID+"/columns",function(data)
+		{
+			var columns = [];
+			$(data).each(function(index,value)
+			{
+				columns.push(value._id);
+				container.append("<div class=\"boardColumn\" data-column-id =\"" + value._id + "\"></div>");
+			});
+			$(columns).each(function(index,value){
+
+			});
+ 		});
+	}
 	// your JS code goes here
-	var app = {}; // create namespace for our app
+	// var app = {}; // create namespace for our app
 
-    app.Note = Backbone.Model.extend({
-    	defaults:{
-    		text:''
-    	}
-    });
-    app.NoteCollumn = Backbone.Collection.extend({
-    	model: app.Note
-    });
-    app.Idea
-	var AppView = Backbone.View.extend({
-		el: $('#container'),
-		// template 
-		template: _.template(
-	  		"<h3>Hello <%= who %><h3><% %>"
-	  	),
+ //    app.Note = Backbone.Model.extend({
+ //    	defaults:{
+ //    		text:''
+ //    	}
+ //    });
+ //    app.NoteCollumn = Backbone.Collection.extend({
+ //    	model: app.Note
+ //    });
+ //    app.Board = Backbone.Collection.extend({
+ //        model: app.NoteCollumn
+ //    })
+ //    var boardTemplate = $('#boardTemplate').html();
+	// var AppView = Backbone.View.extend({
+	// 	el: $('#container'),
+	// 	// template 
+	// 	template: _.template(
+	//   		boardTemplate
+	//   	),
 
-	  	initialize: function(){
-			this.render();
-	  	},
+	//   	initialize: function(){
+	// 		this.render();
+	//   	},
 
-		render: function(){
-			this.$el.html(this.template({who: 'world!'}));
-		}
-	});
+	// 	render: function(){
+	// 		this.$el.html(this.template({who: 'world!'}));
+	// 	}
+	// });
 
-	var appView = new AppView();
+	// var appView = new AppView();
   </script>
   
 </body>
