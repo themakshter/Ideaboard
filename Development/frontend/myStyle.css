@@ -6,7 +6,7 @@
 }
 .note
 {
-    height:100px;
+    min-height: 100px!important;
     margin-top:15px;
     font-family: 'Roboto Slab', serif;
     background-color:white;
