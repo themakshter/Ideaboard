@@ -34,6 +34,8 @@
 						var text = value.contents;
 						notesContainer.prepend("<div class=\"note\">"+text+"</div>");
 					});
+					$('.note').notebook();
+
 				});
 			});
  		});
