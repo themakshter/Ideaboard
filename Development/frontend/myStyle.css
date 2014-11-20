@@ -1,7 +1,8 @@
 .boardColumn
 {
-    display:inline-block;
+    display:inline;
     padding:10px;
+    width:400px;
 
 }
 .note
@@ -15,5 +16,10 @@
 body
 {
 
-  background-color:#E8E8E8
+  background-color:#E8E8E8;
+  overflow-x:visible;
+}
+#container
+{
+  white-space: nowrap;
 }
