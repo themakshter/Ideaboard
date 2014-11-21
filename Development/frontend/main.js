@@ -32,9 +32,23 @@
 					$(data).each(function(index,value)
 					{
 						var text = value.contents;
-						notesContainer.prepend("<div class=\"note\">"+text+"</div>");
+						notesContainer.prepend("<div class=\"note\" data-noteID =\"" + value._id +"\">"+text+"</div>");
+						var note = notesContainer.children().first();
 					});
 					$('.note').notebook();
+					$('.note').on('contentChange', function(e)
+					{
+						var id = e.originalEvent.target.getAttribute('data-noteID');
+						
+					    var content = e.originalEvent.detail.content;
+					    $.ajax({
+					    	url:apiURL+'/boards/'+boardID+"/columns/"+colID+"/notes/"+id,
+					    	type:'PUT',
+					    	data:content
+					    })
+					    //$.put(apiURL+'/boards/'+boardID+"/columns/"+colID+"/notes/"+id,content);
+						console.log("post to server on note"+id);
+					});
 
 				});
 			});
