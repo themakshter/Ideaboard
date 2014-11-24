@@ -1,5 +1,5 @@
 	var apiURL = 'http://localhost:3000';
-	showBoard('546a841460abfa1f17e76b81');
+	showBoard('545e9cdf9c35b9882f3050a8');
 	function showBoard(boardID)
 	{
 		var container = $("#container");
@@ -8,6 +8,7 @@
 		$.get(apiURL+'/boards/'+boardID,function(data)
 		{
 			$(".userField").text(data.author);
+			$(".boardField").text(data.name);
  		});
  		$.get(apiURL+'/boards/'+boardID+"/columns",function(data)
 		{
