@@ -4,9 +4,10 @@ var express = require("express");
 	db = require("./routes/db.js");
 	boards = require("./routes/boards.js");
 	columns = require("./routes/columns.js");
-	notes = require("./routes/notes");
+	notes = require("./routes/notes.js");
 
 var app = express();
+app.use(express.bodyParser());
 app.use(cors());
 
 var port = 3000;
