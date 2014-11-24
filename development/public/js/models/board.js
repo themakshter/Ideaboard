@@ -1,4 +1,4 @@
-window.Note = Backbone.Model.extend({
+window.Board = Backbone.Model.extend({
 
     urlRoot: "/boards",
 
@@ -9,14 +9,6 @@ window.Note = Backbone.Model.extend({
 
         this.validators.name = function (value) {
             return value.length > 0 ? {isValid: true} : {isValid: false, message: "You must enter a name"};
-        };
-
-        this.validators.grapes = function (value) {
-            return value.length > 0 ? {isValid: true} : {isValid: false, message: "You must enter a grape variety"};
-        };
-
-        this.validators.country = function (value) {
-            return value.length > 0 ? {isValid: true} : {isValid: false, message: "You must enter a country"};
         };
     },
 
@@ -43,13 +35,13 @@ window.Note = Backbone.Model.extend({
 
     defaults: {
         _id: null,
-        name: "",
-        author:"unknown",
-        colour:"white"
+        name: "New Board",
+        author:"Unknown",
+        colour:"White"
     }
 });
 
-window.NoteCollection = Backbone.Collection.extend({
+window.BoardCollection = Backbone.Collection.extend({
 
     model: Board,
 

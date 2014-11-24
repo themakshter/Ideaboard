@@ -36,9 +36,7 @@ window.Column = Backbone.Model.extend({
 
     defaults: {
         _id: null,
-        name: "",
-        author:"unknown",
-        colour:"white"
+        name: "New Column"
     }
 });
 
