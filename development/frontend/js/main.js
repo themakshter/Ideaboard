@@ -1,5 +1,6 @@
 	var apiURL = 'http://localhost:3000';
-	showBoard('5473721192dd32643b45ccc4');
+	showBoard('54737859abac55423d2adfe4');
+	var timeLastUpdated = new Date();
 	function showBoard(boardID)
 	{
 		var container = $("#container");
@@ -39,34 +40,42 @@
 					$('.note').notebook();
 					$('.note').on('contentChange', function(e)
 					{
-						var id = e.originalEvent.target.getAttribute('data-noteID');
-						
-					    var content = e.originalEvent.detail.content;
-					    var message = 
-					    {
-					    	"column":colID,
-					    	"name": "test name from client",
-					    	"contents":content,
-					    	"color":"test color from client"
-					    };
-					    $.ajax({
-					    	url:apiURL+'/boards/'+boardID+"/columns/"+colID+"/notes/"+id,
-					    	type:'PUT',
-					    	data:JSON.stringify(message),
-					    	success:function(data,textStatus,jqXHR)
-					    	{
-					    		console.log(data);
-					    	},
-					    	contentType: "application/json"
-					    })
-					    //$.put(apiURL+'/boards/'+boardID+"/columns/"+colID+"/notes/"+id,content);
-						console.log("post to server on note"+id);
+						var now = new Date();
+						var timeDiff = Math.abs(now.getTime() - timeLastUpdated.getTime());
+						console.log(timeDiff);
+						if(timeDiff > 500)
+						{
+							var id = e.originalEvent.target.getAttribute('data-noteID');
+							
+						    var content = e.originalEvent.detail.content;
+						    var message = 
+						    {
+						    	"column":colID,
+						    	"name": "test name from client",
+						    	"contents":content,
+						    	"color":"test color from client"
+						    };
+						    $.ajax({
+						    	url:apiURL+'/boards/'+boardID+"/columns/"+colID+"/notes/"+id,
+						    	type:'PUT',
+						    	data:JSON.stringify(message),
+						    	success:function(data,textStatus,jqXHR)
+						    	{
+						    		console.log(data);
+						    	},
+						    	contentType: "application/json"
+						    })
+						    timeLastUpdated = new Date();
+						    //$.put(apiURL+'/boards/'+boardID+"/columns/"+colID+"/notes/"+id,content);
+							console.log("post to server on note"+id);
+						}
 					});
 
 				});
 			});
  		});
 	}
+
 	// your JS code goes here
 	// var app = {}; // create namespace for our app
 
