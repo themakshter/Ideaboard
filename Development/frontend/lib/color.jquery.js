@@ -80,11 +80,8 @@ jQuery.fn.addColorPicker = function( props ) {
 		fillString: '&nbsp;',
 		fillStringX: '?',
 		colors: [
-			'transparent', '#ffffff','#d0d0d0','#777777','#000000', // monochromes
-			'#ffaaaa','#ff00ff', '#ff0000','#aa0000','#9000ff', // reds
-			'#ff6c00', '#ffff00', '#ffbb00', '#f0e68c','#d2b229', // browns/oranges/yellows
-			'#aaffaa','#00ff00','#00aa00','#6b8e23','#007700', // greens
-			'#bbddff','#00ffdd', '#aaaaff','#0000ff','#0000aa' // blues
+			 '#ff5938','#ff9300','#ffd900','#65db3a',
+			'#00efb5','#00c7ff', '#7F00FF' ,'#b2c5c9'
 			]
 	}, props);
 	var count = props.colors.length;

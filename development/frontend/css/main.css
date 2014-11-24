@@ -12,6 +12,7 @@
     font-family: 'Roboto Slab', serif;
     background-color:white;
     box-shadow: 0 2px 1px rgba(0,0,0,0.08);
+    transition: background-color 1s;
 }
 
 .navbar-center{
@@ -30,4 +31,24 @@ body
 #container
 {
   white-space: nowrap;
+}
+.colorPicker
+
+{
+  opacity: 0;
+  transition: opacity 0.5s;
+  cursor:pointer;
+  margin-left: 2px;
+}
+div:hover > .colorPicker
+{
+  opacity: 1;
+}
+.ColorBlotch
+{
+  padding: 0 2px 0 2px;
+  font-family: monospace;
+  cursor: pointer;
+  font-size: 1.2em;
+  text-align: center;
 }
