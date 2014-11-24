@@ -65,6 +65,7 @@ exports.updateNote = function(req, res){
 	db.collection('notes', function(err, collection){
 		collection.update({"_id":new BSON.ObjectID(id)},note,{safe:true},function(err, result){
 			if(err){
+				console.log(err);
 				res.send({"error":"An error has occurred "});
 			}else{
 				console.log(result + " document(s) updated");
