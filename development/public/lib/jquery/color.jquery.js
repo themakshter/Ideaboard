@@ -80,7 +80,7 @@ jQuery.fn.addColorPicker = function( props ) {
 		fillString: '&nbsp;',
 		fillStringX: '?',
 		colors: [
-			 '#ff5938','#ff9300','#ffd900','#65db3a',
+			 '#ffffff','#ff5938','#ff9300','#ffd900','#65db3a',
 			'#00efb5','#00c7ff', '#7F00FF' ,'#b2c5c9'
 			]
 	}, props);
