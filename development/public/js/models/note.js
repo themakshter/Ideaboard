@@ -1,9 +1,9 @@
-window.Board = Backbone.Model.extend({
+window.Note = Backbone.Model.extend({
 
-    urlRoot: "/boards",
+    urlRoot: "/boards/:boardId/columns/:columnId/notes",
 
     idAttribute: "_id",
-
+    
     initialize: function () {
         this.validators = {};
 
@@ -34,17 +34,17 @@ window.Board = Backbone.Model.extend({
     },
 
     defaults: {
-        _id: null,
-        name: "",
-        author:"unknown",
-        colour:"white"
+        _id : null,
+        name : "New Note",
+        contents : "Write something here...",
+        colour:"White"
     }
 });
 
-window.BoardCollection = Backbone.Collection.extend({
+window.NoteCollection = Backbone.Collection.extend({
 
-    model: Board,
+    model: Note,
 
-    url: "/boards"
+    url: "/boards/:boardId/columns/:columnId/notes"
 
 });
