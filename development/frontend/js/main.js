@@ -1,11 +1,12 @@
 	var apiURL = 'http://localhost:3000';
-	showBoard('54738009273946193f5532fc');
+	showBoard('547391b215c61e96408261fd');
 	var timeLastUpdated = new Date();
 	function showBoard(boardID)
 	{
 		var container = $("#container");
 		container.empty();
-	
+		container.append('<div class="board" data-boardID="'+boardID+'"></div>');
+		container = container.children().first();
 		$.get(apiURL+'/boards/'+boardID,function(data)
 		{
 			$(".userField").text(data.author);
@@ -34,18 +35,32 @@
 					$(data).each(function(index,value)
 					{
 						var text = value.contents;
-						notesContainer.prepend("<div class=\"note\" data-noteID =\"" + value._id +"\">"+text+"</div>");
+						notesContainer.prepend("<div class=\"note\" data-noteID =\"" + value._id +"\"></div>");
 						var note = notesContainer.children().first();
+						note.css('background-color',value.color);
+						note.append("<div class='colorPicker'></div>");
+						note.append("<div class='textArea'>"+text+"</div>");
 					});
-					$('.note').notebook();
-					$('.note').on('contentChange', function(e)
+					$('.textArea').notebook();
+					$('.colorPicker').empty().addColorPicker({
+						clickCallback: function(c,picker)
+						{
+							console.log(picker);
+							console.log(c);
+							$(picker).parent().css('background-color',c);
+							updateNoteDiv(picker.parent());
+						}
+					});
+					$('.textArea').on('contentChange', function(e)
 					{
 						var now = new Date();
 						var timeDiff = Math.abs(now.getTime() - timeLastUpdated.getTime());
 						console.log(timeDiff);
 						if(timeSinceUpdate() > 500)
 						{
-							var id = e.originalEvent.target.getAttribute('data-noteID');
+							var textArea = e.originalEvent.target;
+							var note = $(textArea).parent();
+							var id = note.attr('data-noteID');
 							updateNote(id,colID,boardID);
 						}
 						else
@@ -71,15 +86,25 @@
 		var timeDiff = Math.abs(now.getTime() - timeLastUpdated.getTime());
 		return timeDiff;
 	}
+	function updateNoteDiv(note)
+	{
+		var id = note.attr('data-noteID');
+		var colID = note.parents('.boardColumn').attr('data-columnid');
+		var boardID = note.parents('.board').attr('data-boardID');
+		updateNote(id,colID,boardID);
+	}
 	function updateNote(id,colID,boardID)
 	{
-		var content = $('.note[data-noteID="'+id+'"]').html();
+		var note = $('.note[data-noteID="'+id+'"]');
+		var textArea = note.children('.textArea');
+		var content = textArea.html();
+		var color = note.css('background-color');
 		var message = 
 	    {
 	    	"column":colID,
 	    	"name": "test name from client",
 	    	"contents":content,
-	    	"color":"test color from client"
+	    	"color":color
 	    };
 	    $.ajax({
 	    	url:apiURL+'/boards/'+boardID+"/columns/"+colID+"/notes/"+id,
