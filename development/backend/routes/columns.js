@@ -60,6 +60,7 @@ exports.addColumn = function(req, res){
 exports.updateColumn = function(req, res){
 	var id = req.params.columnId;
 	var column = req.body;
+	delete column._id;
 	console.log("Updating column :" + columnId);
 	console.log(JSON.stringify(column));
 	db.collection('columns', function(err, collection){

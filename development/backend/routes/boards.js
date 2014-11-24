@@ -42,6 +42,7 @@ exports.addBoard = function(req,res){
 exports.updateBoard = function(req,res){
 	var id = req.params.boardId;
 	var board = req.body;
+	delete board._id;
 	console.log("Updating board: " + id);
 	console.log(JSON.stringify(board));
 	db.collection('boards', function(err, collection){
