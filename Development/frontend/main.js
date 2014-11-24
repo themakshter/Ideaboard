@@ -8,7 +8,6 @@
 		$.get(apiURL+'/boards/'+boardID,function(data)
 		{
 			$(".userField").text(data.author);
-			$(".boardField").text(data.name);
  		});
  		$.get(apiURL+'/boards/'+boardID+"/columns",function(data)
 		{
@@ -44,6 +43,7 @@
 					    var content = e.originalEvent.detail.content;
 					    var message = 
 					    {
+					    	"_id":id,
 					    	"column":colID,
 					    	"name": "test name from client",
 					    	"contents":content,
