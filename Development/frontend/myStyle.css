@@ -1,0 +1,25 @@
+.boardColumn
+{
+    display: inline-block;
+    padding:10px;
+    width: 400px;
+    vertical-align:top;
+}
+.note
+{
+    min-height: 100px!important;
+    margin-top:15px;
+    font-family: 'Roboto Slab', serif;
+    background-color:white;
+    box-shadow: 0 2px 1px rgba(0,0,0,0.08);
+}
+body
+{
+
+  background-color:#E8E8E8;
+  overflow-x:visible;
+}
+#container
+{
+  white-space: nowrap;
+}
