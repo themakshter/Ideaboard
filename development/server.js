@@ -1,16 +1,25 @@
 //calling all the required files
 var express = require("express");
+	path = require('path');
 	cors = require("cors");
 	db = require("./routes/db.js");
 	boards = require("./routes/boards.js");
 	columns = require("./routes/columns.js");
 	notes = require("./routes/notes.js");
 
-var app = express();
-app.use(express.bodyParser());
-app.use(cors());
-
 var port = 3000;
+
+var app = express();
+
+app.configure(function () {
+    app.set('port', process.env.PORT || port);
+    app.use(express.logger('dev'));  /* 'default', 'short', 'tiny', 'dev' */
+    app.use(express.bodyParser());
+    app.use(express.static(path.join(__dirname, 'public')));
+    //app.use(cors());
+});
+
+
 
 db.openDatabase("ideaboardDB");
 
@@ -38,7 +47,7 @@ app.post('/boards/:boardId/columns/:columnId/notes',notes.addNote);
 app.put('/boards/:boardId/columns/:columnId/notes/:noteId',notes.updateNote);
 app.delete('/boards/:boardId/columns/:columnId/notes/:noteId', notes.deleteNote);
 
-app.listen(3000);
+app.listen(port);
 console.log("Listening on port " + port);
 
 

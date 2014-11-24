@@ -1,5 +1,5 @@
 	var apiURL = 'http://localhost:3000';
-	showBoard('547391b215c61e96408261fd');
+	showBoard('54737f2ecec95d0c308537ac');
 	var timeLastUpdated = new Date();
 	function showBoard(boardID)
 	{

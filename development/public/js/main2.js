@@ -14,24 +14,24 @@ var AppRouter = Backbone.Router.extend({
 
 	list: function(page) {
         var p = page ? parseInt(page, 10) : 1;
-        var wineList = new WineCollection();
-        wineList.fetch({success: function(){
-            $("#content").html(new WineListView({model: wineList, page: p}).el);
+        var boardList = new BoardCollection();
+        boardList.fetch({success: function(){
+            $("#content").html(new BoardListView({model: boardList, page: p}).el);
         }});
         this.headerView.selectMenuItem('home-menu');
     },
 
     boardDetails: function (id) {
-        var board = new Wine({id: id});
+        var board = new Board({id: id});
         board.fetch({success: function(){
-            $("#content").html(new WineView({model: board}).el);
+            $("#content").html(new BoardView({model: board}).el);
         }});
         this.headerView.selectMenuItem();
     },
 
 	addBoard: function() {
-        var wine = new Wine();
-        $('#content').html(new WineView({model: wine}).el);
+        var board = new Board();
+        $('#content').html(new WineView({model: board}).el);
         this.headerView.selectMenuItem('add-menu');
 	},
 
