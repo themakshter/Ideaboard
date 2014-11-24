@@ -1,11 +1,13 @@
 //calling all the required files
 var express = require("express");
+	cors = require("cors");
 	db = require("./routes/db.js");
 	boards = require("./routes/boards.js");
 	columns = require("./routes/columns.js");
 	notes = require("./routes/notes");
 
 var app = express();
+app.use(cors());
 
 var port = 3000;
 
