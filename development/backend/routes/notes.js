@@ -61,6 +61,7 @@ exports.updateNote = function(req, res){
 	var note = req.body;
 	var id = req.params.noteId;
 	delete note._id;
+	note.column = new BSON.ObjectID(note.column);
 	console.log("Updating note : " + id + "\n"+JSON.stringify(note));
 	db.collection('notes', function(err, collection){
 		collection.update({"_id":new BSON.ObjectID(id)},note,{safe:true},function(err, result){
