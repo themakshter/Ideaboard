@@ -32,7 +32,6 @@ app.delete('/boards/:boardId', boards.deleteBoard);
 
 //columns
 app.get('/boards/:boardId/columns', columns.findAll);
-app.get('/alt/boards/:boardId/columns', columns.findAllAlt);
 app.get('/boards/:boardId/columns/:columnId', columns.findById);
 app.post('/boards/:boardId/columns',columns.addColumn);
 app.put('/boards/:boardId/columns/:columnId',columns.updateColumn);
@@ -41,7 +40,6 @@ app.delete('/boards/:boardId/columns/:columnId', columns.deleteColumn);
 
 //notes
 app.get('/boards/:boardId/columns/:columnId/notes', notes.findAll);
-app.get('/alt/boards/:boardId/columns/:columnId/notes', notes.findAllAlt);
 app.get('/boards/:boardId/columns/:columnId/notes/:noteId', notes.findById);
 app.post('/boards/:boardId/columns/:columnId/notes',notes.addNote);
 app.put('/boards/:boardId/columns/:columnId/notes/:noteId',notes.updateNote);
