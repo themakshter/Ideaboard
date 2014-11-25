@@ -42,18 +42,18 @@ window.BoardView = Backbone.View.extend({
             utils.displayValidationErrors(check.messages);
             return false;
         }
-        this.saveWine();
+        this.savBoard();
         return false;
     },
 
-    saveWine: function () {
+    saveBoard: function () {
         var self = this;
         console.log('before save');
         this.model.save(null, {
             success: function (model) {
                 self.render();
-                app.navigate('wines/' + model.id, false);
-                utils.showAlert('Success!', 'Wine saved successfully', 'alert-success');
+                app.navigate('boards/' + model.id, false);
+                utils.showAlert('Success!', 'Board saved successfully', 'alert-success');
             },
             error: function () {
                 utils.showAlert('Error', 'An error occurred while trying to delete this item', 'alert-error');
@@ -61,10 +61,10 @@ window.BoardView = Backbone.View.extend({
         });
     },
 
-    deleteWine: function () {
+    deleteBoard: function () {
         this.model.destroy({
             success: function () {
-                alert('Wine deleted successfully');
+                alert('Board deleted successfully');
                 window.history.back();
             }
         });

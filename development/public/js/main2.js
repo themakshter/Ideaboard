@@ -1,15 +1,23 @@
 var AppRouter = Backbone.Router.extend({
 
     routes: {
-        ""                  : "list",
-        "boards/page/:page"	: "list",
-        "boards/add"         : "addBoard",
-        "boards/:id"         : "boardDetails",
+        ""                  : "home",
+        "boards/"           : "list",
+        "boards/add"        : "addBoard",
+        "boards/:id"        : "boardDetails",
     },
 
     initialize: function () {
         this.headerView = new HeaderView();
         $('.header').html(this.headerView.el);
+    },
+
+    home: function (id) {
+        if (!this.homeView) {
+            this.homeView = new HomeView();
+        }
+        $('#content').html(this.homeView.el);
+        this.headerView.selectMenuItem('home-menu');
     },
 
 	list: function(page) {
@@ -37,7 +45,7 @@ var AppRouter = Backbone.Router.extend({
 
 });
 
-utils.loadTemplate(['HeaderView', 'BoardView', 'BoardListItemView'], function() {
+utils.loadTemplate(['HeaderView', 'BoardView', 'BoardListItemView','HomeView'], function() {
     app = new AppRouter();
     Backbone.history.start();
 });

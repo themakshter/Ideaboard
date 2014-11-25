@@ -1,19 +1,12 @@
-window.HeaderView = Backbone.View.extend({
+window.HomeView = Backbone.View.extend({
 
-    initialize: function () {
+    initialize:function () {
         this.render();
     },
 
-    render: function () {
+    render:function () {
         $(this.el).html(this.template());
         return this;
-    },
-
-    selectMenuItem: function (menuItem) {
-        $('.nav li').removeClass('active');
-        if (menuItem) {
-            $('.' + menuItem).addClass('active');
-        }
     }
 
 });
