@@ -46,7 +46,7 @@
 			var boards = '<ul class="list-inline">';
 			$.each(data,function(key,value)
 			{
-				boards+= "<li class='boardLink board thumbnail' data-boardID='"+value._id+"'><a class='' href='#boards/"+value._id+"'><h3>"+value.name+"<br><small>"+value.author+"</small></h3></a></li>";
+				boards+= "<li class='boardLink ' data-boardID='"+value._id+"'><a class='board plain thumbnail' href='#boards/"+value._id+"'><h3>"+value.name+"<br><small>"+value.author+"</small></h3></a></li>";
 			});
 			boards+="</ul>";
 			boardList.append(boards);
