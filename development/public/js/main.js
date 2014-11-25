@@ -39,16 +39,15 @@
 		container.append("<div class='boardList'></div>");
 		var boardList = container.children().first();
 
-		boardList.append('<h1>Available Boards</h1>');
+		boardList.append('<h1 class="text-center">Available Boards</h1>');
 		$.get(apiURL+"/boards",function(data)
 		{
-			var table = '<table class="boardTable">';
-			var table = table + "<th><td>Name</td><td>Author</td></th>";
+			var table = '<ul class="boardTable">';
 			$.each(data,function(key,value)
 			{
-				table = table + "<tr><td class='boardLink' data-boardID='"+value._id+"'>"+value.name+"</td><td>"+value.author+"</td></tr>";
+				table+= "<li class='boardLink clickable' data-boardID='"+value._id+"'>"+value.name+" "+value.author+"</li>";
 			});
-			table = table + "</table>";
+			table = table + "</ul>";
 			boardList.append(table);
 			$(".boardLink").click(function(e)
 			{
