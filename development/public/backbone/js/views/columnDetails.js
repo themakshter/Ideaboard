@@ -1,4 +1,4 @@
-window.BoardView = Backbone.View.extend({
+window.ColumnView = Backbone.View.extend({
 
     initialize: function () {
         this.render();
@@ -12,7 +12,7 @@ window.BoardView = Backbone.View.extend({
     events: {
         "change"        : "change",
         "click .save"   : "beforeSave",
-        "click .delete" : "deleteBoard",
+        "click .delete" : "deleteColumn",
     },
 
     change: function (event) {
@@ -41,18 +41,18 @@ window.BoardView = Backbone.View.extend({
             utils.displayValidationErrors(check.messages);
             return false;
         }
-        this.saveBoard();
+        this.saveColumn();
         return false;
     },
 
-    saveBoard: function () {
+    saveColumn: function () {
         var self = this;
         console.log('before save');
         this.model.save(null, {
             success: function (model) {
                 self.render();
-                app.navigate('wines/' + model.id, false);
-                utils.showAlert('Success!', 'Board saved successfully', 'alert-success');
+                app.navigate('boards/:boardId/columns/' + model.id, false);
+                utils.showAlert('Success!', 'Column saved successfully', 'alert-success');
             },
             error: function () {
                 utils.showAlert('Error', 'An error occurred while trying to delete this item', 'alert-error');
@@ -60,10 +60,10 @@ window.BoardView = Backbone.View.extend({
         });
     },
 
-    deleteBoard: function () {
+    deleteColumn: function () {
         this.model.destroy({
             success: function () {
-                alert('Board deleted successfully');
+                alert('Column deleted successfully');
                 window.history.back();
             }
         });

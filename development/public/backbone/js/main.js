@@ -1,12 +1,16 @@
 var AppRouter = Backbone.Router.extend({
 
     routes: {
-        ""                      : "home",
-        "boards"                : "list",
-        "boards/page/:page"     : "list",
-        "boards/add"            : "addBoard",
-        "boards/:id"            : "boardDetails",
-        "about"                 : "about"
+        ""                                      : "home",
+        "boards"                                : "listBoards",
+        "boards/page/:page"                     : "listBoards",
+        "boards/add"                            : "addBoard",
+        "boards/:boardId"                       : "boardDetails",
+        "boards/:boardId/columns"               : "listColumns",
+        "boards/:boardId/columns/page/:page"    : "listColumns",
+        "boards/:boardId/columns/:columnId"     : "columnDetails",
+        "boards/:boardId/columns/add"           : "addColumn",
+        "about"                                 : "about"
     },
 
     initialize: function () {
@@ -22,7 +26,7 @@ var AppRouter = Backbone.Router.extend({
         this.headerView.selectMenuItem('home-menu');
     },
 
-	list: function(page) {
+	listBoards: function(page) {
         var p = page ? parseInt(page, 10) : 1;
         var boardList = new BoardCollection();
         boardList.fetch({success: function(){
@@ -31,8 +35,8 @@ var AppRouter = Backbone.Router.extend({
         this.headerView.selectMenuItem('home-menu');
     },
 
-    boardDetails: function (id) {
-        var board = new Board({_id: id});
+    boardDetails: function (boardId) {
+        var board = new Board({_id: boardId});
         board.fetch({success: function(){
             $("#content").html(new BoardView({model: board}).el);
         }});
@@ -45,6 +49,30 @@ var AppRouter = Backbone.Router.extend({
         this.headerView.selectMenuItem('add-menu');
 	},
 
+    listColumns: function(boardId,page) {
+        var p = page ? parseInt(page, 10) : 1;
+        var columnList = new ColumnCollection();
+        columnList.setBoard(boardId);
+        columnList.fetch({success: function(){
+            $("#content").html(new ColumnListView({model: columnList, page: p, board: boardId}).el);
+        }});
+        this.headerView.selectMenuItem('home-menu');
+    },
+
+    columnDetails: function (columnId) {
+        var column = new Column({_id: columnId});
+        column.fetch({success: function(){
+            $("#content").html(new ColumnView({model: column}).el);
+        }});
+        this.headerView.selectMenuItem();
+    },
+
+    addColumn: function() {
+        var column = new Column();
+        $('#content').html(new ColumnView({model: column}).el);
+        this.headerView.selectMenuItem('add-menu');
+    },
+
     about: function () {
         if (!this.aboutView) {
             this.aboutView = new AboutView();
@@ -55,7 +83,7 @@ var AppRouter = Backbone.Router.extend({
 
 });
 
-utils.loadTemplate(['HomeView', 'HeaderView', 'BoardView', 'BoardListItemView', 'AboutView'], function() {
+utils.loadTemplate(['HomeView', 'HeaderView', 'BoardView', 'BoardListItemView','ColumnView','ColumnListItemView' ,'AboutView'], function() {
     app = new AppRouter();
     Backbone.history.start();
 });
