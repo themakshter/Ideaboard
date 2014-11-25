@@ -64,39 +64,50 @@
 			$(".boardField").text(data.name);
 		});
 		$.get(apiURL+'/boards/'+boardID+"/columns",function(data)
-			{
-			var columns = [];
+		{
 			$(data).each(function(index,value)
 			{
-				var colID = value._id;
-				columns.push(colID);
-				container.append("<div class=\"boardColumn\" data-columnID =\"" + colID + "\"></div>");
-				var colContainer = container.children().last();
-				colContainer.append("<div class=\"notesContainer\">");
-				var notesContainer = colContainer.children().first();
-				var notes = [];
-				$.get(apiURL+'/boards/'+boardID+"/columns/"+colID,function(data)
-				{
-					var colName = data.name;
-					colContainer.prepend("<h3 class=\"columnTitle\">" + colName + "</h3>");
-				});
-				$.get(apiURL+'/boards/'+boardID+"/columns/"+colID+"/notes",function(data)
-				{
-					console.log(data);
-					$(data).each(function(index,value)
-					{
-						makeNote(value,notesContainer);
-					});
-					makeNewNoteButton(colContainer);
-					
-					
-
-				});
+				makeColumn(value,container);
+			});
+			makeNewColumnButton(container);
+		});
+	}
+	function makeNewColumnButton(container)
+	{
+		container.append('<div class="newColumnButton"><span class="glyphicon glyphicon-plus"></span></div>');
+		$('.newColumnButton').click(function()
+		{
+			$.post(apiURL+'/boards/'+currentBoardID+'/columns',
+			{
+				'board':currentBoardID,
+				'name':''
 			});
 		});
 	}
-	function makeColumn(id,container)
-	{}
+	function makeColumn(column,container)
+	{
+		var colID = column._id;
+		container.append("<div class=\"boardColumn\" data-columnID =\"" + colID + "\"></div>");
+		var colContainer = container.children().last();
+		colContainer.append("<div class=\"notesContainer\">");
+		var notesContainer = colContainer.children().first();
+		var notes = [];
+		$.get(apiURL+'/boards/'+currentBoardID+"/columns/"+colID,function(data)
+		{
+			var colName = data.name;
+			colContainer.prepend("<h3 class=\"columnTitle\">" + colName + "</h3>");
+		});
+		$.get(apiURL+'/boards/'+currentBoardID+"/columns/"+colID+"/notes",function(data)
+		{
+			console.log(data);
+			$(data).each(function(index,value)
+			{
+				makeNote(value,notesContainer);
+			});
+			makeNewNoteButton(colContainer);
+			
+		});
+	}
 	function makeNewNoteButton(container)
 	{
 		container.append("<div class='newNoteButton'><span class='glyphicon glyphicon-plus'></span></div>");

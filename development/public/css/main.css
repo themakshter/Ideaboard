@@ -51,7 +51,7 @@ div:hover > .colorPicker
   font-size: 1.2em;
   text-align: center;
 }
-.newNoteButton
+.newNoteButton, .newColumnButton
 {
   opacity: 0;
   border-style:dashed;
@@ -61,11 +61,11 @@ div:hover > .colorPicker
   margin-top: 20px;
   transition: opacity 0.5s;
 }
-.newNoteButton:hover
+.newNoteButton:hover, .newColumnButton:hover
 {
   opacity: 1;
 }
-.newNoteButton .glyphicon
+.newNoteButton .glyphicon, .newColumnButton .glyphicon
 {
   font-size: 50px;
   margin: 0;
@@ -79,4 +79,11 @@ div:hover > .colorPicker
 {
     overflow-x:visible;
 
+}
+.newColumnButton
+{
+  opacity: 0.3;
+  width:300px;
+  height: 1000px;
+  display: inline-block;
 }
