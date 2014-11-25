@@ -1,6 +1,7 @@
 	var apiURL = 'http://localhost:3000';
 	var timeLastUpdated = new Date();
 	var container = $("#container");
+	var currentBoardID;
 	//listBoards();
 	var AppRouter = Backbone.Router.extend(
 	{
@@ -60,6 +61,7 @@
 	}
 	function showBoard(boardID)
 	{
+		currentBoardID = boardID;
 		container.empty();
 		container.append('<div class="board" data-boardID="'+boardID+'"></div>');
 		container = container.children().first();
@@ -90,52 +92,53 @@
 					console.log(data);
 					$(data).each(function(index,value)
 					{
-						var text = value.contents;
-						notesContainer.prepend("<div class=\"note\" data-noteID =\"" + value._id +"\"></div>");
-						var note = notesContainer.children().first();
-						note.css('background-color',value.color);
-						note.append("<div class='colorPicker'></div>");
-						note.append("<div class='textArea'>"+text+"</div>");
+						makeNote(value,notesContainer);
 					});
+					makeNewNoteButton(colContainer);
 					$('.textArea').notebook();
 					$('.colorPicker').empty().addColorPicker({
 						clickCallback: function(c,picker)
 						{
-							console.log(picker);
-							console.log(c);
 							$(picker).parent().css('background-color',c);
 							updateNoteDiv(picker.parent());
 						}
 					});
 					$('.textArea').on('contentChange', function(e)
 					{
-						var now = new Date();
-						var timeDiff = Math.abs(now.getTime() - timeLastUpdated.getTime());
-						console.log(timeDiff);
-						if(timeSinceUpdate() > 500)
-						{
-							var textArea = e.originalEvent.target;
-							var note = $(textArea).parent();
-							var id = note.attr('data-noteID');
-							updateNote(id,colID,boardID);
-						}
-						else
-						{
-							setTimeout(checkLater(id,colID,boardID),1000)
-						}
-						function checkLater(id,colID,boardID)
-						{
-							if(timeSinceUpdate()>500)
-							{
-								updateNote(id,colID,boardID);
-							}
-						}
+
+						var textArea = e.originalEvent.target;
+						var note = $(textArea).parent();
+						var id = note.attr('data-noteID');
+						updateNote(id,colID,boardID);
+
 					});
+
 
 				});
 			});
  		});
 	}
+	function makeNewNoteButton(container)
+	{
+		container.append("<div class='newNoteButton'><span class='glyphicon glyphicon-plus'></span></div>");
+		var button = container.children().last();
+		button.click(function()
+		{
+			var colID = $(this).parents('.boardColumn').attr('data-columnid');
+			createNote(colID);
+
+		});
+	}
+	function makeNote(note,container)
+	{
+		var text = note.contents;
+		container.append("<div class=\"note\" data-noteID =\"" + note._id +"\"></div>");
+		var noteCon = container.children().last();
+		noteCon.css('background-color',note.color);
+		noteCon.append("<div class='colorPicker'></div>");
+		noteCon.append("<div class='textArea'>"+text+"</div>");
+	}
+
 	function timeSinceUpdate()
 	{
 		var now = new Date();
@@ -148,6 +151,16 @@
 		var colID = note.parents('.boardColumn').attr('data-columnid');
 		var boardID = note.parents('.board').attr('data-boardID');
 		updateNote(id,colID,boardID);
+	}
+	function createNote(colID)
+	{
+		$.post(apiURL+"/boards/"+currentBoardID+"/columns/"+colID+"/notes",
+		{
+			"name":"testName",
+			"contents":"",
+			"color":"#FFFFFF"
+		});
+
 	}
 	function updateNote(id,colID,boardID)
 	{
@@ -162,8 +175,10 @@
 	    	"contents":content,
 	    	"color":color
 	    };
+	    var url = apiURL+'/boards/'+boardID+"/columns/"+colID+"/notes/"+id;
+	    console.log(url);
 	    $.ajax({
-	    	url:apiURL+'/boards/'+boardID+"/columns/"+colID+"/notes/"+id,
+	    	url: url,
 	    	type:'PUT',
 	    	data:JSON.stringify(message),
 	    	success:function(data,textStatus,jqXHR)

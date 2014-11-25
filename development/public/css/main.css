@@ -52,3 +52,27 @@ div:hover > .colorPicker
   font-size: 1.2em;
   text-align: center;
 }
+.newNoteButton
+{
+  opacity: 0;
+  border-style:dashed;
+  height: 100px;
+  text-align: center;
+  position: relative;
+  margin-top: 20px;
+  transition: opacity 0.5s;
+}
+.newNoteButton:hover
+{
+  opacity: 1;
+}
+.newNoteButton .glyphicon
+{
+  font-size: 50px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
