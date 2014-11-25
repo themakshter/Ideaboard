@@ -1,9 +1,35 @@
 	var apiURL = 'http://localhost:3000';
-	showBoard('54737f2ecec95d0c308537ac');
 	var timeLastUpdated = new Date();
+	var container = $("#container");
+	//showBoard('547391b215c61e96408261fd');
+	listBoards();
+	function listBoards()
+	{
+		container.empty();
+		container.append("<div class='boardList'></div>");
+		var boardList = container.children().first();
+
+		boardList.append('<h1>Available Boards</h1>');
+		$.get(apiURL+"/boards",function(data)
+		{
+			var table = '<table class="boardTable">';
+			var table = table + "<th><td>Name</td><td>Author</td></th>";
+			$.each(data,function(key,value)
+			{
+				table = table + "<tr><td class='boardLink' data-boardID='"+value._id+"'>"+value.name+"</td><td>"+value.author+"</td></tr>";
+			});
+			table = table + "</table>";
+			boardList.append(table);
+			$(".boardLink").click(function(e)
+			{
+				var boardID = $(this).attr("data-boardID");
+				showBoard(boardID);
+			});
+		});
+
+	}
 	function showBoard(boardID)
 	{
-		var container = $("#container");
 		container.empty();
 		container.append('<div class="board" data-boardID="'+boardID+'"></div>');
 		container = container.children().first();

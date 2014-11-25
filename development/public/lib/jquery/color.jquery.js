@@ -81,7 +81,7 @@ jQuery.fn.addColorPicker = function( props ) {
 		fillStringX: '?',
 		colors: [
 			 '#ffffff','#ff5938','#ff9300','#ffd900','#65db3a',
-			'#00efb5','#00c7ff', '#7F00FF' ,'#b2c5c9'
+			'#00efb5','#00c7ff', '#BF5FFF' ,'#b2c5c9'
 			]
 	}, props);
 	var count = props.colors.length;
