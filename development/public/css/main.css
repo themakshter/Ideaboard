@@ -30,13 +30,17 @@
   cursor: pointer;
 }
 
-.board {
+.thumbnail {
     min-width: 260px;
 }
 
-.board li {
-    margin-left: 0px !important;
-    margin-right: 20px !important;
+.board{
+  
+}
+
+.thumbnails li {
+  margin-left: 0px !important;
+  margin-right: 20px !important;
 }
 
 a.plain:link {
@@ -59,19 +63,18 @@ a.plain:hover {
     text-decoration: none;
 }
 
-
 body
 {
 
   background-color:#E8E8E8;
   overflow-x:visible;
 }
+
 #container
 {
   white-space: nowrap;
 }
 .colorPicker
-
 {
   opacity: 0;
   transition: opacity 0.5s;

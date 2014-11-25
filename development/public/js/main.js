@@ -43,18 +43,13 @@
 		boardList.append('<h1 class="text-center">Available Boards</h1>');
 		$.get(apiURL+"/boards",function(data)
 		{
-			var boards = '<ul class="boardTable thumbnails">';
+			var boards = '<ul class="boardTable thumbnails list-inline">';
 			$.each(data,function(key,value)
 			{
-				boards+= "<li class='boardLink board' data-boardID='"+value._id+"'><a href='#boards/"+value._id+"'><h3>"+value.name+"<br><small>"+value.author+"</small><h3></a></li>";
+				boards+= "<li class='boardLink board' data-boardID='"+value._id+"'><a class='thumbnail plain' href='#boards/"+value._id+"'><h3>"+value.name+"<br><small>"+value.author+"</small></h3></a></li>";
 			});
 			boards = boards + "</ul>";
 			boardList.append(boards);
-			// $(".boardLink").click(function(e)
-			// {
-			// 	var boardID = $(this).attr("data-boardID");
-			// 	app_router.navigate('boards/'+boardID,{trigger:true});
-			// });
 		});
 
 	}
