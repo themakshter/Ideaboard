@@ -15,10 +15,6 @@
     transition: background-color 1s;
 }
 
-.boardList{
-  display: inline;
-}
-
 .navbar-center{
   position: absolute;
     width: 100%;
@@ -26,55 +22,17 @@
     text-align: center;
 }
 
-.clickable{
-  cursor: pointer;
-}
-
-.thumbnail {
-    min-width: 260px;
-}
-
-.board{
-  
-}
-
-.thumbnails li {
-  margin-left: 0px !important;
-  margin-right: 20px !important;
-}
-
-a.plain:link {
-    color: #333;
-    text-decoration: none;
-}
-
-a.plain:active {
-    color: #333;
-    text-decoration: none;
-}
-
-a.plain:visited {
-    color: #333;
-    text-decoration: none;
-}
-
-a.plain:hover {
-    color: #333;
-    text-decoration: none;
-}
-
 body
 {
 
   background-color:#E8E8E8;
-  overflow-x:visible;
 }
-
 #container
 {
   white-space: nowrap;
 }
 .colorPicker
+
 {
   opacity: 0;
   transition: opacity 0.5s;
@@ -116,4 +74,9 @@ div:hover > .colorPicker
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+}
+.board
+{
+    overflow-x:visible;
+
 }

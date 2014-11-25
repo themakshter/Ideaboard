@@ -2,7 +2,6 @@
 	var timeLastUpdated = new Date();
 	var container = $("#container");
 	var currentBoardID;
-	//listBoards();
 	var AppRouter = Backbone.Router.extend(
 	{
 		routes:
@@ -65,7 +64,7 @@
 			$(".boardField").text(data.name);
 		});
 		$.get(apiURL+'/boards/'+boardID+"/columns",function(data)
-			{
+		{
 			var columns = [];
 			$(data).each(function(index,value)
 			{
@@ -89,43 +88,22 @@
 						makeNote(value,notesContainer);
 					});
 					makeNewNoteButton(colContainer);
-					$('.textArea').notebook();
-					$('.colorPicker').empty().addColorPicker({
-						clickCallback: function(c,picker)
-						{
-							$(picker).parent().css('background-color',c);
-							updateNoteDiv(picker.parent());
-						}
-					});
+					
 					$('.textArea').on('contentChange', function(e)
 					{
-						var now = new Date();
-						var timeDiff = Math.abs(now.getTime() - timeLastUpdated.getTime());
-						console.log(timeDiff);
-						if(timeSinceUpdate() > 500)
-						{
-							var textArea = e.originalEvent.target;
-							var note = $(textArea).parent();
-							var id = note.attr('data-noteID');
-							updateNote(id,colID,boardID);
-						}
-						else
-						{
-							setTimeout(checkLater(id,colID,boardID),1000);
-						}
-						function checkLater(id,colID,boardID)
-						{
-							if(timeSinceUpdate()>500)
-							{
-								updateNote(id,colID,boardID);
-							}
-						}
+						var textArea = e.originalEvent.target;
+						var note = $(textArea).parent();
+						var id = note.attr('data-noteID');
+						updateNote(id,colID,boardID);
 					});
-
 
 				});
 			});
-	});
+		});
+	}
+	function makeColumn(id,container)
+	{
+
 	}
 	function makeNewNoteButton(container)
 	{
@@ -145,7 +123,17 @@
 		var noteCon = container.children().last();
 		noteCon.css('background-color',note.color);
 		noteCon.append("<div class='colorPicker'></div>");
+		var colorPicker = $(noteCon).children().last();
 		noteCon.append("<div class='textArea'>"+text+"</div>");
+		var textArea = $(noteCon).children().last();
+		$(textArea).notebook();
+		$(colorPicker).empty().addColorPicker({
+			clickCallback: function(c,picker)
+			{
+				$(picker).parent().css('background-color',c);
+				updateNoteDiv(picker.parent());
+			}
+		});
 	}
 
 	function timeSinceUpdate()
@@ -167,7 +155,14 @@
 		{
 			"name":"testName",
 			"contents":"",
+			"column":colID,
 			"color":"#FFFFFF"
+		}
+		,function(data)
+		{
+			console.log(data);
+			var container = $('.boardColumn[data-columnid="'+colID+'"] .notesContainer');
+			makeNote(data,container);
 		});
 
 	}
