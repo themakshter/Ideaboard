@@ -35,6 +35,7 @@
 	Backbone.history.start();
 	function listBoards()
 	{
+		container = $("#container");
 		container.empty();
 		container.append("<div class='boardList'></div>");
 		var boardList = container.children().first();
@@ -45,9 +46,9 @@
 			var boards = '<ul class="list-inline">';
 			$.each(data,function(key,value)
 			{
-				boards+= "<li class='boardLink board' data-boardID='"+value._id+"'><a class='' href='#boards/"+value._id+"'><h3>"+value.name+"<br><small>"+value.author+"</small></h3></a></li>";
+				boards+= "<li class='boardLink board thumbnail' data-boardID='"+value._id+"'><a class='' href='#boards/"+value._id+"'><h3>"+value.name+"<br><small>"+value.author+"</small></h3></a></li>";
 			});
-			boards = boards + "</ul>";
+			boards+="</ul>";
 			boardList.append(boards);
 		});
 
