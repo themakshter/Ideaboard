@@ -64,7 +64,7 @@
 			$(".boardField").text(data.name);
 		});
 		$.get(apiURL+'/boards/'+boardID+"/columns",function(data)
-		{
+			{
 			var columns = [];
 			$(data).each(function(index,value)
 			{
@@ -89,22 +89,14 @@
 					});
 					makeNewNoteButton(colContainer);
 					
-					$('.textArea').on('contentChange', function(e)
-					{
-						var textArea = e.originalEvent.target;
-						var note = $(textArea).parent();
-						var id = note.attr('data-noteID');
-						updateNote(id,colID,boardID);
-					});
+					
 
 				});
 			});
 		});
 	}
 	function makeColumn(id,container)
-	{
-
-	}
+	{}
 	function makeNewNoteButton(container)
 	{
 		container.append("<div class='newNoteButton'><span class='glyphicon glyphicon-plus'></span></div>");
@@ -133,6 +125,14 @@
 				$(picker).parent().css('background-color',c);
 				updateNoteDiv(picker.parent());
 			}
+		});
+		$(textArea).on('contentChange', function(e)
+		{
+			var textArea = e.originalEvent.target;
+			var note = $(textArea).parent();
+			var id = note.attr('data-noteID');
+			var colID = $(note).parents('.boardColumn').attr('data-columnid');
+			updateNote(id,colID,currentBoardID);
 		});
 	}
 
