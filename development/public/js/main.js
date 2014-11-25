@@ -22,7 +22,7 @@
 	});
 	app_router.on('route:defaultRoute', function(actions)
 	{
-		        alert(actions);
+		alert(actions);
     });
 	app_router.on('route:listBoards',function(actions)
 	{
@@ -42,18 +42,18 @@
 		boardList.append('<h1 class="text-center">Available Boards</h1>');
 		$.get(apiURL+"/boards",function(data)
 		{
-			var table = '<ul class="boardTable">';
+			var boards = '<ul class="boardTable">';
 			$.each(data,function(key,value)
 			{
-				table+= "<li class='boardLink clickable' data-boardID='"+value._id+"'>"+value.name+" "+value.author+"</li>";
+				boards+= "<li class='boardLink board' data-boardID='"+value._id+"'><a href='#boards/"+value._id+"'><h3>"+value.name+"<br><small>"+value.author+"</small><h3></a></li>";
 			});
-			table = table + "</ul>";
-			boardList.append(table);
-			$(".boardLink").click(function(e)
-			{
-				var boardID = $(this).attr("data-boardID");
-				app_router.navigate('boards/'+boardID,{trigger:true});
-			});
+			boards = boards + "</ul>";
+			boardList.append(boards);
+			// $(".boardLink").click(function(e)
+			// {
+			// 	var boardID = $(this).attr("data-boardID");
+			// 	app_router.navigate('boards/'+boardID,{trigger:true});
+			// });
 		});
 
 	}
