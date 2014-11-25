@@ -5,10 +5,11 @@ window.BoardListView = Backbone.View.extend({
     },
 
     render: function () {
+        console.log(this);
         var boards = this.model.models;
         var len = boards.length;
-        // var startPos = (this.options.page - 1) * 8;
-        // var endPos = Math.min(startPos + 8, len);
+        var startPos = (this.page - 1) * 8;
+        var endPos = Math.min(startPos + 8, len);
 
         $(this.el).html('<ul class="thumbnails"></ul>');
 
@@ -16,7 +17,7 @@ window.BoardListView = Backbone.View.extend({
             $('.thumbnails', this.el).append(new BoardListItemView({model: boards[i]}).render().el);
         }
 
-        //$(this.el).append(new Paginator({model: this.model, page: this.options.page}).render().el);
+        $(this.el).append(new Paginator({model: this.model, page: this.options.page}).render().el);
 
         return this;
     }
