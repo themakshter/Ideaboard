@@ -44,6 +44,7 @@ exports.findAll = function(req,res){
 exports.addColumn = function(req, res){
 	var column = req.body;
 	console.log('Adding column:' + JSON.stringify(column));
+	column.board =  new BSON.ObjectID(column.board);
 	db.collection('columns', function(err,collection){
 		collection.insert(column, {safe:true}, function(err, results){
 			if(err){

@@ -5,6 +5,7 @@
     width: 400px;
     vertical-align:top;
 }
+
 .note
 {
     min-height: 100px!important;
@@ -27,13 +28,16 @@ body
   background-color:#E8E8E8;
 }
 
-
 #container
 {
+  max-width: 1000px;
+}
+
+.board{
   white-space: nowrap;
 }
-.colorPicker
 
+.colorPicker
 {
   opacity: 0;
   transition: opacity 0.5s;
