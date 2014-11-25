@@ -2,7 +2,6 @@
 	var timeLastUpdated = new Date();
 	var container = $("#container");
 	var currentBoardID;
-	//listBoards();
 	var AppRouter = Backbone.Router.extend(
 	{
 		routes:
@@ -92,29 +91,11 @@
 					
 					$('.textArea').on('contentChange', function(e)
 					{
-						var now = new Date();
-						var timeDiff = Math.abs(now.getTime() - timeLastUpdated.getTime());
-						console.log(timeDiff);
-						if(timeSinceUpdate() > 500)
-						{
-							var textArea = e.originalEvent.target;
-							var note = $(textArea).parent();
-							var id = note.attr('data-noteID');
-							updateNote(id,colID,boardID);
-						}
-						else
-						{
-							setTimeout(checkLater(id,colID,boardID),1000);
-						}
-						function checkLater(id,colID,boardID)
-						{
-							if(timeSinceUpdate()>500)
-							{
-								updateNote(id,colID,boardID);
-							}
-						}
+						var textArea = e.originalEvent.target;
+						var note = $(textArea).parent();
+						var id = note.attr('data-noteID');
+						updateNote(id,colID,boardID);
 					});
-
 
 				});
 			});
