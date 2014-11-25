@@ -37,7 +37,8 @@ window.Board = Backbone.Model.extend({
     defaults: {
         _id: null,
         name: "New Board",
-        author:"Unknown Author"
+        author:"Unknown Author",
+        colour:"white"
     }
 });
 

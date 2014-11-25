@@ -13,7 +13,6 @@ window.BoardView = Backbone.View.extend({
         "change"        : "change",
         "click .save"   : "beforeSave",
         "click .delete" : "deleteBoard",
-        "drop #picture" : "dropHandler"
     },
 
     change: function (event) {
@@ -70,20 +69,5 @@ window.BoardView = Backbone.View.extend({
         });
         return false;
     },
-
-    dropHandler: function (event) {
-        event.stopPropagation();
-        event.preventDefault();
-        var e = event.originalEvent;
-        e.dataTransfer.dropEffect = 'copy';
-        this.pictureFile = e.dataTransfer.files[0];
-
-        // Read the image file from the local file system and display it in the img tag
-        var reader = new FileReader();
-        reader.onloadend = function () {
-            $('#picture').attr('src', reader.result);
-        };
-        reader.readAsDataURL(this.pictureFile);
-    }
 
 });
