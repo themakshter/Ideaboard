@@ -6,6 +6,7 @@ window.BoardView = Backbone.View.extend({
 
     render: function () {
         $(this.el).html(this.template(this.model.toJSON()));
+        showBoard(this.model.id);
         return this;
     },
 
