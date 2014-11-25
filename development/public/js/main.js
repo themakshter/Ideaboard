@@ -94,14 +94,7 @@
 						makeNote(value,notesContainer);
 					});
 					makeNewNoteButton(colContainer);
-					$('.textArea').notebook();
-					$('.colorPicker').empty().addColorPicker({
-						clickCallback: function(c,picker)
-						{
-							$(picker).parent().css('background-color',c);
-							updateNoteDiv(picker.parent());
-						}
-					});
+					
 					$('.textArea').on('contentChange', function(e)
 					{
 						var now = new Date();
@@ -150,7 +143,17 @@
 		var noteCon = container.children().last();
 		noteCon.css('background-color',note.color);
 		noteCon.append("<div class='colorPicker'></div>");
+		var colorPicker = $(noteCon).children().last();
 		noteCon.append("<div class='textArea'>"+text+"</div>");
+		var textArea = $(noteCon).children().last();
+		$(textArea).notebook();
+		$(colorPicker).empty().addColorPicker({
+			clickCallback: function(c,picker)
+			{
+				$(picker).parent().css('background-color',c);
+				updateNoteDiv(picker.parent());
+			}
+		});
 	}
 
 	function timeSinceUpdate()
@@ -172,7 +175,14 @@
 		{
 			"name":"testName",
 			"contents":"",
+			"column":colID,
 			"color":"#FFFFFF"
+		}
+		,function(data)
+		{
+			console.log(data);
+			var container = $('.boardColumn[data-columnid="'+colID+'"] .notesContainer');
+			makeNote(data,container);
 		});
 
 	}
