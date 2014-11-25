@@ -50,8 +50,8 @@ exports.addColumn = function(req, res){
 			if(err){
 				res.send({"err":"An error occurred - " + err});
 			}else{
-				console.log("Succes : " + JSON.stringify(result[0]));
-				res.send(result[0]);
+				console.log("Succes : " + JSON.stringify(results[0]));
+				res.send(results[0]);
 			}
 		});
 	});
