@@ -21,10 +21,10 @@
 		console.log("showing board"+id);
 
 	});
-	app_router.on('route:defaultRoute', function(actions) 
+	app_router.on('route:defaultRoute', function(actions)
 	{
-        alert(actions);
-    })
+		alert(actions);
+    });
 	app_router.on('route:listBoards',function(actions)
 	{
 		listBoards();
@@ -40,22 +40,21 @@
 		container.append("<div class='boardList'></div>");
 		var boardList = container.children().first();
 
-		boardList.append('<h1>Available Boards</h1>');
+		boardList.append('<h1 class="text-center">Available Boards</h1>');
 		$.get(apiURL+"/boards",function(data)
 		{
-			var table = '<table class="boardTable">';
-			var table = table + "<th><td>Name</td><td>Author</td></th>";
+			var boards = '<ul class="boardTable thumbnails">';
 			$.each(data,function(key,value)
 			{
-				table = table + "<tr><td class='boardLink' data-boardID='"+value._id+"'>"+value.name+"</td><td>"+value.author+"</td></tr>";
+				boards+= "<li class='boardLink board' data-boardID='"+value._id+"'><a href='#boards/"+value._id+"'><h3>"+value.name+"<br><small>"+value.author+"</small><h3></a></li>";
 			});
-			table = table + "</table>";
-			boardList.append(table);
-			$(".boardLink").click(function(e)
-			{
-				var boardID = $(this).attr("data-boardID");
-				app_router.navigate('boards/'+boardID,{trigger:true});
-			});
+			boards = boards + "</ul>";
+			boardList.append(boards);
+			// $(".boardLink").click(function(e)
+			// {
+			// 	var boardID = $(this).attr("data-boardID");
+			// 	app_router.navigate('boards/'+boardID,{trigger:true});
+			// });
 		});
 
 	}
@@ -69,9 +68,9 @@
 		{
 			$(".userField").text(data.author);
 			$(".boardField").text(data.name);
- 		});
- 		$.get(apiURL+'/boards/'+boardID+"/columns",function(data)
-		{
+		});
+		$.get(apiURL+'/boards/'+boardID+"/columns",function(data)
+			{
 			var columns = [];
 			$(data).each(function(index,value)
 			{
@@ -105,18 +104,33 @@
 					});
 					$('.textArea').on('contentChange', function(e)
 					{
-
-						var textArea = e.originalEvent.target;
-						var note = $(textArea).parent();
-						var id = note.attr('data-noteID');
-						updateNote(id,colID,boardID);
-
+						var now = new Date();
+						var timeDiff = Math.abs(now.getTime() - timeLastUpdated.getTime());
+						console.log(timeDiff);
+						if(timeSinceUpdate() > 500)
+						{
+							var textArea = e.originalEvent.target;
+							var note = $(textArea).parent();
+							var id = note.attr('data-noteID');
+							updateNote(id,colID,boardID);
+						}
+						else
+						{
+							setTimeout(checkLater(id,colID,boardID),1000);
+						}
+						function checkLater(id,colID,boardID)
+						{
+							if(timeSinceUpdate()>500)
+							{
+								updateNote(id,colID,boardID);
+							}
+						}
 					});
 
 
 				});
 			});
- 		});
+	});
 	}
 	function makeNewNoteButton(container)
 	{
@@ -168,57 +182,22 @@
 		var textArea = note.children('.textArea');
 		var content = textArea.html();
 		var color = note.css('background-color');
-		var message = 
-	    {
-	    	"column":colID,
-	    	"name": "test name from client",
-	    	"contents":content,
-	    	"color":color
-	    };
-	    var url = apiURL+'/boards/'+boardID+"/columns/"+colID+"/notes/"+id;
-	    console.log(url);
-	    $.ajax({
-	    	url: url,
-	    	type:'PUT',
-	    	data:JSON.stringify(message),
-	    	success:function(data,textStatus,jqXHR)
-	    	{
-	    		console.log(data);
-	    	},
-	    	contentType: "application/json"
-	    })
-	    timeLastUpdated = new Date();
-	}
-
-	// your JS code goes here
-	// var app = {}; // create namespace for our app
-
- //    app.Note = Backbone.Model.extend({
- //    	defaults:{
- //    		text:''
- //    	}
- //    });
- //    app.NoteCollumn = Backbone.Collection.extend({
- //    	model: app.Note
- //    });
- //    app.Board = Backbone.Collection.extend({
- //        model: app.NoteCollumn
- //    })
- //    var boardTemplate = $('#boardTemplate').html();
-	// var AppView = Backbone.View.extend({
-	// 	el: $('#container'),
-	// 	// template 
-	// 	template: _.template(
-	//   		boardTemplate
-	//   	),
-
-	//   	initialize: function(){
-	// 		this.render();
-	//   	},
-
-	// 	render: function(){
-	// 		this.$el.html(this.template({who: 'world!'}));
-	// 	}
-	// });
-
-	// var appView = new AppView();
+		var message =
+		{
+			"column":colID,
+			"name": "test name from client",
+			"contents":content,
+			"color":color
+		};
+		$.ajax({
+			url:apiURL+'/boards/'+boardID+"/columns/"+colID+"/notes/"+id,
+			type:'PUT',
+			data:JSON.stringify(message),
+			success:function(data,textStatus,jqXHR)
+			{
+				console.log(data);
+			},
+			contentType: "application/json"
+		});
+		timeLastUpdated = new Date();
+		}

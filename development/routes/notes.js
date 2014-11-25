@@ -45,6 +45,7 @@ exports.findAll = function(req, res){
 exports.addNote = function(req, res){
 	var note = req.body;
 	console.log("Adding note : " + JSON.stringify(note));
+	note.column = new BSON.ObjectID(note.column);
 	db.collection('notes', function(err,collection){
 		collection.insert(note,{safe:true},function(err, result){
 			if(err){

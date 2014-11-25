@@ -15,12 +15,50 @@
     transition: background-color 1s;
 }
 
+.boardList{
+  display: inline;
+}
+
 .navbar-center{
   position: absolute;
     width: 100%;
     left: 0;
     text-align: center;
 }
+
+.clickable{
+  cursor: pointer;
+}
+
+.board {
+    min-width: 260px;
+}
+
+.board li {
+    margin-left: 0px !important;
+    margin-right: 20px !important;
+}
+
+a.plain:link {
+    color: #333;
+    text-decoration: none;
+}
+
+a.plain:active {
+    color: #333;
+    text-decoration: none;
+}
+
+a.plain:visited {
+    color: #333;
+    text-decoration: none;
+}
+
+a.plain:hover {
+    color: #333;
+    text-decoration: none;
+}
+
 
 body
 {
