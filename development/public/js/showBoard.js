@@ -1,65 +1,38 @@
+$(document).ready(fucnction()
+{
 	var apiURL = 'http://localhost:3000';
 	var timeLastUpdated = new Date();
 	var container = $("#container");
-	//listBoards();
-	var AppRouter = Backbone.Router.extend(
-	{
-		routes:
-		{
-			""			: "listBoards",
-			"boards/new":"newBoard",
-			"boards/:id":"showBoard",
-			"*actions": "defaultRoute"
-		}
-	});
+	showBoard('547391b215c61e96408261fd');
+	// listBoards();
+	// function listBoards()
+	// {
+	// 	container.empty();
+	// 	container.append("<div class='boardList'></div>");
+	// 	var boardList = container.children().first();
 
-	var app_router = new AppRouter();
-	app_router.on('route:showBoard',function(id)
-	{
-		showBoard(id);
-		console.log("showing board"+id);
+	// 	boardList.append('<h1>Available Boards</h1>');
+	// 	$.get(apiURL+"/boards",function(data)
+	// 	{
+	// 		var table = '<table class="boardTable">';
+	// 		var table = table + "<th><td>Name</td><td>Author</td></th>";
+	// 		$.each(data,function(key,value)
+	// 		{
+	// 			table = table + "<tr><td class='boardLink' data-boardID='"+value._id+"'>"+value.name+"</td><td>"+value.author+"</td></tr>";
+	// 		});
+	// 		table = table + "</table>";
+	// 		boardList.append(table);
+	// 		$(".boardLink").click(function(e)
+	// 		{
+	// 			var boardID = $(this).attr("data-boardID");
+	// 			showBoard(boardID);
+	// 		});
+	// 	});
 
-	});
-	app_router.on('route:defaultRoute', function(actions) 
-	{
-        alert(actions);
-    })
-	app_router.on('route:listBoards',function(actions)
-	{
-		listBoards();
-	});
-	app_router.on('route:newBoard',function(actions)
-	{
-		
-	});
-	Backbone.history.start();
-	function listBoards()
-	{
-		container.empty();
-		container.append("<div class='boardList'></div>");
-		var boardList = container.children().first();
-
-		boardList.append('<h1>Available Boards</h1>');
-		$.get(apiURL+"/boards",function(data)
-		{
-			var table = '<table class="boardTable">';
-			var table = table + "<th><td>Name</td><td>Author</td></th>";
-			$.each(data,function(key,value)
-			{
-				table = table + "<tr><td class='boardLink' data-boardID='"+value._id+"'>"+value.name+"</td><td>"+value.author+"</td></tr>";
-			});
-			table = table + "</table>";
-			boardList.append(table);
-			$(".boardLink").click(function(e)
-			{
-				var boardID = $(this).attr("data-boardID");
-				app_router.navigate('boards/'+boardID,{trigger:true});
-			});
-		});
-
-	}
+	// }
 	function showBoard(boardID)
 	{
+		var boardID = $("#boardId").attr(value);
 		container.empty();
 		container.append('<div class="board" data-boardID="'+boardID+'"></div>');
 		container = container.children().first();
@@ -174,6 +147,7 @@
 	    })
 	    timeLastUpdated = new Date();
 	}
+});
 
 	// your JS code goes here
 	// var app = {}; // create namespace for our app
