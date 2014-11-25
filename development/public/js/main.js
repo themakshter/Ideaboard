@@ -64,7 +64,7 @@
 			$(".boardField").text(data.name);
 		});
 		$.get(apiURL+'/boards/'+boardID+"/columns",function(data)
-			{
+		{
 			var columns = [];
 			$(data).each(function(index,value)
 			{
@@ -99,7 +99,11 @@
 
 				});
 			});
-	});
+		});
+	}
+	function makeColumn(id,container)
+	{
+
 	}
 	function makeNewNoteButton(container)
 	{
