@@ -82,7 +82,15 @@
 			{
 				'board':currentBoardID,
 				'name':''
+			},
+			function(data){
+				var container = $('.board');
+				$('.newColumnButton').remove();
+				makeColumn(data,container)
+				createNote(data._id);
+				makeNewColumnButton(container)
 			});
+
 		});
 	}
 	function makeColumn(column,container)
@@ -106,6 +114,7 @@
 				makeNote(value,notesContainer);
 			});
 			makeNewNoteButton(colContainer);
+			$('body').scrollTo('.newColumnButton');
 			
 		});
 	}
