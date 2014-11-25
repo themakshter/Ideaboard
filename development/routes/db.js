@@ -50,7 +50,7 @@ var boards = [];
 					_id: noteId,
 					column: columnId,
 					name: "testBoard"+i+"testColumn"+j+"testNote"+k,
-					contents: "This <i>is</i>a <u>test</u> <b>note</b>",
+					contents: "This <i>is</i> a <u>test</u> <b>note</b>",
 					colour: "testColour"+k
 				});
 			}

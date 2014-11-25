@@ -42,10 +42,10 @@
 		boardList.append('<h1 class="text-center">Available Boards</h1>');
 		$.get(apiURL+"/boards",function(data)
 		{
-			var boards = '<ul class="boardTable thumbnails list-inline">';
+			var boards = '<ul class="boardTable list-inline">';
 			$.each(data,function(key,value)
 			{
-				boards+= "<li class='boardLink board' data-boardID='"+value._id+"'><a class='thumbnail plain' href='#boards/"+value._id+"'><h3>"+value.name+"<br><small>"+value.author+"</small></h3></a></li>";
+				boards+= "<li class='boardLink board' data-boardID='"+value._id+"'><a class='' href='#boards/"+value._id+"'><h3>"+value.name+"<br><small>"+value.author+"</small></h3></a></li>";
 			});
 			boards = boards + "</ul>";
 			boardList.append(boards);

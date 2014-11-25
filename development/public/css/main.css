@@ -24,9 +24,10 @@
 
 body
 {
-
   background-color:#E8E8E8;
 }
+
+
 #container
 {
   white-space: nowrap;
@@ -74,9 +75,4 @@ div:hover > .colorPicker
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-}
-.board
-{
-    overflow-x:visible;
-
 }
