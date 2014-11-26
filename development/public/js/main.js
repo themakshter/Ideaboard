@@ -33,6 +33,7 @@
 		
 	});
 	Backbone.history.start();
+
 	function listBoards()
 	{
 		container = $("#container");
@@ -53,6 +54,7 @@
 		});
 
 	}
+
 	function showBoard(boardID)
 	{
 		currentBoardID = boardID;
@@ -73,6 +75,7 @@
 			makeNewColumnButton(container);
 		});
 	}
+
 	function makeNewColumnButton(container)
 	{
 		container.append('<div class="newColumnButton"><span class="glyphicon glyphicon-plus"></span></div>');
@@ -81,7 +84,7 @@
 			$.post(apiURL+'/boards/'+currentBoardID+'/columns',
 			{
 				'board':currentBoardID,
-				'name':''
+				'name':'New Column'
 			},
 			function(data){
 				var container = $('.board');
@@ -95,6 +98,7 @@
 
 		});
 	}
+
 	function makeColumn(column,container)
 	{
 		var colID = column._id;
@@ -164,6 +168,7 @@
 		var timeDiff = Math.abs(now.getTime() - timeLastUpdated.getTime());
 		return timeDiff;
 	}
+
 	function updateNoteDiv(note)
 	{
 		var id = note.attr('data-noteID');
@@ -175,7 +180,7 @@
 	{
 		$.post(apiURL+"/boards/"+currentBoardID+"/columns/"+colID+"/notes",
 		{
-			"name":"testName",
+			"name":"New Note",
 			"contents":"",
 			"column":colID,
 			"color":"#FFFFFF"
