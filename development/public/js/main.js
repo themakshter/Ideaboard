@@ -41,7 +41,7 @@
 		container.append("<div class='boardList'></div>");
 		var boardList = container.children().first();
 
-		boardList.append('<h1 class="text-center">Available Boards</h1>');
+		boardList.append('<h1 class="text-center">Available Boards</h1><br>');
 		$.get(apiURL+"/boards",function(data)
 		{
 			var boards = '<ul class="list-inline">';
