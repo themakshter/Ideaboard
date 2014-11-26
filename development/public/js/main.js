@@ -89,6 +89,8 @@
 				makeColumn(data,container)
 				createNote(data._id);
 				makeNewColumnButton(container)
+				var newColumnButton = $('.newColumnButton');
+				window.scrollBy(300,0);
 			});
 
 		});
@@ -114,8 +116,7 @@
 				makeNote(value,notesContainer);
 			});
 			makeNewNoteButton(colContainer);
-			$('body').scrollTo('.newColumnButton');
-			
+				
 		});
 	}
 	function makeNewNoteButton(container)
