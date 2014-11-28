@@ -6,6 +6,12 @@
     vertical-align:top;
 }
 
+#loading{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
 a.plain:link {
     color: #333;
     text-decoration: none;
