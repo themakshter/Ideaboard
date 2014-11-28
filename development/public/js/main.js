@@ -106,7 +106,11 @@
 		$.get(apiURL+'/boards/'+currentBoardID+"/columns/"+colID,function(data)
 		{
 			var colName = data.name;
-			colContainer.prepend("<h3 class=\"columnTitle\">" + colName + "</h3>");
+			if (colName === "")
+			{
+				colName = "Name ..."
+			}
+			colContainer.prepend("<form ><input type='text' class=\"columnTitle\" value='"+colName+"'></input></form>");
 		});
 		$.get(apiURL+'/boards/'+currentBoardID+"/columns/"+colID+"/notes",function(data)
 		{

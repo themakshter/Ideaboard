@@ -110,3 +110,11 @@ div:hover > .colorPicker
   height: 1000px;
   display: inline-block;
 }
+.columnTitle
+{
+  border-style: none;
+  background-color: transparent;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: bold;
+  font-size: 2rem;
+}
