@@ -39,6 +39,7 @@ a.plain:hover {
     background-color:white;
     box-shadow: 0 2px 1px rgba(0,0,0,0.08);
     transition: background-color 1s;
+    display: none;
 }
 
 .navbar-center{
@@ -93,7 +94,8 @@ div:hover > .colorPicker
   text-align: center;
   position: relative;
   margin-top: 20px;
-  transition: opacity 0.5s;
+  transition: opacity 0.5s, top 0.5s;
+
 }
 .newNoteButton:hover, .newColumnButton:hover
 {
