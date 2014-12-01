@@ -90,7 +90,6 @@
 				var container = $('.board');
 				$('.newColumnButton').remove();
 				makeColumn(data,container)
-				createNote(data._id);
 				makeNewColumnButton(container)
 				var newColumnButton = $('.newColumnButton');
 				window.scrollBy(300,0);
