@@ -148,6 +148,20 @@
 		var colorPicker = $(noteCon).children().last();
 		noteCon.append("<div class='textArea'>"+text+"</div>");
 		var textArea = $(noteCon).children().last();
+		noteCon.append('<span  class="glyphicon glyphicon-remove deleteNote"></span>');
+		var deleteButton = noteCon.children().last();
+		deleteButton.click(function()
+		{
+			var noteCon = $(this).parent();
+			noteCon.slideUp(500);
+			var noteId = noteCon.attr('data-noteid');
+			var colID = noteCon.parents('.boardColumn').attr('data-columnid');
+			$.ajax(
+			{
+				url:apiURL+'/boards/'+currentBoardID+'/columns/'+colID+'/notes/'+noteId,
+				type: 'DELETE'
+			});
+		});
 		$(textArea).notebook();
 		$(colorPicker).empty().addColorPicker({
 			clickCallback: function(c,picker)
