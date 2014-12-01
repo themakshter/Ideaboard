@@ -142,6 +142,7 @@
 		var text = note.contents;
 		container.append("<div class=\"note\" data-noteID =\"" + note._id +"\"></div>");
 		var noteCon = container.children().last();
+		$(noteCon).slideDown();
 		noteCon.css('background-color',note.color);
 		noteCon.append("<div class='colorPicker'></div>");
 		var colorPicker = $(noteCon).children().last();
