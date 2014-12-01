@@ -78,6 +78,7 @@ exports.updateNote = function(req, res){
 };
 
 exports.deleteNote = function(req, res){
+	var note = req.body;
 	var id = req.params.noteId;
 	console.log("Deleting note : " + id);
 	db.collection('notes',  function(err, collection){
