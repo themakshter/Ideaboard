@@ -63,7 +63,7 @@ exports.updateColumn = function(req, res){
 	var column = req.body;
 	delete column._id;
 	column.board = new BSON.ObjectID(column.board);
-	console.log("Updating column :" + columnId);
+	console.log("Updating column :" + id);
 	console.log(JSON.stringify(column));
 	db.collection('columns', function(err, collection){
 		collection.update({"_id":new BSON.ObjectID(id)}, column, {safe:true}, function(err, result){
