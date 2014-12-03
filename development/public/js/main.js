@@ -114,6 +114,23 @@
 				colName = "Name ..."
 			}
 			colContainer.prepend("<form ><input type='text' class=\"columnTitle\" value='"+colName+"'></input></form>");
+			var colTitle = colContainer.children().first();
+			colTitle.change(function()
+			{
+				var title = $(this).attr('value');
+				var colID = $(this).parents('.boardColumn').attr('data-columnid');
+				$.ajax(
+				{
+					url: apiURL+'/boards/'+currentBoardID+'/columns/'+colID,
+					data:
+					{
+						"_id":colID,
+						"board":currentBoardID,
+						"name":title
+					},
+					type:'put'
+				})
+			});
 		});
 		$.get(apiURL+'/boards/'+currentBoardID+"/columns/"+colID+"/notes",function(data)
 		{
