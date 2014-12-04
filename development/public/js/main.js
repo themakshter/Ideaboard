@@ -115,21 +115,22 @@
 			}
 			colContainer.prepend("<form ><input type='text' class=\"columnTitle\" value='"+colName+"'></input></form>");
 			var colTitle = colContainer.children().first();
-			colTitle.change(function()
+			colTitle.change(function(e)
 			{
-				var title = $(this).attr('value');
+				var title = e.target.value;
 				var colID = $(this).parents('.boardColumn').attr('data-columnid');
-				$.ajax(
+				var message = 
 				{
-					url: apiURL+'/boards/'+currentBoardID+'/columns/'+colID,
-					data:
-					{
 						"_id":colID,
 						"board":currentBoardID,
 						"name":title
-					},
-					type:'put'
-				})
+				};
+				$.ajax(
+				{
+					url: apiURL+'/boards/'+currentBoardID+'/columns/'+colID,
+					data:message,
+					type:'PUT'
+				});
 			});
 		});
 		$.get(apiURL+'/boards/'+currentBoardID+"/columns/"+colID+"/notes",function(data)
