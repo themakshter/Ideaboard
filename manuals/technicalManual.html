@@ -5,8 +5,10 @@
 	<meta name="viewport" content="width-device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" href="css/prism.css">
 	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script src="js/prism.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -17,6 +19,11 @@
 		</h1>
 		<h2>Technologies</h2>
 		<h2>Architecture</h2>
+		<p>We decided to implement a client server architecture, where the client uses a RESTful api to communicate with the server. This is because:</p>
+		<ul>
+			<li>We wanted the the users to be able to access their notes from anywhere.</li>
+			<li>A RESTful api backend is uncoupled from the frontend implementation, this allows any other frontend implementation. This is important as in the future we may build a native mobile application which can use the same backend as the web application.</li>
+		</ul>
 		<h2>Back end</h2>
 		<h2>Front end</h2>
 			<h3>User Interface</h3>
@@ -29,15 +36,65 @@
 			</ul>
 			<p>Upon hovering over the end of a list or column a user discovers the new note or new column button. All of these appearing interface elements are animated to fade in and out, this is so that the user is not forced into sudden disorientating state changes when editing a board.</p>
 			<h3>Use of libraries</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>Library</th>
+						<th>Used For</th>
+						<th>Reason Used</th>
+						<th>Example Use</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<a href='http://backbonejs.org/'>Backbone.js</a> 
+						</td>
+						<td>To create the in app router allowing history and navigation on a single page web application</td>
+						<td>We wanted to use a lightweight MVC web framework to give structure to our application and Backbone is very lighweight and we had previous experience with it. However, we found using a MVC framework for our site too cumbersone and simply developed it without with the exception of the in app router</td>
+						<td>
+							<pre>
+								<code class="language-javascript">
+								var AppRouter = Backbone.Router.extend(
+								{
+									routes:
+									{
+										""			: "listBoards",
+										"boards/new":"newBoard",
+										"boards/:id":"showBoard",
+										"*actions": "defaultRoute"
+									}
+								});
+
+								var app_router = new AppRouter();
+								app_router.on('route:showBoard',function(id)
+								{
+									showBoard(id);
+									console.log("showing board"+id);
+
+								});
+								</code>
+							</pre>
+					</tr>
+				</tbody>
+			</table>
 			<p>The front end uses the following libraries:</p>
 			<ul>
-				<li><a href='http://backbonejs.org/'>Backbone.js</a> for the in app routing</li>
+				<li><for the in app routing</li>
 				<li><a href='http://jquery.com/'>jQuery</a> for DOM manipulation,ajax requests and cross browser support</li>
-				<li><a href='https://github.com/raphaelcruzeiro/jquery-notebook'>JQuery notebook</a> for rich text editing</li>
-				<li><a href='http://getbootstrap.com/'>Twitter Bootstrap</a> for the page layout and design</li>
+				<li><a href='https://github.com/raphaelcruzeiro/jquery-notebook'>JQuery notebook</a> for rich text editing. Used because the editor for jQeuery notebook only appears when text is selected it fulfilled our goal of creating a natural user interface.</li>
+				<li><a href='http://getbootstrap.com/'>Twitter Bootstrap</a> for the page layout and design. As we previously had experience</li>
 				<li><a href='http://wanderinghorse.net/computing/javascript/jquery/colorpicker/'>JQuery color picker</a> to choose the note colors, slightly modified to pick a different set of colors and add context to the callback function</li>
 				<li><a href='http://www.google.com/fonts'>Google Fonts</a> for the Robto Slab and Roboto Condensed fonts</li>
 			</ul>
+			<h3>Testing</h3>
+			<p>We chose a number of web browsers which we wished to target, we developed the site in Google Chrome because we were more productive with their development tools.</p>
+			<ul>
+				<li>Internet Explorer 9+</li>
+				<li>Google Chrome 37+</li>
+				<li>Firefox 30
+			</ul>
+			<p> because our user interface is not suitable for touch screens we chose not to support mobile browsers.</p>
 	</div>
 </body>
 </html>
