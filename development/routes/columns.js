@@ -78,7 +78,7 @@ exports.updateColumn = function(req, res){
 	});
 };
 
-exports.deleteColumn = function(res, req){
+exports.deleteColumn = function(req, res){
 	var id = req.params.columnId;
 	console.log("Deleting column : " + id);
 	db.collection('columns', function(err,collection){
