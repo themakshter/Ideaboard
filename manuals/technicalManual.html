@@ -23,6 +23,7 @@
 		<ul>
 			<li>We wanted the the users to be able to access their notes from anywhere.</li>
 			<li>A RESTful API back-end is uncoupled from the front-end implementation, this allows any other front-end implementation. This is important as in the future we may build a native mobile application which can use the same back-end as the web application.</li>
+			<li>RESTful API's are much more simple to interact with than alternatives such as soap</li>
 		</ul>
 		<h2>Back end</h2>
 		<h2>Front end</h2>
@@ -36,6 +37,21 @@
 			</ul>
 			<p>Upon hovering over the end of a list or column a user discovers the new note or new column button. All of these appearing interface elements are animated to fade in and out, this is so that the user is not forced into sudden disorientating state changes when editing a board.</p>
 
+			<p>Whilst we are very pleased of our user interface it is heavily reliant on mouse cursors in order to operate. Thus it is not suitable for mobile use. Our plan in the future is to implement a mobile application in native code the utilises the same API as our web application. When a mobile user accesses the site they can then be redirected to the relevant app store to download a mobile version.</p>
+
+			<p>Despite not implementing a mobile version of the site we have implemented a responsive design to be flexible to different display sizes. Our responsive design was implmented using the Bootstrap css framework. Below is an example of the board selection screen responding to width changes.</p>
+			<figcaption>
+				<figure>
+					<img src="img/narrowboards.png">
+				</figure>
+				<caption>the board selection screen on a narrow screen</caption>
+			</figcaption>
+			<figcaption>
+				<figure>
+					<img src="img/wideboards.png">
+				</figure>
+				<caption>Board selection screen on a wide screen</caption>
+			</figcaption>
 			<h3>Front-end libraries</h3>
 				<p>One the skill we aimed to improve is the use of JavaScript libraries for single page applications. With extensive use of libraries for user interface elements we were able to easily implement attractive controls far more easily than if we had coded them ourselves.</p>
 				<p>In addition to the libraries used below this page uses <a href="http://prismjs.com">Prismjs</a> to syntax highlight code examples.</p>
@@ -125,7 +141,7 @@ $(textArea).on('contentChange', function(e)
 					<caption>Code used to initialise jQuery Notebook and attach an event listener to update on text changes</caption>
 				</figcaption>
 				<h5>Problems</h5>
-				<p>We encountered incompatibilities between jQuery notebook and Twitter bootstrap with regards to the position of the pop up bubble. Upon discovering this the site already had already been developed using both these libraries. We found however, that these errors only occurred when the parent elements of the notebook used relative positioning so it was relatively simple to work around.</p>
+				<p>We encountered incompatibilities between jQuery notebook and Twitter bootstrap with regards to the position of the pop up bubble. Upon discovering this the site already had already been developed using both these libraries. We found however, that these errors only occurred when the parent elements of the notebook used relative positioning so it was relatively simple to work around. </p>
 				<figure>
 					<img src="img/notebook-position.png" class="img-rounded">
 					<figcaption>jQuery notebook with relatively positioned columns causing the bubble appear up and to the right of selected text (during development)</figcaption>
