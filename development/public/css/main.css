@@ -128,7 +128,7 @@ div:hover > .colorPicker
   font-weight: bold;
   font-size: 2rem;
 }
-.deleteNote
+.deleteNote, .deleteColumn
 {
 
   opacity: 0;
@@ -139,7 +139,7 @@ div:hover > .colorPicker
   position: relative;
   top: -1.2em;
 }
-div:hover > .deleteNote
+div:hover > .deleteNote, div:hover > .deleteColumn
 {
   opacity: 1;
   cursor: pointer;

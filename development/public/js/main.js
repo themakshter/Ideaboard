@@ -113,6 +113,7 @@
 			{
 				colName = "Name ..."
 			}
+			colContainer.prepend("<span class='glyphicon glyphicon-remove deleteColumn' />");
 			colContainer.prepend("<form ><input type='text' class=\"columnTitle\" value='"+colName+"'></input></form>");
 			var colTitle = colContainer.children().first();
 			colTitle.change(function(e)
