@@ -51,7 +51,11 @@
 					"author":author,
 					"color":""
 				};
-				$.post(apiURL+"/boards/",message);
+				$.post(apiURL+"/boards/",message,function(data)
+				{
+					var id = data._id;
+					app_router.navigate("/boards/"+id,{trigger: true});
+				});
 			});
 		});
 
