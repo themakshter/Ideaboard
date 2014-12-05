@@ -1,7 +1,6 @@
 //calling all the required files
 var express = require("express");
 	path = require('path');
-	cors = require("cors");
 	db = require("./routes/db.js");
 	boards = require("./routes/boards.js");
 	columns = require("./routes/columns.js");
@@ -16,10 +15,7 @@ app.configure(function () {
     app.use(express.logger('dev'));  /* 'default', 'short', 'tiny', 'dev' */
     app.use(express.bodyParser());
     app.use(express.static(path.join(__dirname, 'public')));
-    //app.use(cors());
 });
-
-
 
 db.openDatabase("ideaboardDB");
 

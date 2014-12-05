@@ -26,7 +26,7 @@ var boards = [];
 	var columns = [];
 	var notes = [];
 	
-	for(var i = 0; i<10;i++){
+	for(var i = 0; i<5;i++){
 		var boardId = new BSON.ObjectID();
 		boards.push({
 			_id: boardId,
