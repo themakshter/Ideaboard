@@ -114,6 +114,7 @@
 				colName = "Name ..."
 			}
 			colContainer.prepend("<span class='glyphicon glyphicon-remove deleteColumn' />");
+			var deleteColumn = colContainer.children().first();
 			colContainer.prepend("<form ><input type='text' class=\"columnTitle\" value='"+colName+"'></input></form>");
 			var colTitle = colContainer.children().first();
 			colTitle.change(function(e)
@@ -132,6 +133,18 @@
 					data:message,
 					type:'PUT'
 				});
+			});
+			deleteColumn.click(function()
+			{
+				var column = $(this).parents('.boardColumn');
+				var colid = column.attr('data-columnid');
+				column.remove();
+				$.ajax(
+				{
+					url:apiURL+'/boards/'+currentBoardID+'/columns/'+colid,
+					type:'DELETE'
+				});
+
 			});
 		});
 		$.get(apiURL+'/boards/'+currentBoardID+"/columns/"+colID+"/notes",function(data)
