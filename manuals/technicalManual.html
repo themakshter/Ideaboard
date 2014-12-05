@@ -19,25 +19,25 @@
 		</h1>
 		<h2>Technologies</h2>
 		<h2>Architecture</h2>
-		<p>We decided to implement a client server architecture, where the client uses a RESTful api to communicate with the server. This is because:</p>
+		<p>We decided to implement a client server architecture, where the client uses a RESTful API to communicate with the server. This is because:</p>
 		<ul>
 			<li>We wanted the the users to be able to access their notes from anywhere.</li>
-			<li>A RESTful api backend is uncoupled from the frontend implementation, this allows any other frontend implementation. This is important as in the future we may build a native mobile application which can use the same backend as the web application.</li>
+			<li>A RESTful API back-end is uncoupled from the front-end implementation, this allows any other front-end implementation. This is important as in the future we may build a native mobile application which can use the same back-end as the web application.</li>
 		</ul>
 		<h2>Back end</h2>
 		<h2>Front end</h2>
 			<h3>User Interface</h3>
-			<p>IdeaBoard uses a nautral user interface, a natural user interface is one which is initally invisible, but whilst the user explores the application they discover and learn the supported functions. As such upon first seeing the board the user sees only a series of notes, however, upon hovering over with a mouse they can see UI interface elements to change colour and delete notes. When the user selects text a menu appears under their cursor allowing them to:</p>
+			<p>IdeaBoard uses a natural user interface, a natural user interface is one which is initially invisible, but whilst the user explores the application they discover and learn the supported functions. As such upon first seeing the board the user sees only a series of notes, however, upon hovering over with a mouse they can see UI interface elements to change colour and delete notes. When the user selects text a menu appears under their cursor allowing them to:</p>
 			<ul>
 				<li>Create bullet points and numbered lists</li>
-				<li>Make text bold,underline or italic</li>
+				<li>Make text bold, underline or italic</li>
 				<li>Create heading</li>
 				<li>Make links</li>
 			</ul>
 			<p>Upon hovering over the end of a list or column a user discovers the new note or new column button. All of these appearing interface elements are animated to fade in and out, this is so that the user is not forced into sudden disorientating state changes when editing a board.</p>
 
-			<h3>Frontend libraries</h3>
-				<p>One the skill we aimed to improve is the use of javascript libraries for single page applications. With extensive use of libraries for user interface elements we were able to easily implement attractive controls far more easily than if we had coded them ourselves.</p>
+			<h3>Front-end libraries</h3>
+				<p>One the skill we aimed to improve is the use of JavaScript libraries for single page applications. With extensive use of libraries for user interface elements we were able to easily implement attractive controls far more easily than if we had coded them ourselves.</p>
 				<p>In addition to the libraries used below this page uses <a href="http://prismjs.com">Prismjs</a> to syntax highlight code examples.</p>
 				<h4>
 					<a href='http://backbonejs.org/'>Backbone.js</a> 
@@ -45,7 +45,7 @@
 				<h5>Where?</h5>
 				<p>To create the in app router allowing history and navigation on a single page web application</p>
 				<h5>Why?</h5>
-				<p>We wanted to use a lightweight MVC web framework to give structure to our application and Backbone is very lighweight and we had previous experience with it. However, we found using a MVC framework for our site too cumbersone and simply developed it without with the exception of the in app router which we needed for basic functionality.</p>
+				<p>We wanted to use a lightweight MVC web framework to give structure to our application and Backbone is very lightweight and we had previous experience with it. However, we found using a MVC framework for our site too cumbersome and simply developed it without with the exception of the in app router which we needed for basic functionality.</p>
 				<h5>Example</h5>
 				<figure>
 <!--code blocks cannot be indented otherwise itll mess up formatting -->
@@ -74,12 +74,12 @@ app_router.on('route:showBoard',function(id)
 
 				<h4><a href='http://jquery.com/'>jQuery</a></h4>
 				<h5>Where?</h5>
-				<p>Used throughout the applicaton for DOM maninpulation, ajax requests and smoothing over API differences between web browsers.</p>
+				<p>Used throughout the application for DOM manipulation, ajax requests and smoothing over API differences between web browsers.</p>
 				<h5>Why?</h5>
 				<ul>
 					<li>Both our team members had extensive experience with jQuery</li>
 					<li>It allows for more concise code (it's marketed as'The Write Less, Do More, JavaScript Library.')</li>
-					<li>Its the most commonly used frontend we library so its easy to find help</li>
+					<li>Its the most commonly used front-end we library so its easy to find help</li>
 					<li>Other libraries(jQuery notebook and JQuery color picker) we wanted to use were jQuery extensions</li>
 				</ul>
 				<h5>Example</h5>
@@ -125,14 +125,14 @@ $(textArea).on('contentChange', function(e)
 					<caption>Code used to initialise jQuery Notebook and attach an event listener to update on text changes</caption>
 				</figcaption>
 				<h5>Problems</h5>
-				<p>We encountered incompatabilities between jQuery notebook and Twitter bootstrap with regards to the position of the pop up bubble. Upon discovering this the site already had already been developed using both these libraries. We found however, that these errors only occured when the parent elements of the notebook used relative positioning so it was relatively simple to work around.</p>
+				<p>We encountered incompatibilities between jQuery notebook and Twitter bootstrap with regards to the position of the pop up bubble. Upon discovering this the site already had already been developed using both these libraries. We found however, that these errors only occurred when the parent elements of the notebook used relative positioning so it was relatively simple to work around.</p>
 				<figure>
 					<img src="img/notebook-position.png" class="img-rounded">
 					<figcaption>jQuery notebook with relatively positioned columns causing the bubble appear up and to the right of selected text (during development)</figcaption>
 				</figure>
 				<li><a href='http://getbootstrap.com/'>Twitter Bootstrap</a> for the page layout and design. As we previously had experience</li>
-				<li><a href='http://wanderinghorse.net/computing/javascript/jquery/colorpicker/'>JQuery color picker</a> to choose the note colors, slightly modified to pick a different set of colors and add context to the callback function</li>
-				<li><a href='http://www.google.com/fonts'>Google Fonts</a> for the Robto Slab and Roboto Condensed fonts</li>
+				<li><a href='http://wanderinghorse.net/computing/javascript/jquery/colorpicker/'>JQuery color picker</a> to choose the note colours, slightly modified to pick a different set of colours and add context to the callback function</li>
+				<li><a href='http://www.google.com/fonts'>Google Fonts</a> for the Roboto Slab and Roboto Condensed fonts</li>
 			<h3>Testing</h3>
 			<p>We chose to target support for the previous two versions of the four most popular desktop browsers.Because our user interface is not suitable for touch screens we chose not to support mobile browsers.</p>
 			<ul>
