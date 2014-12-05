@@ -130,10 +130,58 @@ $(textArea).on('contentChange', function(e)
 					<img src="img/notebook-position.png" class="img-rounded">
 					<figcaption>jQuery notebook with relatively positioned columns causing the bubble appear up and to the right of selected text (during development)</figcaption>
 				</figure>
-				<li><a href='http://getbootstrap.com/'>Twitter Bootstrap</a> for the page layout and design. As we previously had experience</li>
-				<li><a href='http://wanderinghorse.net/computing/javascript/jquery/colorpicker/'>JQuery color picker</a> to choose the note colours, slightly modified to pick a different set of colours and add context to the callback function</li>
-				<li><a href='http://www.google.com/fonts'>Google Fonts</a> for the Roboto Slab and Roboto Condensed fonts</li>
+
+				<h4><a href='http://wanderinghorse.net/computing/javascript/jquery/colorpicker/'>jQuery Color Picker</a></h4>
+				<h5>Where</h5>
+				<p>Used to edit the colour of the notes, was slightly modified to support our selection of colours and add context to the callback function</p>
+				<img src="img/colorpicker-example.png" class="img-rounded">
+				<h5>Why</h5>
+				<p>We chose this because it supports only a limited number of colours rather than a any shade. This means that the UI is simpler and the user can only pick colours that complement other colours and work with the black text.</p>
+				<h5>Example</h5>
+				<figcaption>
+					<figure>
+<pre>
+<code class="language-javascript">
+$(colorPicker).empty().addColorPicker(
+{
+		clickCallback: function(c,picker)
+		{
+			$(picker).parent().css('background-color',c);
+			updateNoteDiv(picker.parent());
+		}
+});
+</code>
+</pre>
+					</figure>
+					<caption>Code used to initialise colour picker and provide it with a callback to update the note and server on modification</caption>
+				</figcaption>
+
+				<h4><a href='http://getbootstrap.com/'>Twitter Bootstrap</a> </h4>
+				<p>Used for page Layout and design. The top navigation bar is implemented using bootstrap components. Also used in the project brief and manuals for the site</p>
+				<h5>Example</h5>
+				<figcaption>
+					<figure>
+<pre>
+<code class="language-javascript">
+boardList.append('<h1 class="text-center">Available Boards</h1><br>');
+$.get(apiURL+"/boards",function(data)
+{
+	var boards = '<ul class="list-inline">';
+	$.each(data,function(key,value)
+	{
+		boards+= "<li class='boardLink ' data-boardID='"+value._id+"'><a class='board plain thumbnail text-center' href='#boards/"+value._id+"'><h3>"+value.name+"<br><small>"+value.author+"</small></h3></a></li>";
+	});
+	boards+="</ul>";
+	boardList.append(boards);
+});
+	
+</code>
+</pre>
+					</figure>
+					<caption>Code used to display boards generating markup with the bootstrap classes text-center and list-inline.</caption>
+				</figcaption>
 			<h3>Testing</h3>
+			<p>In order to provide test data on start up the server checks to see if a database exists, and if it does not it generates a set of test data automatically.</p>
 			<p>We chose to target support for the previous two versions of the four most popular desktop browsers.Because our user interface is not suitable for touch screens we chose not to support mobile browsers.</p>
 			<ul>
 				<li>Internet Explorer 9+</li>
