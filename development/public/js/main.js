@@ -107,7 +107,7 @@
 	{
 		currentBoardID = boardID;
 		container.empty();
-		container.append('<div class="board" data-boardID="'+boardID+'"></div>');
+		container.append('<div class="board mainBoard" data-boardID="'+boardID+'"></div>');
 		container = container.children().first();
 		$.get(apiURL+'/boards/'+boardID,function(data)
 		{
