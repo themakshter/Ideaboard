@@ -30,9 +30,32 @@
 	});
 	app_router.on('route:newBoard',function(actions)
 	{
-		
+		newBoard();
 	});
 	Backbone.history.start();
+
+	function newBoard()
+	{
+		container = $("#container");
+		container.empty();
+		container.load("html/newBoard.html",function()
+		{
+			var newBoardButton = $("#newBoardButton");
+			newBoardButton.click(function()
+			{
+				var name = $("#boardNameInput").val();
+				var author = $("#authorInput").val();
+				var message = 
+				{
+					"name": name,
+					"author":author,
+					"color":""
+				};
+				$.post(apiURL+"/boards/",message);
+			});
+		});
+
+	}
 
 	function listBoards()
 	{
