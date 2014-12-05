@@ -154,12 +154,15 @@ CREATE TABLE Note
 		</code></pre>
 		<h3>Design</h3>
 		<p>
-			The design of our server was pretty simple. As mentioned before, the back-end was present to server the GET, PUT, POST and DELETE requests from our web application. To be able to do this, we designed our routes with our structures in mind. We wanted to be able to display all the boards we had, and then, if needed, a specific board requested with id. This would also apply to the columns and notes belonging to each board. With this in mind, we created a number of routes which can be seen below.
-Using /boards will return a list of all the boards contained in the database. If we enter an id next, /boards/:id, this will give us a board with the requested id. Moivng on, /boards/id/columns would give us a list of columns, and calling an id on that will give us a specific column. Lastly, using /boards/:boardId/columns/:columnid/notes and adding notesId to it will give us the notes within this board and column.
+			The design of our server was pretty simple. As mentioned before, the back-end was present to server the <code>GET</code>, <code>PUT</code>, <code>POST</code> and <code>DELETE</code> requests from our web application. To be able to do this, we designed our routes with our structures in mind. We wanted to be able to display all the boards we had, and then, if needed, a specific board requested with id. This would also apply to the columns and notes belonging to each board. With this in mind, we created a number of routes which can be seen below.
+Using <code>/boards</code> will return a list of all the boards contained in the database. If we enter an id next, <code>/boards/:boardId</code>, this will give us a board with the requested id. Moivng on, <code>/boards/:boardId/columns</code> would give us a list of columns, and calling an id on that will give us a specific column. Lastly, using <code>/boards/:boardId/columns/:columnId/notes</code> and adding <code>/:noteId</code> to it will give us the notes and a specific note within this board column respectively.
 		</p>
-		<h3>NodeJS Server</h3>
+		<h3>Server</h3>
+		<h4>Inspiration</h4>
 		<p>
-			The creating of the node server was done with the help of a tutorial which involved creating a wine factory. They had just one table of wines in their collection, but we had three. With that in mind, we created methods for retrieving, editing and deleting database records. These were written into separate files and imported in the main server file for modularity and a nicer structure. 
+			The creating of the node server was done with the help of a <a href="http://coenraets.org/blog/2012/10/creating-a-rest-api-using-node-js-express-and-mongodb/">tutorial</a> which involved creating a wine factory.</p> 
+		<h4>Structure</h4>
+			<p>The tutorial had just one table of wines in their collection, but we had three. With that in mind, we created methods for retrieving, editing and deleting database records. These were written into separate files and imported in the main server file for modularity and a nicer structure. 
 Making a RESTful API also involved making use of the express module available in nodejs and installed through npm. This returns an object on which we can call the different requests and assign them to routes and methods. An example of this is assigning a get request to ‘/boards/’ to call the method to retrieve a list of all the different boards.
 		</p>
 		<h2>Front end</h2>
