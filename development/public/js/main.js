@@ -51,7 +51,32 @@
 					"author":author,
 					"color":""
 				};
-				$.post(apiURL+"/boards/",message);
+				$.post(apiURL+"/boards/",message,function(data)
+				{
+					var boardID = data._id;
+					var colmsg = 
+					{
+						"board":boardID,
+						'name':''
+					};
+					$.post(apiURL+'/boards/'+boardID+'/columns',colmsg,function(data)
+					{
+						var colID = data._id;
+						var notemsg =
+						{
+							'column':colID,
+							'name':'',
+							'contents':'',
+							'colour':''
+						};
+						$.post(apiURL+'/boards/'+boardID+'/columns/'+colID+'/notes',notemsg,function()
+						{
+							app_router.navigate("boards/"+boardID,{trigger: true});
+
+						});
+					});
+
+				});
 			});
 		});
 
