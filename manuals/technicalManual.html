@@ -43,22 +43,126 @@
 		</p>
 		<h3>Model</h3>
 		<p>
-			For our application, we designed three main structures: Boards, Columns and Notes. A board would have a name, the name of its author and colour, for customisation purposes. Moreover, it would have a list/number of columns. Each column in a board would have a name and a list/number of notes. Lastly, each note would have a title, the note content and colour. A diagram can be seen below.
+			For our application, we designed three main structures: Boards, Columns and Notes. A board would have a name, the name of its author and colour, for customisation purposes. Moreover, it would have a list/number of columns. Each column in a board would have a name and a list/number of notes. Lastly, each note would have a title, the note content and colour. A diagram can be seen below:
 		</p>
+		<img class="image-center" src="img/database_design.png" alt="Database Design Image">
 		<h3>Database</h3>
 		<p>
-			As mentioned previously in the brief, we were still considering which database to use for our application. The two choices had been MongoDB and MySQL. MySQL seemed to fit our design well, and both of us were more comfortable with it, both having used it before. With this in mind, we set to create our tables. Using our design, we created Board, Column and Note tables. Column linked to Board with a BoardID as a foreign key and Note linked to a column in the same way. Our table can be seen below.
-
-However, once we started to prototype our application, it was discovered that it would be extremely tricky to work with node.js and MySQL. It was certainly not impossible, but the amount of work required to make things work was deemed too costly to justify using an SQL database. Instead, a document-based database would be ideal, and this was available in the form of MongoDB. Therefore, we switched to MongoDB. In Mongo, we tried to initially just use one document for each record, meaning a board document, containing its values and a list of column documents which in turn contained note documents. This seemed to be a good idea but we faced some trouble while making this work as retrieving individual notes or columns within the inner values was tricky. One could easily retrieve the whole list but doing that to make change to only document inside the list was considered inefficient and wasteful. Instead, the design of our database was more or less similar to the SQL one, with the ids of boards stored in column documents etc. Example documents of each table are shown below.
+			As mentioned previously in the brief, we were still considering which database to use for our application. The two choices had been MongoDB and SQL. SQL seemed to fit our design well, and both of us were more comfortable with it, both having used it before. With this in mind, we set to create our tables. Using our models from above, we created Board, Column and Note tables. Column linked to Board with a BoardID as a foreign key and Note linked to a column in the same way. Our table can be seen below.
 		</p>
+		<pre>
+		<code class="language-sql">
+CREATE DATABASE ideaBoard;
+
+USE ideaBoard;
+
+CREATE TABLE User
+(
+	user_id INT NOT NULL AUTO_INCREMENT,
+	email VARCHAR(50) NOT NULL,
+	UNIQUE(user_id),
+	UNIQUE(email),
+	PRIMARY KEY(user_id)
+);
+
+CREATE TABLE Board
+(
+	board_id INT NOT NULL AUTO_INCREMENT,
+    user INT NOT NULL,
+	FOREIGN KEY (user) REFERENCES User(user_id),
+	name VARCHAR(100) NOT NULL,
+	UNIQUE(board_id),
+	PRIMARY KEY(board_id)
+);
+
+CREATE TABLE Board_Column
+(
+	board_column_id INT NOT NULL AUTO_INCREMENT,
+    board INT NOT NULL,
+	FOREIGN KEY (board) REFERENCES Board(board_id),
+	title VARCHAR(100),
+	UNIQUE(board_column_id),
+	PRIMARY KEY(board_column_id)
+);
+
+CREATE TABLE Note
+(
+	note_id INT NOT NULL AUTO_INCREMENT,
+    board_column INT NOT NULL,
+	FOREIGN KEY (board_column) REFERENCES Board_Column(board_column_id),
+	content TEXT,
+	UNIQUE(note_id),
+	PRIMARY KEY(note_id)
+);
+		</code>
+	</pre>
+		<p>
+			However, once we started to prototype our application, it was discovered that it would be extremely tricky to work with node.js and MySQL. It was certainly not impossible, but the amount of work required to make things work was deemed too costly to justify using an SQL database. Instead, a document-based database would be ideal, and this was available in the form of MongoDB. Therefore, we switched to MongoDB. In Mongo, we tried to initially just use one document for each record, meaning a board document, containing its values and a list of column documents which in turn contained note documents. The schema of this can be scene below<p>
+		<pre><code class="language-javascript">
+		var ideaboardSchema = new Schema(
+			{
+				id : ObjectID,
+				name : String,
+				author : String,
+				colour : String,
+				columns : [
+					{
+						id : ObjectID,
+						name : String
+						notes: [
+							{
+								id : ObjectID,
+								title : String,
+								content : String,
+								colour : String
+							}...
+						]
+					}...	
+				]
+			}
+		);	
+		</code></pre>
+			<p> This seemed to be a good idea but we faced some trouble while making this work as retrieving individual notes or columns within the inner values was tricky. One could easily retrieve the whole list but doing that to make change to only document inside the list was considered inefficient and wasteful. Instead, the design of our database was more or less similar to the SQL one, with the ids of boards stored in column documents etc. The final schema is as follows.
+		</p>
+		<pre><code class="language-javascript">
+			var boardSchema = new Schema(
+				{
+					id : ObjectID,
+					name : String,
+					author : String,
+					colour : String	
+				}
+			);
+
+			var columnSchema = new Schema(
+				{
+					id :  ObjectID
+					name : String,
+					board : ObjectID
+				}
+			);
+
+			var noteSchema = new Schema(
+				{
+					id : Object ID,
+					name : String,
+					content : String,
+					colour : String,
+					column : ObjectID
+				}
+			);
+		</code></pre>
 		<h3>Design</h3>
 		<p>
-			The design of our server was pretty simple. As mentioned before, the back-end was present to server the GET, PUT, POST and DELETE requests from our web application. To be able to do this, we designed our routes with our structures in mind. We wanted to be able to display all the boards we had, and then, if needed, a specific board requested with id. This would also apply to the columns and notes belonging to each board. With this in mind, we created a number of routes which can be seen below.
-Using /boards will return a list of all the boards contained in the database. If we enter an id next, /boards/:id, this will give us a board with the requested id. Moivng on, /boards/id/columns would give us a list of columns, and calling an id on that will give us a specific column. Lastly, using /boards/:boardId/columns/:columnid/notes and adding notesId to it will give us the notes within this board and column.
+			The design of our server was pretty simple. As mentioned before, the back-end was present to server the <code>GET</code>, <code>PUT</code>, <code>POST</code> and <code>DELETE</code> requests from our web application. To be able to do this, we designed our routes with our structures in mind. We wanted to be able to display all the boards we had, and then, if needed, a specific board requested with id. This would also apply to the columns and notes belonging to each board. With this in mind, we created a number of routes which can be seen below.
+Using <code>/boards</code> will return a list of all the boards contained in the database. If we enter an id next, <code>/boards/:boardId</code>, this will give us a board with the requested id. Moivng on, <code>/boards/:boardId/columns</code> would give us a list of columns, and calling an id on that will give us a specific column. Lastly, using <code>/boards/:boardId/columns/:columnId/notes</code> and adding <code>/:noteId</code> to it will give us the notes and a specific note within this board column respectively.
 		</p>
-		<h3>NodeJS Server</h3>
+		<h3>Server</h3>
+		<h4>Inspiration</h4>
 		<p>
-			The creating of the node server was done with the help of a tutorial which involved creating a wine factory. They had just one table of wines in their collection, but we had three. With that in mind, we created methods for retrieving, editing and deleting database records. These were written into separate files and imported in the main server file for modularity and a nicer structure. 
+			The creating of the node server was done with the help of a <a href="http://coenraets.org/blog/2012/10/creating-a-rest-api-using-node-js-express-and-mongodb/">tutorial</a> which involved creating a wine factory.</p> 
+		<h4>Structure</h4>
+			<p>The tutorial had just one table of wines in their collection, but we had three. With that in mind, we created methods for retrieving, editing and deleting database records. These were written into separate files and imported in the main server file for modularity and a nicer structure. 
 Making a RESTful API also involved making use of the express module available in nodejs and installed through npm. This returns an object on which we can call the different requests and assign them to routes and methods. An example of this is assigning a get request to ‘/boards/’ to call the method to retrieve a list of all the different boards.
 		</p>
 		<h2>Front end</h2>
