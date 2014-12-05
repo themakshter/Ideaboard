@@ -35,8 +35,10 @@
 				<li>Make links</li>
 			</ul>
 			<p>Upon hovering over the end of a list or column a user discovers the new note or new column button. All of these appearing interface elements are animated to fade in and out, this is so that the user is not forced into sudden disorientating state changes when editing a board.</p>
+
 			<h3>Frontend libraries</h3>
-					
+				<p>One the skill we aimed to improve is the use of javascript libraries for single page applications. With extensive use of libraries for user interface elements we were able to easily implement attractive controls far more easily than if we had coded them ourselves.</p>
+				<p>In addition to the libraries used below this page uses <a href="http://prismjs.com">Prismjs</a> to syntax highlight code examples.</p>
 				<h4>
 					<a href='http://backbonejs.org/'>Backbone.js</a> 
 				</h4>
@@ -45,6 +47,7 @@
 				<h5>Why?</h5>
 				<p>We wanted to use a lightweight MVC web framework to give structure to our application and Backbone is very lighweight and we had previous experience with it. However, we found using a MVC framework for our site too cumbersone and simply developed it without with the exception of the in app router which we needed for basic functionality.</p>
 				<h5>Example</h5>
+				<figure>
 <!--code blocks cannot be indented otherwise itll mess up formatting -->
 <pre>
 <code class="language-javascript">
@@ -66,7 +69,8 @@ app_router.on('route:showBoard',function(id)
 });
 </code>
 </pre>
-				<figure>The code in main.js used create a router, define its routes and follow the showBoard route.</figure>
+					<figcaption>The code in main.js used create a router, define its routes and follow the showBoard route.</figcaption>
+				</figure>
 
 				<h4><a href='http://jquery.com/'>jQuery</a></h4>
 				<h5>Where?</h5>
@@ -81,7 +85,10 @@ app_router.on('route:showBoard',function(id)
 				<h5>Example</h5>
 <pre>
 <code class="language-javascript">
-<!-- An Ajax call to get the board name and author-->
+&lt;!-- DOM manipulation - Creating the divs that hold the notes --&gt;
+colContainer.append("<div class=\"notesContainer\">");
+
+&lt;!-- An Ajax call to get the board name and author--&gt;
 $.get(apiURL+'/boards/'+boardID,function(data)
 {
 	$(".userField").text(data.author);
@@ -89,20 +96,52 @@ $.get(apiURL+'/boards/'+boardID,function(data)
 });
 </code>
 </pre>
-				<li><for the in app routing</li>
-				<li><a href='http://jquery.com/'>jQuery</a> for DOM manipulation,ajax requests and cross browser support</li>
-				<li><a href='https://github.com/raphaelcruzeiro/jquery-notebook'>JQuery notebook</a> for rich text editing. Used because the editor for jQeuery notebook only appears when text is selected it fulfilled our goal of creating a natural user interface.</li>
+				<h4>
+					<a href='https://github.com/raphaelcruzeiro/jquery-notebook'>JQuery notebook</a>
+				</h4> 
+				<h5>Where</h5>
+				<p>So that the notes support rich text, when the user highlights a note a bubble allowing editing action applied to the selected text. </p>
+				<img src="img/notebook-example.png">
+				<h5>Why</h5>
+				<p>Used because the editor for jQeuery notebook only appears when text is selected it fulfilled our goal of creating a natural user interface. ALso it allows all the rich text function we wish to use.</p>
+				<h5>Example</h5>
+				<figcaption>
+					<figure>
+<pre>
+<code class="language-javascript">
+$(textArea).notebook();
+
+$(textArea).on('contentChange', function(e)
+{
+	var textArea = e.originalEvent.target;
+	var note = $(textArea).parent();
+	var id = note.attr('data-noteID');
+	var colID = $(note).parents('.boardColumn').attr('data-columnid');
+	updateNote(id,colID,currentBoardID);
+});
+</code>
+</pre>
+					</figure>
+					<caption>Code used to initialise jQuery Notebook and attach an event listener to update on text changes</caption>
+				</figcaption>
+				<h5>Problems</h5>
+				<p>We encountered incompatabilities between jQuery notebook and Twitter bootstrap with regards to the position of the pop up bubble. Upon discovering this the site already had already been developed using both these libraries. We found however, that these errors only occured when the parent elements of the notebook used relative positioning so it was relatively simple to work around.</p>
+				<figure>
+					<img src="img/notebook-position.png" class="img-rounded">
+					<figcaption>jQuery notebook with relatively positioned columns causing the bubble appear up and to the right of selected text (during development)</figcaption>
+				</figure>
 				<li><a href='http://getbootstrap.com/'>Twitter Bootstrap</a> for the page layout and design. As we previously had experience</li>
 				<li><a href='http://wanderinghorse.net/computing/javascript/jquery/colorpicker/'>JQuery color picker</a> to choose the note colors, slightly modified to pick a different set of colors and add context to the callback function</li>
 				<li><a href='http://www.google.com/fonts'>Google Fonts</a> for the Robto Slab and Roboto Condensed fonts</li>
 			<h3>Testing</h3>
-			<p>We chose a number of web browsers which we wished to target, we developed the site in Google Chrome because we were more productive with their development tools.</p>
+			<p>We chose to target support for the previous two versions of the four most popular desktop browsers.Because our user interface is not suitable for touch screens we chose not to support mobile browsers.</p>
 			<ul>
 				<li>Internet Explorer 9+</li>
 				<li>Google Chrome 37+</li>
-				<li>Firefox 30
+				<li>Firefox 30</li>
+				<li>Safari 6.2</li>
 			</ul>
-			<p> because our user interface is not suitable for touch screens we chose not to support mobile browsers.</p>
+			<p>  We developed the site in Google Chrome because we were most productive with their development tools.</p>
 	</div>
 </body>
 </html>
