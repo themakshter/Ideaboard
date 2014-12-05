@@ -44,8 +44,8 @@ a.plain:hover {
 
 .navbar-center{
   position: absolute;
-    width: 100%;
-    left: 0;
+    width: 30%;
+    left: 38%;
     text-align: center;
 }
 
@@ -143,4 +143,8 @@ div:hover > .deleteNote, div:hover > .deleteColumn
 {
   opacity: 1;
   cursor: pointer;
+}
+.board.mainBoard
+{
+  margin-left: -20%;
 }
