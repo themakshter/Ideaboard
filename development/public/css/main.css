@@ -1,3 +1,7 @@
+.gap{
+  height: 55px;
+}
+
 .boardColumn
 {
     display: inline-block;
