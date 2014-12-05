@@ -3,3 +3,70 @@
 	margin-right: auto;
 	display: block;
 }
+
+table,
+th,
+td {
+    border: 1px solid;
+    padding: 8px;
+}
+
+th {
+    text-align: center;
+}
+
+.legend {
+    font-weight: bold;
+}
+
+table {
+    display: table;
+    width: 100%;
+}
+
+.equi-width {
+    width: 8%;
+}
+
+caption {
+    font-size: 20px;
+}
+
+.ali {
+    background-color: #65CECE;
+    border: 1px solid;
+    border-color: black;
+}
+
+.michael {
+    background-color: pink;
+    border: 1px solid;
+    border-color: black;
+}
+
+.both {
+    border: 1px solid;
+    border-color: black;
+    background: -moz-linear-gradient(-45deg, #65CECE 50%, pink 50%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(50%, #65CECE), color-stop(50%, #9cf767));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(-45deg, #65CECE 50%, pink 50%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(-45deg, #65CECE 50%, pink 50%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(-45deg, #65CECE 50%, pink 50%);
+    /* IE10+ */
+    background: linear-gradient(135deg, #65CECE 50%, pink 50%);
+    /* W3C */
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#65CECE', endColorstr='pink', GradientType=1);
+    /* IE6-9 fallback on horizontal gradient */
+}
+
+.box {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 25px;
+    width: 25%;
+}
