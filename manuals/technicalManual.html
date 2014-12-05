@@ -19,53 +19,104 @@
 		</h1>
 		<h2>Technologies</h2>
 		<h2>Architecture</h2>
-		<p>We decided to implement a client server architecture, where the client uses a RESTful API to communicate with the server. This is because:</p>
+		<p>
+			For our application, we split it to two basic parts: the front-end and the back-end. In our design, we wanted the backend to just serve as a RESTful API for our front-end, returning JSON objects which would be manipulated front-end. The RESTful API server would also need to be able to carry out POST, PUT and DELETE functions in addition to GET functions. With this in mind, we set to making creating our server.
+		</p>
+		<p>
+			We decided to implement a client server architecture, where the client uses a RESTful API to communicate with the server. This is because:
+		</p>
 		<ul>
-			<li>We wanted the the users to be able to access their notes from anywhere.</li>
-			<li>A RESTful API back-end is uncoupled from the front-end implementation, this allows any other front-end implementation. This is important as in the future we may build a native mobile application which can use the same back-end as the web application.</li>
-			<li>RESTful API's are much more simple to interact with than alternatives such as soap</li>
+			<li>
+				We wanted the the users to be able to access their notes from anywhere.
+			</li>
+			<li>
+				A RESTful API back-end is uncoupled from the front-end implementation, this allows any other front-end implementation. This is important as in the future we may build a native mobile application which can use the same back-end as the web application.
+			</li>
+			<li>
+				RESTful API's are much more simple to interact with than alternatives such as soap
+			</li>
 		</ul>
 		<h2>Back end</h2>
+		<h3>Technologies</h3>
+		<p>
+			The main technology we decided to use to create our backend was node.js. This was chosen over a number of technologies such as the MVC ASP.NET and Java Play Frameworks. These two focused a lot more work on server-side and was too heavy-weight for a simple RESTful API. Moreover, node.js was a technology we were working with on our Group Development Project so we also viewed using this as a perfect opportunity to learn a new technology while killing two birds with one stone.
+		</p>
+		<h3>Model</h3>
+		<p>
+			For our application, we designed three main structures: Boards, Columns and Notes. A board would have a name, the name of its author and colour, for customisation purposes. Moreover, it would have a list/number of columns. Each column in a board would have a name and a list/number of notes. Lastly, each note would have a title, the note content and colour. A diagram can be seen below.
+		</p>
+		<h3>Database</h3>
+		<p>
+			As mentioned previously in the brief, we were still considering which database to use for our application. The two choices had been MongoDB and MySQL. MySQL seemed to fit our design well, and both of us were more comfortable with it, both having used it before. With this in mind, we set to create our tables. Using our design, we created Board, Column and Note tables. Column linked to Board with a BoardID as a foreign key and Note linked to a column in the same way. Our table can be seen below.
+
+However, once we started to prototype our application, it was discovered that it would be extremely tricky to work with node.js and MySQL. It was certainly not impossible, but the amount of work required to make things work was deemed too costly to justify using an SQL database. Instead, a document-based database would be ideal, and this was available in the form of MongoDB. Therefore, we switched to MongoDB. In Mongo, we tried to initially just use one document for each record, meaning a board document, containing its values and a list of column documents which in turn contained note documents. This seemed to be a good idea but we faced some trouble while making this work as retrieving individual notes or columns within the inner values was tricky. One could easily retrieve the whole list but doing that to make change to only document inside the list was considered inefficient and wasteful. Instead, the design of our database was more or less similar to the SQL one, with the ids of boards stored in column documents etc. Example documents of each table are shown below.
+		</p>
+		<h3>Design</h3>
+		<p>
+			The design of our server was pretty simple. As mentioned before, the back-end was present to server the GET, PUT, POST and DELETE requests from our web application. To be able to do this, we designed our routes with our structures in mind. We wanted to be able to display all the boards we had, and then, if needed, a specific board requested with id. This would also apply to the columns and notes belonging to each board. With this in mind, we created a number of routes which can be seen below.
+Using /boards will return a list of all the boards contained in the database. If we enter an id next, /boards/:id, this will give us a board with the requested id. Moivng on, /boards/id/columns would give us a list of columns, and calling an id on that will give us a specific column. Lastly, using /boards/:boardId/columns/:columnid/notes and adding notesId to it will give us the notes within this board and column.
+		</p>
+		<h3>NodeJS Server</h3>
+		<p>
+			The creating of the node server was done with the help of a tutorial which involved creating a wine factory. They had just one table of wines in their collection, but we had three. With that in mind, we created methods for retrieving, editing and deleting database records. These were written into separate files and imported in the main server file for modularity and a nicer structure. 
+Making a RESTful API also involved making use of the express module available in nodejs and installed through npm. This returns an object on which we can call the different requests and assign them to routes and methods. An example of this is assigning a get request to ‘/boards/’ to call the method to retrieve a list of all the different boards.
+		</p>
 		<h2>Front end</h2>
-			<h3>User Interface</h3>
-			<p>IdeaBoard uses a natural user interface, a natural user interface is one which is initially invisible, but whilst the user explores the application they discover and learn the supported functions. As such upon first seeing the board the user sees only a series of notes, however, upon hovering over with a mouse they can see UI interface elements to change colour and delete notes. When the user selects text a menu appears under their cursor allowing them to:</p>
-			<ul>
-				<li>Create bullet points and numbered lists</li>
-				<li>Make text bold, underline or italic</li>
-				<li>Create heading</li>
-				<li>Make links</li>
-			</ul>
-			<p>Upon hovering over the end of a list or column a user discovers the new note or new column button. All of these appearing interface elements are animated to fade in and out, this is so that the user is not forced into sudden disorientating state changes when editing a board.</p>
+		<h3>User Interface</h3>
+		<p>
+			IdeaBoard uses a natural user interface, a natural user interface is one which is initially invisible, but whilst the user explores the application they discover and learn the supported functions. As such upon first seeing the board the user sees only a series of notes, however, upon hovering over with a mouse they can see UI interface elements to change colour and delete notes. When the user selects text a menu appears under their cursor allowing them to:
+		</p>
+		<ul>
+			<li>Create bullet points and numbered lists</li>
+			<li>Make text bold, underline or italic</li>
+			<li>Create heading</li>
+			<li>Make links</li>
+		</ul>
+		<p>
+			Upon hovering over the end of a list or column a user discovers the new note or new column button. All of these appearing interface elements are animated to fade in and out, this is so that the user is not forced into sudden disorientating state changes when editing a board.
+		</p>
 
-			<p>Whilst we are very pleased of our user interface it is heavily reliant on mouse cursors in order to operate. Thus it is not suitable for mobile use. Our plan in the future is to implement a mobile application in native code the utilises the same API as our web application. When a mobile user accesses the site they can then be redirected to the relevant app store to download a mobile version.</p>
+		<p>
+			Whilst we are very pleased of our user interface it is heavily reliant on mouse cursors in order to operate. Thus it is not suitable for mobile use. Our plan in the future is to implement a mobile application in native code the utilises the same API as our web application. When a mobile user accesses the site they can then be redirected to the relevant app store to download a mobile version.
+		</p>
 
-			<p>Despite not implementing a mobile version of the site we have implemented a responsive design to be flexible to different display sizes. Our responsive design was implmented using the Bootstrap css framework. Below is an example of the board selection screen responding to width changes.</p>
-			<figcaption>
-				<figure>
-					<img src="img/narrowboards.png">
-				</figure>
-				<caption>the board selection screen on a narrow screen</caption>
-			</figcaption>
-			<figcaption>
-				<figure>
-					<img src="img/wideboards.png">
-				</figure>
-				<caption>Board selection screen on a wide screen</caption>
-			</figcaption>
-			<h3>Front-end libraries</h3>
-				<p>One the skill we aimed to improve is the use of JavaScript libraries for single page applications. With extensive use of libraries for user interface elements we were able to easily implement attractive controls far more easily than if we had coded them ourselves.</p>
-				<p>In addition to the libraries used below this page uses <a href="http://prismjs.com">Prismjs</a> to syntax highlight code examples.</p>
-				<h4>
-					<a href='http://backbonejs.org/'>Backbone.js</a> 
-				</h4>
-				<h5>Where?</h5>
-				<p>To create the in app router allowing history and navigation on a single page web application</p>
-				<h5>Why?</h5>
-				<p>We wanted to use a lightweight MVC web framework to give structure to our application and Backbone is very lightweight and we had previous experience with it. However, we found using a MVC framework for our site too cumbersome and simply developed it without with the exception of the in app router which we needed for basic functionality.</p>
-				<h5>Example</h5>
-				<figure>
-<!--code blocks cannot be indented otherwise itll mess up formatting -->
-<pre>
+		<p>
+			Despite not implementing a mobile version of the site we have implemented a responsive design to be flexible to different display sizes. Our responsive design was implmented using the Bootstrap css framework. Below is an example of the board selection screen responding to width changes.
+		</p>
+		<figcaption>
+			<figure>
+				<img src="img/narrowboards.png"></figure>
+			<caption>the board selection screen on a narrow screen</caption>
+		</figcaption>
+		<figcaption>
+			<figure>
+				<img src="img/wideboards.png"></figure>
+			<caption>Board selection screen on a wide screen</caption>
+		</figcaption>
+		<h3>Front-end libraries</h3>
+		<p>
+			One the skill we aimed to improve is the use of JavaScript libraries for single page applications. With extensive use of libraries for user interface elements we were able to easily implement attractive controls far more easily than if we had coded them ourselves.
+		</p>
+		<p>
+			In addition to the libraries used below this page uses
+			<a href="http://prismjs.com">Prismjs</a>
+			to syntax highlight code examples.
+		</p>
+		<h4>
+			<a href='http://backbonejs.org/'>Backbone.js</a>
+		</h4>
+		<h5>Where?</h5>
+		<p>
+			To create the in app router allowing history and navigation on a single page web application
+		</p>
+		<h5>Why?</h5>
+		<p>
+			We wanted to use a lightweight MVC web framework to give structure to our application and Backbone is very lightweight and we had previous experience with it. However, we found using a MVC framework for our site too cumbersome and simply developed it without with the exception of the in app router which we needed for basic functionality.
+		</p>
+		<h5>Example</h5>
+		<figure>
+			<!--code blocks cannot be indented otherwise itll mess up formatting -->
+			<pre>
 <code class="language-javascript">
 var AppRouter = Backbone.Router.extend(
 {
@@ -85,21 +136,33 @@ app_router.on('route:showBoard',function(id)
 });
 </code>
 </pre>
-					<figcaption>The code in main.js used create a router, define its routes and follow the showBoard route.</figcaption>
-				</figure>
+			<figcaption>
+				The code in main.js used create a router, define its routes and follow the showBoard route.
+			</figcaption>
+		</figure>
 
-				<h4><a href='http://jquery.com/'>jQuery</a></h4>
-				<h5>Where?</h5>
-				<p>Used throughout the application for DOM manipulation, ajax requests and smoothing over API differences between web browsers.</p>
-				<h5>Why?</h5>
-				<ul>
-					<li>Both our team members had extensive experience with jQuery</li>
-					<li>It allows for more concise code (it's marketed as'The Write Less, Do More, JavaScript Library.')</li>
-					<li>Its the most commonly used front-end we library so its easy to find help</li>
-					<li>Other libraries(jQuery notebook and JQuery color picker) we wanted to use were jQuery extensions</li>
-				</ul>
-				<h5>Example</h5>
-<pre>
+		<h4>
+			<a href='http://jquery.com/'>jQuery</a>
+		</h4>
+		<h5>Where?</h5>
+		<p>
+			Used throughout the application for DOM manipulation, ajax requests and smoothing over API differences between web browsers.
+		</p>
+		<h5>Why?</h5>
+		<ul>
+			<li>Both our team members had extensive experience with jQuery</li>
+			<li>
+				It allows for more concise code (it's marketed as'The Write Less, Do More, JavaScript Library.')
+			</li>
+			<li>
+				Its the most commonly used front-end we library so its easy to find help
+			</li>
+			<li>
+				Other libraries(jQuery notebook and JQuery color picker) we wanted to use were jQuery extensions
+			</li>
+		</ul>
+		<h5>Example</h5>
+		<pre>
 <code class="language-javascript">
 &lt;!-- DOM manipulation - Creating the divs that hold the notes --&gt;
 colContainer.append("<div class=\"notesContainer\">");
@@ -112,18 +175,22 @@ $.get(apiURL+'/boards/'+boardID,function(data)
 });
 </code>
 </pre>
-				<h4>
-					<a href='https://github.com/raphaelcruzeiro/jquery-notebook'>JQuery notebook</a>
-				</h4> 
-				<h5>Where</h5>
-				<p>So that the notes support rich text, when the user highlights a note a bubble allowing editing action applied to the selected text. </p>
-				<img src="img/notebook-example.png">
-				<h5>Why</h5>
-				<p>Used because the editor for jQeuery notebook only appears when text is selected it fulfilled our goal of creating a natural user interface. ALso it allows all the rich text function we wish to use.</p>
-				<h5>Example</h5>
-				<figcaption>
-					<figure>
-<pre>
+		<h4>
+			<a href='https://github.com/raphaelcruzeiro/jquery-notebook'>JQuery notebook</a>
+		</h4>
+		<h5>Where</h5>
+		<p>
+			So that the notes support rich text, when the user highlights a note a bubble allowing editing action applied to the selected text.
+		</p>
+		<img src="img/notebook-example.png">
+		<h5>Why</h5>
+		<p>
+			Used because the editor for jQeuery notebook only appears when text is selected it fulfilled our goal of creating a natural user interface. ALso it allows all the rich text function we wish to use.
+		</p>
+		<h5>Example</h5>
+		<figcaption>
+			<figure>
+				<pre>
 <code class="language-javascript">
 $(textArea).notebook();
 
@@ -137,26 +204,38 @@ $(textArea).on('contentChange', function(e)
 });
 </code>
 </pre>
-					</figure>
-					<caption>Code used to initialise jQuery Notebook and attach an event listener to update on text changes</caption>
-				</figcaption>
-				<h5>Problems</h5>
-				<p>We encountered incompatibilities between jQuery notebook and Twitter bootstrap with regards to the position of the pop up bubble. Upon discovering this the site already had already been developed using both these libraries. We found however, that these errors only occurred when the parent elements of the notebook used relative positioning so it was relatively simple to work around. </p>
-				<figure>
-					<img src="img/notebook-position.png" class="img-rounded">
-					<figcaption>jQuery notebook with relatively positioned columns causing the bubble appear up and to the right of selected text (during development)</figcaption>
-				</figure>
+			</figure>
+			<caption>
+				Code used to initialise jQuery Notebook and attach an event listener to update on text changes
+			</caption>
+		</figcaption>
+		<h5>Problems</h5>
+		<p>
+			We encountered incompatibilities between jQuery notebook and Twitter bootstrap with regards to the position of the pop up bubble. Upon discovering this the site already had already been developed using both these libraries. We found however, that these errors only occurred when the parent elements of the notebook used relative positioning so it was relatively simple to work around.
+		</p>
+		<figure>
+			<img src="img/notebook-position.png" class="img-rounded">
+			<figcaption>
+				jQuery notebook with relatively positioned columns causing the bubble appear up and to the right of selected text (during development)
+			</figcaption>
+		</figure>
 
-				<h4><a href='http://wanderinghorse.net/computing/javascript/jquery/colorpicker/'>jQuery Color Picker</a></h4>
-				<h5>Where</h5>
-				<p>Used to edit the colour of the notes, was slightly modified to support our selection of colours and add context to the callback function</p>
-				<img src="img/colorpicker-example.png" class="img-rounded">
-				<h5>Why</h5>
-				<p>We chose this because it supports only a limited number of colours rather than a any shade. This means that the UI is simpler and the user can only pick colours that complement other colours and work with the black text.</p>
-				<h5>Example</h5>
-				<figcaption>
-					<figure>
-<pre>
+		<h4>
+			<a href='http://wanderinghorse.net/computing/javascript/jquery/colorpicker/'>jQuery Color Picker</a>
+		</h4>
+		<h5>Where</h5>
+		<p>
+			Used to edit the colour of the notes, was slightly modified to support our selection of colours and add context to the callback function
+		</p>
+		<img src="img/colorpicker-example.png" class="img-rounded">
+		<h5>Why</h5>
+		<p>
+			We chose this because it supports only a limited number of colours rather than a any shade. This means that the UI is simpler and the user can only pick colours that complement other colours and work with the black text.
+		</p>
+		<h5>Example</h5>
+		<figcaption>
+			<figure>
+				<pre>
 <code class="language-javascript">
 $(colorPicker).empty().addColorPicker(
 {
@@ -168,16 +247,22 @@ $(colorPicker).empty().addColorPicker(
 });
 </code>
 </pre>
-					</figure>
-					<caption>Code used to initialise colour picker and provide it with a callback to update the note and server on modification</caption>
-				</figcaption>
+			</figure>
+			<caption>
+				Code used to initialise colour picker and provide it with a callback to update the note and server on modification
+			</caption>
+		</figcaption>
 
-				<h4><a href='http://getbootstrap.com/'>Twitter Bootstrap</a> </h4>
-				<p>Used for page Layout and design. The top navigation bar is implemented using bootstrap components. Also used in the project brief and manuals for the site</p>
-				<h5>Example</h5>
-				<figcaption>
-					<figure>
-<pre>
+		<h4>
+			<a href='http://getbootstrap.com/'>Twitter Bootstrap</a>
+		</h4>
+		<p>
+			Used for page Layout and design. The top navigation bar is implemented using bootstrap components. Also used in the project brief and manuals for the site
+		</p>
+		<h5>Example</h5>
+		<figcaption>
+			<figure>
+				<pre>
 <code class="language-javascript">
 boardList.append('<h1 class="text-center">Available Boards</h1><br>');
 $.get(apiURL+"/boards",function(data)
@@ -193,19 +278,27 @@ $.get(apiURL+"/boards",function(data)
 	
 </code>
 </pre>
-					</figure>
-					<caption>Code used to display boards generating markup with the bootstrap classes text-center and list-inline.</caption>
-				</figcaption>
-			<h3>Testing</h3>
-			<p>In order to provide test data on start up the server checks to see if a database exists, and if it does not it generates a set of test data automatically.</p>
-			<p>We chose to target support for the previous two versions of the four most popular desktop browsers.Because our user interface is not suitable for touch screens we chose not to support mobile browsers.</p>
-			<ul>
-				<li>Internet Explorer 9+</li>
-				<li>Google Chrome 37+</li>
-				<li>Firefox 30</li>
-				<li>Safari 6.2</li>
-			</ul>
-			<p>  We developed the site in Google Chrome because we were most productive with their development tools.</p>
+			</figure>
+			<caption>
+				Code used to display boards generating markup with the bootstrap classes text-center and list-inline.
+			</caption>
+		</figcaption>
+		<h3>Testing</h3>
+		<p>
+			In order to provide test data on start up the server checks to see if a database exists, and if it does not it generates a set of test data automatically.
+		</p>
+		<p>
+			We chose to target support for the previous two versions of the four most popular desktop browsers.Because our user interface is not suitable for touch screens we chose not to support mobile browsers.
+		</p>
+		<ul>
+			<li>Internet Explorer 9+</li>
+			<li>Google Chrome 37+</li>
+			<li>Firefox 30</li>
+			<li>Safari 6.2</li>
+		</ul>
+		<p>
+			We developed the site in Google Chrome because we were most productive with their development tools.
+		</p>
 	</div>
 </body>
 </html>
