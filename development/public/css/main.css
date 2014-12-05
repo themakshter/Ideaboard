@@ -139,7 +139,12 @@ div:hover > .colorPicker
   position: relative;
   top: -1.2em;
 }
-div:hover > .deleteNote, div:hover > .deleteColumn
+.deleteBoard
+{
+  opacity: 0;
+  transition:opacity 0.5s;
+}
+div:hover > .deleteNote, div:hover > .deleteColumn, li:hover > .deleteBoard
 {
   opacity: 1;
   cursor: pointer;

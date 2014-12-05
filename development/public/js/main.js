@@ -95,18 +95,20 @@
 			var boards = '<ul class="list-inline">';
 			$.each(data,function(key,value)
 			{
-				boards+= "<li class='boardLink ' data-boardID='"+value._id+"'><a class='board plain thumbnail text-center' href='#boards/"+value._id+"'><span class='glyphicon glyphicon-remove deleteBoard' /><h3>"+value.name+"<br><small>"+value.author+"</small></h3></a></li>";
+				boards+= "<li class='boardLink ' data-boardID='"+value._id+"'><span class='glyphicon glyphicon-remove deleteBoard' /><a class='board plain thumbnail text-center' href='#boards/"+value._id+"'><h3>"+value.name+"<br><small>"+value.author+"</small></h3></a></li>";
 			});
 			boards+="</ul>";
 			boardList.append(boards);
 			$('.deleteBoard').click(function()
 			{
-				var id = this.parents('.boardLink').attr('data-boardID');
+				var boardLink = $(this).parents('.boardLink')
+				var id = boardLink.attr('data-boardID');
 				$.ajax(
 				{
 					url:apiURL+'/boards/'+id,
 					type:'DELETE'
 				});
+				boardLink.remove();
 			});
 		});
 
