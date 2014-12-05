@@ -164,10 +164,11 @@
 		noteCon.css('background-color',note.color);
 		noteCon.append("<div class='colorPicker'></div>");
 		var colorPicker = $(noteCon).children().last();
-		noteCon.append("<div class='textArea'>"+text+"</div>");
-		var textArea = $(noteCon).children().last();
 		noteCon.append('<span  class="glyphicon glyphicon-remove deleteNote"></span>');
 		var deleteButton = noteCon.children().last();
+		noteCon.append("<div class='textArea'>"+text+"</div>");
+		var textArea = $(noteCon).children().last();
+
 		deleteButton.click(function()
 		{
 			var noteCon = $(this).parent();
