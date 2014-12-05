@@ -97,8 +97,9 @@ CREATE TABLE Note
 		</code>
 	</pre>
 		<p>
-			However, once we started to prototype our application, it was discovered that it would be extremely tricky to work with node.js and MySQL. It was certainly not impossible, but the amount of work required to make things work was deemed too costly to justify using an SQL database. Instead, a document-based database would be ideal, and this was available in the form of MongoDB. Therefore, we switched to MongoDB. In Mongo, we tried to initially just use one document for each record, meaning a board document, containing its values and a list of column documents which in turn contained note documents. The schema of this can be scene below<p>
-		<pre><code class="language-javascript">
+			However, once we started to prototype our application, it was discovered that it would be extremely tricky to work with node.js and MySQL. It was certainly not impossible, but the amount of work required to make things work was deemed too costly to justify using an SQL database. Instead, a document-based database would be ideal, and this was available in the form of MongoDB. Therefore, we switched to MongoDB. In Mongo, we tried to initially just use one document for each record, meaning a board document, containing its values and a list of column documents which in turn contained note documents. The schema of this can be scene below
+			<p>
+				<pre><code class="language-javascript">
 		var ideaboardSchema = new Schema(
 			{
 				id : ObjectID,
@@ -122,9 +123,10 @@ CREATE TABLE Note
 			}
 		);	
 		</code></pre>
-			<p> This seemed to be a good idea but we faced some trouble while making this work as retrieving individual notes or columns within the inner values was tricky. One could easily retrieve the whole list but doing that to make change to only document inside the list was considered inefficient and wasteful. Instead, the design of our database was more or less similar to the SQL one, with the ids of boards stored in column documents etc. The final schema is as follows.
-		</p>
-		<pre><code class="language-javascript">
+				<p>
+					This seemed to be a good idea but we faced some trouble while making this work as retrieving individual notes or columns within the inner values was tricky. One could easily retrieve the whole list but doing that to make change to only document inside the list was considered inefficient and wasteful. Instead, the design of our database was more or less similar to the SQL one, with the ids of boards stored in column documents etc. The final schema is as follows.
+				</p>
+				<pre><code class="language-javascript">
 			var boardSchema = new Schema(
 				{
 					id : ObjectID,
@@ -152,75 +154,393 @@ CREATE TABLE Note
 				}
 			);
 		</code></pre>
-		<h3>Design</h3>
-		<p>
-			The design of our server was pretty simple. As mentioned before, the back-end was present to server the <code>GET</code>, <code>PUT</code>, <code>POST</code> and <code>DELETE</code> requests from our web application. To be able to do this, we designed our routes with our structures in mind. We wanted to be able to display all the boards we had, and then, if needed, a specific board requested with id. This would also apply to the columns and notes belonging to each board. With this in mind, we created a number of routes which can be seen below.
-Using <code>/boards</code> will return a list of all the boards contained in the database. If we enter an id next, <code>/boards/:boardId</code>, this will give us a board with the requested id. Moivng on, <code>/boards/:boardId/columns</code> would give us a list of columns, and calling an id on that will give us a specific column. Lastly, using <code>/boards/:boardId/columns/:columnId/notes</code> and adding <code>/:noteId</code> to it will give us the notes and a specific note within this board column respectively.
-		</p>
-		<h3>Server</h3>
-		<h4>Inspiration</h4>
-		<p>
-			The creating of the node server was done with the help of a <a href="http://coenraets.org/blog/2012/10/creating-a-rest-api-using-node-js-express-and-mongodb/">tutorial</a> which involved creating a wine factory.</p> 
-		<h4>Structure</h4>
-			<p>The tutorial had just one table of wines in their collection, but we had three. With that in mind, we created methods for retrieving, editing and deleting database records. These were written into separate files and imported in the main server file for modularity and a nicer structure. 
-Making a RESTful API also involved making use of the express module available in nodejs and installed through npm. This returns an object on which we can call the different requests and assign them to routes and methods. An example of this is assigning a get request to ‘/boards/’ to call the method to retrieve a list of all the different boards.
-		</p>
-		<h2>Front end</h2>
-		<h3>User Interface</h3>
-		<p>
-			IdeaBoard uses a natural user interface, a natural user interface is one which is initially invisible, but whilst the user explores the application they discover and learn the supported functions. As such upon first seeing the board the user sees only a series of notes, however, upon hovering over with a mouse they can see UI interface elements to change colour and delete notes. When the user selects text a menu appears under their cursor allowing them to:
-		</p>
-		<ul>
-			<li>Create bullet points and numbered lists</li>
-			<li>Make text bold, underline or italic</li>
-			<li>Create heading</li>
-			<li>Make links</li>
-		</ul>
-		<p>
-			Upon hovering over the end of a list or column a user discovers the new note or new column button. All of these appearing interface elements are animated to fade in and out, this is so that the user is not forced into sudden disorientating state changes when editing a board.
-		</p>
+				<h3>Design</h3>
+				<p>
+					The design of our server was pretty simple. As mentioned before, the back-end was present to server the
+					<code>GET</code>
+					,
+					<code>PUT</code>
+					,
+					<code>POST</code>
+					and
+					<code>DELETE</code>
+					requests from our web application. To be able to do this, we designed our routes with our structures in mind. We wanted to be able to display all the boards we had, and then, if needed, a specific board requested with id. This would also apply to the columns and notes belonging to each board. With this in mind, we created a number of routes which can be seen below.
+Using
+					<code>/boards</code>
+					will return a list of all the boards contained in the database. If we enter an id next,
+					<code>/boards/:boardId</code>
+					, this will give us a board with the requested id. Moivng on,
+					<code>/boards/:boardId/columns</code>
+					would give us a list of columns, and calling an id on that will give us a specific column. Lastly, using
+					<code>/boards/:boardId/columns/:columnId/notes</code>
+					and adding
+					<code>/:noteId</code>
+					to it will give us the notes and a specific note within this board column respectively.
+				</p>
+				<h3>Server</h3>
+				<h4>Inspiration</h4>
+				<p>
+					The creating of the node server was done with the help of a
+					<a href="http://coenraets.org/blog/2012/10/creating-a-rest-api-using-node-js-express-and-mongodb/">tutorial</a>
+					which involved creating a wine factory.
+				</p>
+				<h4>Structure</h4>
+				<p>
+					Making a RESTful API also involved making use of different, useful node modules. The two modules used in our application were mongo and express modules. Mongo was obviously used to communicate with our database while
+					<a href="http://expressjs.com/" >Express</a>
+					is a lightweight node.js web application framework, providing the basic HTTP infrastructure to easily to create REST APIs. It allows us to set which methods would be called by each of the requests that we mentioned in our design. An example of this is assigning a get request to
+					<code>/boards/</code>
+					to call the method to retrieve a list of all the different boards.
+				</p>
+				<pre><code class="language-javascript">
+var express = require("express");  //import the module
 
-		<p>
-			Whilst we are very pleased of our user interface it is heavily reliant on mouse cursors in order to operate. Thus it is not suitable for mobile use. Our plan in the future is to implement a mobile application in native code the utilises the same API as our web application. When a mobile user accesses the site they can then be redirected to the relevant app store to download a mobile version.
-		</p>
+var app = express();				//instantiate into a variable
 
-		<p>
-			Despite not implementing a mobile version of the site we have implemented a responsive design to be flexible to different display sizes. Our responsive design was implmented using the Bootstrap css framework. Below is an example of the board selection screen responding to width changes.
-		</p>
-		<figcaption>
+//requests for boards
+app.get('/boards', boards.findAll);						//GET request
+app.get('/boards/:boardId', boards.findById);			//GET request
+app.post('/boards/',boards.addBoard);					//POST request
+app.put('/boards/:boardId',boards.updateBoard);			//PUT request
+app.delete('/boards/:boardId', boards.deleteBoard);		//DELETE request
+
+//columns
+app.get('/boards/:boardId/columns', columns.findAll);					//GET request
+app.get('/boards/:boardId/columns/:columnId', columns.findById);		//GET request
+app.post('/boards/:boardId/columns',columns.addColumn);					//POST request
+app.put('/boards/:boardId/columns/:columnId',columns.updateColumn);		//PUT request
+app.delete('/boards/:boardId/columns/:columnId', columns.deleteColumn);	//DELETE request
+
+
+//notes
+app.get('/boards/:boardId/columns/:columnId/notes', notes.findAll);					//GET request
+app.get('/boards/:boardId/columns/:columnId/notes/:noteId', notes.findById);		//GET request
+app.post('/boards/:boardId/columns/:columnId/notes',notes.addNote);					//POST request
+app.put('/boards/:boardId/columns/:columnId/notes/:noteId',notes.updateNote);		//PUT request
+app.delete('/boards/:boardId/columns/:columnId/notes/:noteId', notes.deleteNote);	//DELETE request
+			</code></pre>
+				<p>
+					The tutorial had just one table of wines in their collection, but we had three. With that in mind, we created methods for retrieving, editing and deleting database records. These were written into separate files and imported in the main server file for modularity and a nicer structure.
+				</p>
+				<h4>Database operations</h4>
+				<h5>Connecting to database</h5>
+				<p>
+					We added a separate file which handles connecting with the database. This way, we only connect to our database once when start our server, calling
+					<code>db.openDabase()</code>
+					.
+				</p>
+				<pre><code class="language-javascript">
+var mongo = require("mongodb");
+
+var Server = mongo.Server,
+	Db = mongo.Db,
+	BSON = mongo.BSONPure;
+
+var server = new Server('localhost',27017, {auto_reconnect: true});
+
+exports.openDatabase = function(dbName){
+	db = new Db(dbName,server);
+	db.open(function(err, db){
+	if(!err){
+		console.log("Connected to '" +dbName+ "' database ");
+		db.collection('boards',{strict:true}, function(err, collection){
+			if(err){
+				console.log("The 'boards' collection doesn't exist. Creating it with sample data...");
+				populateDB();
+			}
+		});
+	}
+});
+};
+				</code></pre>
+				<p>
+					The db file also contains a method to create sample data, which was initially used for testing purposes
+				</p>
+				It is a simple and elegant function to create records to our liking
+			</p>
+			<pre><code class="language-javascript">
+var populateDB = function(){
+var boards = [];
+	var columns = [];
+	var notes = [];
+	
+	for(var i = 0; i<5;i++){
+		var boardId = new BSON.ObjectID();
+		boards.push({
+			_id: boardId,
+			name:"testBoard"+i,
+			author:"testAuthor"+i,
+			colour:"testColor"+i
+		});
+		var tempColumns = [];
+		for(var j = 0;j < 5; j++){
+			var columnId = new BSON.ObjectID();
+			columns.push(
+			{
+				_id: columnId,
+				board:boardId,
+				name: "testBoard"+i+"testColumn"+j
+			});
+			for(var k = 0;k < 5;k++){
+				var noteId = new BSON.ObjectID();
+				notes.push(
+				{
+					_id: noteId,
+					column: columnId,
+					name: "testBoard"+i+"testColumn"+j+"testNote"+k,
+					contents: "This <i>is</i> a <u>test</u> <b>note</b>",
+					colour: "testColour"+k
+				});
+			}
+		}
+	}
+
+	db.collection('boards', function(err, collection){
+		collection.insert(boards,{safe:true}, function(err, result){});
+	});
+	db.collection('columns', function(err, collection){
+		collection.insert(columns,{safe:true}, function(err, result){});
+	});
+	db.collection('notes', function(err, collection){
+		collection.insert(notes,{safe:true}, function(err, result){});
+	});
+};
+				</code></pre>
+			<h5>Retrieving records</h5>
+			<p>
+				For each type of record (board, column, note), we implemented methods to retrieve specific records or all of them. For the board database, we used standard methods using the tutorial previously mentioned
+			</p>
+			<pre><code class="language-javascript">
+exports.findById = function(req, res){
+	var id = req.params.boardId;
+	console.log("Retrieving board : " + id);
+	db.collection('boards',function(err, collection){
+		collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item){
+			if(err){
+				console.log(err);
+			}else{
+				res.send(item);
+			}
+		});
+	});
+};
+
+exports.findAll = function(req, res){
+	db.collection('boards', function(err, collection){
+		collection.find().toArray(function(err,items){
+			res.send(items);
+		});
+	});
+};</code></pre>
+			<p>
+				However, for notes and columns, we had to find the columns relating to the board and note relating to the column.
+			</p>
+			<pre><code class="language-javascript">
+exports.findAllAlt = function(req,res){
+	var boardId = req.params.boardId;
+	console.log("Columns for board with id: " + boardId);
+	db.collection('columns', function(err, collection){
+		collection.findOne({'board': new BSON.ObjectID(boardId)},function(err, item){
+			if(err)	{
+				console.log(err);
+			}else{
+				res.send(item);
+			}
+		});
+	});
+};
+
+
+exports.findById = function(req,res){
+	var id = req.params.columnId;
+	console.log("Retrieving column : " + id);
+	db.collection('columns',function(err, collection){
+		collection.findOne({'_id': new BSON.ObjectID(id)}, function(err, item){
+			if(err){
+				console.log(err);
+			}else{
+				res.send(item);
+			}
+		});
+	});
+};
+			</code></pre>
+			<h5>Adding new records</h5>
+			<p>Boards</p>
+			<pre><code class="language-javascript">
+exports.addBoard = function(req,res){
+	var board = req.body;
+	console.log('Adding board: ' + JSON.stringify(board));
+	db.collection('boards', function(err, collection){
+		collection.insert(board, {safe:true},function(err,result){
+			if(err){
+				res.send({"error":"An error occurred - " + err});
+			}else{
+				console.log("Success : " + JSON.stringify(result[0]));
+				res.send(result[0]);
+			}
+		});
+	});
+};
+			</code></pre>
+			<p>Others</p>
+			<pre><code class="language-javascript">
+exports.addColumn = function(req, res){
+	var column = req.body;
+	console.log('Adding column:' + JSON.stringify(column));
+	column.board =  new BSON.ObjectID(column.board);
+	db.collection('columns', function(err,collection){
+		collection.insert(column, {safe:true}, function(err, results){
+			if(err){
+				res.send({"err":"An error occurred - " + err});
+			}else{
+				console.log("Succes : " + JSON.stringify(results[0]));
+				res.send(results[0]);
+			}
+		});
+	});
+
+};
+
+			</code></pre>
+			<h5>Updating records</h5>
+			<p>Boards</p>
+			<pre><code class="language-javascript">
+exports.updateBoard = function(req,res){
+	var id = req.params.boardId;
+	var board = req.body;
+	delete board._id;
+	console.log("Updating board: " + id);
+	console.log(JSON.stringify(board));
+	db.collection('boards', function(err, collection){
+		collection.update({"_id":new BSON.ObjectID(id)}, board, {safe:true}, function(err, result){
+			if(err){
+				console.log("Error updating board - " +err);
+				res.send({"error": "An error occurred - " + err});
+			}else{
+				console.log("" + result + "document(s) updated");
+				res.send(board);
+			}
+		});
+	});
+};
+
+			</code></pre>
+			<p>Others</p>
+			<pre><code class="language-javascript">
+exports.updateColumn = function(req, res){
+	var id = req.params.columnId;
+	var column = req.body;
+	delete column._id;
+	column.board = new BSON.ObjectID(column.board);
+	console.log("Updating column :" + id);
+	console.log(JSON.stringify(column));
+	db.collection('columns', function(err, collection){
+		collection.update({"_id":new BSON.ObjectID(id)}, column, {safe:true}, function(err, result){
+			if(err){
+				console.log("Error updating board - " + err);
+				res.send({"error": "An error occured - " + err});
+			}else{
+				console.log("" + result + "document(s) updated");
+				res.send(column);
+			}
+		});
+	});
+};
+			</code></pre>
+			<h5>Deleting records</h5>
+			<p>Boards</p>
+			<pre><code class="language-javascript">
+exports.deleteBoard = function(req,res){
+	var id = req.params.boardId;
+	console.log("Deeleting board : " + id);
+	db.collection('boards', function(err, collection){
+		collection.remove({"_id":new BSON.ObjectID(id)}, {safe:true}, function(err, result){
+			if(err){
+				res.send({'error':'An error occurred - ' + err});
+			}else{
+				console.log('' + result + ' document(s) removed');
+				res.send(req.body);
+			}
+		});
+	});
+};
+			</code></pre>
+			<p>Others</p>
+			<pre><code class="language-javascript">
+exports.deleteColumn = function(req, res){
+	var id = req.params.columnId;
+	console.log("Deleting column : " + id);
+	db.collection('columns', function(err,collection){
+		collection.remove({"_id":new BSON.ObjectID(id)},{safe:true}, function(err, result){
+			if(err){
+				res.send({"error":"An error has occured - " + err});
+			}else{
+				console.log(result + "document(s) removed");
+				res.send(req.body);
+			}
+		});
+	});
+};
+
+			</code></pre>
+
+			<h2>Front end</h2>
+			<h3>User Interface</h3>
+			<p>
+				IdeaBoard uses a natural user interface, a natural user interface is one which is initially invisible, but whilst the user explores the application they discover and learn the supported functions. As such upon first seeing the board the user sees only a series of notes, however, upon hovering over with a mouse they can see UI interface elements to change colour and delete notes. When the user selects text a menu appears under their cursor allowing them to:
+			</p>
+			<ul>
+				<li>Create bullet points and numbered lists</li>
+				<li>Make text bold, underline or italic</li>
+				<li>Create heading</li>
+				<li>Make links</li>
+			</ul>
+			<p>
+				Upon hovering over the end of a list or column a user discovers the new note or new column button. All of these appearing interface elements are animated to fade in and out, this is so that the user is not forced into sudden disorientating state changes when editing a board.
+			</p>
+
+			<p>
+				Whilst we are very pleased of our user interface it is heavily reliant on mouse cursors in order to operate. Thus it is not suitable for mobile use. Our plan in the future is to implement a mobile application in native code the utilises the same API as our web application. When a mobile user accesses the site they can then be redirected to the relevant app store to download a mobile version.
+			</p>
+
+			<p>
+				Despite not implementing a mobile version of the site we have implemented a responsive design to be flexible to different display sizes. Our responsive design was implmented using the Bootstrap css framework. Below is an example of the board selection screen responding to width changes.
+			</p>
+			<figcaption>
+				<figure>
+					<img src="img/narrowboards.png"></figure>
+				<caption>the board selection screen on a narrow screen</caption>
+			</figcaption>
+			<figcaption>
+				<figure>
+					<img src="img/wideboards.png"></figure>
+				<caption>Board selection screen on a wide screen</caption>
+			</figcaption>
+			<h3>Front-end libraries</h3>
+			<p>
+				One the skill we aimed to improve is the use of JavaScript libraries for single page applications. With extensive use of libraries for user interface elements we were able to easily implement attractive controls far more easily than if we had coded them ourselves.
+			</p>
+			<p>
+				In addition to the libraries used below this page uses
+				<a href="http://prismjs.com">Prismjs</a>
+				to syntax highlight code examples.
+			</p>
+			<h4>
+				<a href='http://backbonejs.org/'>Backbone.js</a>
+			</h4>
+			<h5>Where?</h5>
+			<p>
+				To create the in app router allowing history and navigation on a single page web application
+			</p>
+			<h5>Why?</h5>
+			<p>
+				We wanted to use a lightweight MVC web framework to give structure to our application and Backbone is very lightweight and we had previous experience with it. However, we found using a MVC framework for our site too cumbersome and simply developed it without with the exception of the in app router which we needed for basic functionality.
+			</p>
+			<h5>Example</h5>
 			<figure>
-				<img src="img/narrowboards.png"></figure>
-			<caption>the board selection screen on a narrow screen</caption>
-		</figcaption>
-		<figcaption>
-			<figure>
-				<img src="img/wideboards.png"></figure>
-			<caption>Board selection screen on a wide screen</caption>
-		</figcaption>
-		<h3>Front-end libraries</h3>
-		<p>
-			One the skill we aimed to improve is the use of JavaScript libraries for single page applications. With extensive use of libraries for user interface elements we were able to easily implement attractive controls far more easily than if we had coded them ourselves.
-		</p>
-		<p>
-			In addition to the libraries used below this page uses
-			<a href="http://prismjs.com">Prismjs</a>
-			to syntax highlight code examples.
-		</p>
-		<h4>
-			<a href='http://backbonejs.org/'>Backbone.js</a>
-		</h4>
-		<h5>Where?</h5>
-		<p>
-			To create the in app router allowing history and navigation on a single page web application
-		</p>
-		<h5>Why?</h5>
-		<p>
-			We wanted to use a lightweight MVC web framework to give structure to our application and Backbone is very lightweight and we had previous experience with it. However, we found using a MVC framework for our site too cumbersome and simply developed it without with the exception of the in app router which we needed for basic functionality.
-		</p>
-		<h5>Example</h5>
-		<figure>
-			<!--code blocks cannot be indented otherwise itll mess up formatting -->
-			<pre>
+				<!--code blocks cannot be indented otherwise itll mess up formatting -->
+				<pre>
 <code class="language-javascript">
 var AppRouter = Backbone.Router.extend(
 {
@@ -240,33 +560,33 @@ app_router.on('route:showBoard',function(id)
 });
 </code>
 </pre>
-			<figcaption>
-				The code in main.js used create a router, define its routes and follow the showBoard route.
-			</figcaption>
-		</figure>
+				<figcaption>
+					The code in main.js used create a router, define its routes and follow the showBoard route.
+				</figcaption>
+			</figure>
 
-		<h4>
-			<a href='http://jquery.com/'>jQuery</a>
-		</h4>
-		<h5>Where?</h5>
-		<p>
-			Used throughout the application for DOM manipulation, ajax requests and smoothing over API differences between web browsers.
-		</p>
-		<h5>Why?</h5>
-		<ul>
-			<li>Both our team members had extensive experience with jQuery</li>
-			<li>
-				It allows for more concise code (it's marketed as'The Write Less, Do More, JavaScript Library.')
-			</li>
-			<li>
-				Its the most commonly used front-end we library so its easy to find help
-			</li>
-			<li>
-				Other libraries(jQuery notebook and JQuery color picker) we wanted to use were jQuery extensions
-			</li>
-		</ul>
-		<h5>Example</h5>
-		<pre>
+			<h4>
+				<a href='http://jquery.com/'>jQuery</a>
+			</h4>
+			<h5>Where?</h5>
+			<p>
+				Used throughout the application for DOM manipulation, ajax requests and smoothing over API differences between web browsers.
+			</p>
+			<h5>Why?</h5>
+			<ul>
+				<li>Both our team members had extensive experience with jQuery</li>
+				<li>
+					It allows for more concise code (it's marketed as'The Write Less, Do More, JavaScript Library.')
+				</li>
+				<li>
+					Its the most commonly used front-end we library so its easy to find help
+				</li>
+				<li>
+					Other libraries(jQuery notebook and JQuery color picker) we wanted to use were jQuery extensions
+				</li>
+			</ul>
+			<h5>Example</h5>
+			<pre>
 <code class="language-javascript">
 &lt;!-- DOM manipulation - Creating the divs that hold the notes --&gt;
 colContainer.append("<div class=\"notesContainer\">");
@@ -279,22 +599,22 @@ $.get(apiURL+'/boards/'+boardID,function(data)
 });
 </code>
 </pre>
-		<h4>
-			<a href='https://github.com/raphaelcruzeiro/jquery-notebook'>JQuery notebook</a>
-		</h4>
-		<h5>Where</h5>
-		<p>
-			So that the notes support rich text, when the user highlights a note a bubble allowing editing action applied to the selected text.
-		</p>
-		<img src="img/notebook-example.png">
-		<h5>Why</h5>
-		<p>
-			Used because the editor for jQeuery notebook only appears when text is selected it fulfilled our goal of creating a natural user interface. ALso it allows all the rich text function we wish to use.
-		</p>
-		<h5>Example</h5>
-		<figcaption>
-			<figure>
-				<pre>
+			<h4>
+				<a href='https://github.com/raphaelcruzeiro/jquery-notebook'>JQuery notebook</a>
+			</h4>
+			<h5>Where</h5>
+			<p>
+				So that the notes support rich text, when the user highlights a note a bubble allowing editing action applied to the selected text.
+			</p>
+			<img src="img/notebook-example.png">
+			<h5>Why</h5>
+			<p>
+				Used because the editor for jQeuery notebook only appears when text is selected it fulfilled our goal of creating a natural user interface. ALso it allows all the rich text function we wish to use.
+			</p>
+			<h5>Example</h5>
+			<figcaption>
+				<figure>
+					<pre>
 <code class="language-javascript">
 $(textArea).notebook();
 
@@ -308,38 +628,38 @@ $(textArea).on('contentChange', function(e)
 });
 </code>
 </pre>
-			</figure>
-			<caption>
-				Code used to initialise jQuery Notebook and attach an event listener to update on text changes
-			</caption>
-		</figcaption>
-		<h5>Problems</h5>
-		<p>
-			We encountered incompatibilities between jQuery notebook and Twitter bootstrap with regards to the position of the pop up bubble. Upon discovering this the site already had already been developed using both these libraries. We found however, that these errors only occurred when the parent elements of the notebook used relative positioning so it was relatively simple to work around.
-		</p>
-		<figure>
-			<img src="img/notebook-position.png" class="img-rounded">
-			<figcaption>
-				jQuery notebook with relatively positioned columns causing the bubble appear up and to the right of selected text (during development)
+				</figure>
+				<caption>
+					Code used to initialise jQuery Notebook and attach an event listener to update on text changes
+				</caption>
 			</figcaption>
-		</figure>
-
-		<h4>
-			<a href='http://wanderinghorse.net/computing/javascript/jquery/colorpicker/'>jQuery Color Picker</a>
-		</h4>
-		<h5>Where</h5>
-		<p>
-			Used to edit the colour of the notes, was slightly modified to support our selection of colours and add context to the callback function
-		</p>
-		<img src="img/colorpicker-example.png" class="img-rounded">
-		<h5>Why</h5>
-		<p>
-			We chose this because it supports only a limited number of colours rather than a any shade. This means that the UI is simpler and the user can only pick colours that complement other colours and work with the black text.
-		</p>
-		<h5>Example</h5>
-		<figcaption>
+			<h5>Problems</h5>
+			<p>
+				We encountered incompatibilities between jQuery notebook and Twitter bootstrap with regards to the position of the pop up bubble. Upon discovering this the site already had already been developed using both these libraries. We found however, that these errors only occurred when the parent elements of the notebook used relative positioning so it was relatively simple to work around.
+			</p>
 			<figure>
-				<pre>
+				<img src="img/notebook-position.png" class="img-rounded">
+				<figcaption>
+					jQuery notebook with relatively positioned columns causing the bubble appear up and to the right of selected text (during development)
+				</figcaption>
+			</figure>
+
+			<h4>
+				<a href='http://wanderinghorse.net/computing/javascript/jquery/colorpicker/'>jQuery Color Picker</a>
+			</h4>
+			<h5>Where</h5>
+			<p>
+				Used to edit the colour of the notes, was slightly modified to support our selection of colours and add context to the callback function
+			</p>
+			<img src="img/colorpicker-example.png" class="img-rounded">
+			<h5>Why</h5>
+			<p>
+				We chose this because it supports only a limited number of colours rather than a any shade. This means that the UI is simpler and the user can only pick colours that complement other colours and work with the black text.
+			</p>
+			<h5>Example</h5>
+			<figcaption>
+				<figure>
+					<pre>
 <code class="language-javascript">
 $(colorPicker).empty().addColorPicker(
 {
@@ -351,22 +671,22 @@ $(colorPicker).empty().addColorPicker(
 });
 </code>
 </pre>
-			</figure>
-			<caption>
-				Code used to initialise colour picker and provide it with a callback to update the note and server on modification
-			</caption>
-		</figcaption>
+				</figure>
+				<caption>
+					Code used to initialise colour picker and provide it with a callback to update the note and server on modification
+				</caption>
+			</figcaption>
 
-		<h4>
-			<a href='http://getbootstrap.com/'>Twitter Bootstrap</a>
-		</h4>
-		<p>
-			Used for page Layout and design. The top navigation bar is implemented using bootstrap components. We also used some of the bootstrap glypicons for UI elements, because these are vector icons our site supports high-DPI displays. Bootstrap was also used in the project brief and manuals for the site.
-		</p>
-		<h5>Example</h5>
-		<figcaption>
-			<figure>
-				<pre>
+			<h4>
+				<a href='http://getbootstrap.com/'>Twitter Bootstrap</a>
+			</h4>
+			<p>
+				Used for page Layout and design. The top navigation bar is implemented using bootstrap components. We also used some of the bootstrap glypicons for UI elements, because these are vector icons our site supports high-DPI displays. Bootstrap was also used in the project brief and manuals for the site.
+			</p>
+			<h5>Example</h5>
+			<figcaption>
+				<figure>
+					<pre>
 <code class="language-javascript">
 boardList.append('<h1 class="text-center">Available Boards</h1><br>');
 $.get(apiURL+"/boards",function(data)
@@ -382,27 +702,27 @@ $.get(apiURL+"/boards",function(data)
 	
 </code>
 </pre>
-			</figure>
-			<caption>
-				Code used to display boards generating markup with the bootstrap classes text-center and list-inline.
-			</caption>
-		</figcaption>
-		<h3>Testing</h3>
-		<p>
-			In order to provide test data on start up the server checks to see if a database exists, and if it does not it generates a set of test data automatically.
-		</p>
-		<p>
-			We chose to target support for the previous two versions of the four most popular desktop browsers.Because our user interface is not suitable for touch screens we chose not to support mobile browsers.
-		</p>
-		<ul>
-			<li>Internet Explorer 9+</li>
-			<li>Google Chrome 37+</li>
-			<li>Firefox 30</li>
-			<li>Safari 6.2</li>
-		</ul>
-		<p>
-			We developed the site in Google Chrome because we were most productive with their development tools.
-		</p>
-	</div>
+				</figure>
+				<caption>
+					Code used to display boards generating markup with the bootstrap classes text-center and list-inline.
+				</caption>
+			</figcaption>
+			<h3>Testing</h3>
+			<p>
+				In order to provide test data on start up the server checks to see if a database exists, and if it does not it generates a set of test data automatically.
+			</p>
+			<p>
+				We chose to target support for the previous two versions of the four most popular desktop browsers.Because our user interface is not suitable for touch screens we chose not to support mobile browsers.
+			</p>
+			<ul>
+				<li>Internet Explorer 9+</li>
+				<li>Google Chrome 37+</li>
+				<li>Firefox 30</li>
+				<li>Safari 6.2</li>
+			</ul>
+			<p>
+				We developed the site in Google Chrome because we were most productive with their development tools.
+			</p>
+		</div>
 </body>
-</html>
+	</html>
