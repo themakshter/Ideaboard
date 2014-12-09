@@ -3,15 +3,20 @@
 <head>
 	<title>Technical Manual</title>
 	<meta name="viewport" content="width-device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link type="text/css" rel="stylesheet" href="css/jquery.tocify.css" />
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" href="css/prism.css">
 	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/jquery.tocify.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script src="js/prism.js"></script>
 </head>
 <body>
-	<div class="container">
+	<div class="row">
+		<div class="col-md-3"><div ID="toc"></div></div>
+		<div class="col-md-9">	<div class="container">
 		<h1>
 			Ideaboard Technical Manual
 			<br>
@@ -968,6 +973,14 @@ $.get(apiURL+"/boards",function(data)
 					</div>
 				</div>
 				<br>
-				<br></div>
+				<br></div></div>
+	</div>
+			<script type="text/javascript">
+//Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+              $(function() {
+                  //Calls the tocify method on your HTML div.
+                  $("#toc").tocify();
+              });
+				</script>
 </body>
 		</html>
