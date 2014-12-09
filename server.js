@@ -45,7 +45,7 @@ app.post('/boards/:boardId/columns/:columnId/notes',notes.addNote);
 app.put('/boards/:boardId/columns/:columnId/notes/:noteId',notes.updateNote);
 app.delete('/boards/:boardId/columns/:columnId/notes/:noteId', notes.deleteNote);
 
-app.listen(rocess.env.PORT || 3000);
+app.listen(process.env.PORT || 3000);
 console.log("Listening on port " + port);
 
 
