@@ -84,6 +84,8 @@
 
 	function listBoards()
 	{
+		$(".boardField").text("");
+		$(".userField").text("");
 		container = $("#container");
 		container.empty();
 		container.append("<div class='boardList'></div>");
