@@ -20,7 +20,7 @@ app.configure(function () {
 });
 
 //db.openDatabase("ideaboardDB");
-db.connectToDatabase("mongodb://heroku_app32367096:1o3ei9s8rlmundbe3mm5j9u90h@ds061370.mongolab.com:61370/heroku_app32367096");
+db.connectToDatabase("mongodb://heroku_app32370393:c8sg6ppveh639803aago9vjkn9@ds061370.mongolab.com:61370/heroku_app32370393");
 
 
 //boards
@@ -45,7 +45,7 @@ app.post('/boards/:boardId/columns/:columnId/notes',notes.addNote);
 app.put('/boards/:boardId/columns/:columnId/notes/:noteId',notes.updateNote);
 app.delete('/boards/:boardId/columns/:columnId/notes/:noteId', notes.deleteNote);
 
-app.listen(port);
+app.listen(rocess.env.PORT || 3000);
 console.log("Listening on port " + port);
 
 
