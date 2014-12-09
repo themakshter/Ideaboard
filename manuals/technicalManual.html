@@ -22,8 +22,8 @@
               });
 				</script>
 	<div class="row">
-		<div class="col-md-3"><div ID="toc"></div></div>
-		<div class="col-md-9">	<div class="container">
+		<div class="col-xs-3"><div ID="toc"></div></div>
+		<div class="col-xs-9">	<div class="container">
 		<h1>
 			Ideaboard Technical Manual
 			<br>
@@ -508,7 +508,7 @@ exports.findAll = function(req,res){
 				<p>
 					In addition to the libraries used below this page uses
 					<a href="http://prismjs.com">Prismjs</a>
-					to syntax highlight code examples.
+					to syntax highlight code examples and <a href="http://gregfranko.com/jquery.tocify.js/">Tocify</a> to create a table of content.
 				</p>
 				<h4>
 					<a href='http://backbonejs.org/'>Backbone.js</a>
@@ -586,12 +586,12 @@ $.get(apiURL+'/boards/'+boardID,function(data)
 				<h4>
 					<a href='https://github.com/raphaelcruzeiro/jquery-notebook'>JQuery notebook</a>
 				</h4>
-				<strong>Where</strong>
+				<strong>Where?</strong>
 				<p>
 					So that the notes support rich text, when the user highlights a note a bubble allowing editing action applied to the selected text.
 				</p>
 				<img src="img/notebook-example.png">
-				<strong>Why</strong>
+				<br><strong>Why?</strong>
 				<p>
 					Used because the editor for jQeuery notebook only appears when text is selected it fulfilled our goal of creating a natural user interface. ALso it allows all the rich text function we wish to use.
 				</p>
@@ -631,12 +631,12 @@ $(textArea).on('contentChange', function(e)
 				<h4>
 					<a href='http://wanderinghorse.net/computing/javascript/jquery/colorpicker/'>jQuery Color Picker</a>
 				</h4>
-				<strong>Where</strong>
+				<strong>Where?</strong>
 				<p>
 					Used to edit the colour of the notes, was slightly modified to support our selection of colours and add context to the callback function
 				</p>
 				<img src="img/colorpicker-example.png" class="img-rounded">
-				<strong>Why</strong>
+				<br><strong>Why?</strong>
 				<p>
 					We chose this because it supports only a limited number of colours rather than a any shade. This means that the UI is simpler and the user can only pick colours that complement other colours and work with the black text.
 				</p>
@@ -720,7 +720,7 @@ $.get(apiURL+"/boards",function(data)
                         </ol>
 				
 				<table>
-					<caption>Skills table</caption>
+					<caption>Skills table before the project</caption>
 					<tr>
 						<th>Web Development Skills</th>
 						<th class="equi-width">None</th>
@@ -847,7 +847,7 @@ $.get(apiURL+"/boards",function(data)
 				</p> 
 				
 				<table>
-					<caption>Skills table</caption>
+					<caption>Skills table after the project</caption>
 					<tr>
 						<th>Web Development Skills</th>
 						<th class="equi-width">None</th>
