@@ -458,8 +458,17 @@ exports.findAll = function(req,res){
 		});
 	});
 };</code></pre>
-
-				<h2>Front end</h2>
+<h3>Testing</h3>
+<p>To an extent, we tested our server using <a href="http://curl.haxx.se/">cURL</a>, follwing instructions from the tutorial. Some example tests can be seen below</p>
+<ul>
+	<li>Get all boards: <code>curl- i -X GET htp://localhost:3000/boards</code> </li>
+	<li>Get board with _id value of 5478fec3e929b4f0311c4a9b: <code>curl -i -X GET http://localhost:3000/boards/5478fec3e929b4f0311c4a9b</code></li>
+	<li>Delete board with _id value of 5478fec3e929b4f0311c4a9b:
+<code>curl -i -X DELETE http://localhost:3000/boards/5478fec3e929b4f0311c4a9b</code></li>
+<li>Add a new board:
+<code>curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "New Board", "author": "New Author"}' http://localhost:3000/boards</code></li>
+<li>Modify board with _id value of 5486e09273ac4cbc289c1124:
+<code>curl -i -X PUT -H 'Content-Type: application/json' -d '{"name": "Board name new", "year": "Author change"}' http://localhost:3000/boards/5486e09273ac4cbc289c1124</code>
 				<h3>User Interface</h3>
 				<p>
 					IdeaBoard uses a natural user interface, a natural user interface is one which is initially invisible, but whilst the user explores the application they discover and learn the supported functions. As such upon first seeing the board the user sees only a series of notes, however, upon hovering over with a mouse they can see UI interface elements to change colour and delete notes. When the user selects text a menu appears under their cursor allowing them to:
@@ -662,15 +671,15 @@ $(colorPicker).empty().addColorPicker(
 					<figure>
 						<pre>
 <code class="language-javascript">
-boardList.append("&lt;h1 class="text-center"&gt;Available Boards</h1>&lt;br&gt;");
+boardList.append('&lt;h1 class="text-center"&gt;Available Boards</h1>&lt;br&gt;');
 $.get(apiURL+"/boards",function(data)
 {
-	var boards = '<ul class="list-inline">';
+	var boards = '&lt;ul class="list-inline"&gt;';
 	$.each(data,function(key,value)
 	{
-		boards+= "&ltli class='boardLink ' data-boardID='"+value._id+"'&gt;&lta class='board plain thumbnail text-center' href='#boards/"+value._id+"'&gt;&lth3&gt;"+value.name+"&ltbr&gt;<small&gt;"+value.author+"&lt/small&gt;&lt/h3&gt;&lt/a&gt;&lt/li&gt;";
+		boards+= "&lt;li class='boardLink' data-boardID='"+value._id+"' &gt; &lt; a class='board plain thumbnail text-center' href='#boards/"+value._id+"' &gt;  &lt;h3&gt; "+value.name+" &lt; br &gt; &lt; small &gt; "+value.author+" &lt; small &gt; &lt; /h3 &gt; &lt; /a &gt; &lt; /li &gt;";
 	});
-	boards+="</ul>";
+	boards+=" &lt; /ul&gt; ";
 	boardList.append(boards);
 });
 	
@@ -699,8 +708,16 @@ $.get(apiURL+"/boards",function(data)
 				</p>
 				<h2>Skills Tables</h2>
 				<p>
-					We have included the table of our skills from the project brief.
-				</p>
+					We have included the table of our skills from the project brief.</p>
+					 <p>The skills we wanted to improve are listed below, in decreasing priority.</p>
+                        <ol>
+                            <li>
+                                Creating a responsive user interface with HTML5, CSS3 & JavaScript
+                            </li>
+                            <li>Web patterns and frameworks such as model-view-controller</li>
+                            <li>JavaScript libraries/frameworks for single page applications</li>
+                        </ol>
+				
 				<table>
 					<caption>Skills table</caption>
 					<tr>
@@ -825,22 +842,9 @@ $.get(apiURL+"/boards",function(data)
 					</tr>
 				</table>
 				<br>
-				<div class="legend row">
-					<div class="text-center col-xs-4">Mohammad Ali Khan (mak1g11)</div>
-					<div class="text-center col-xs-4">Michael Terry (mrt1g11)</div>
-					<div class="text-center col-xs-4">Both</div>
-				</div>
-				<div class="row">
-					<div class="text-center col-xs-4">
-						<div class="box ali"></div>
-					</div>
-					<div class="text-center col-xs-4">
-						<div class="box michael"></div>
-					</div>
-					<div class="text-center col-xs-4">
-						<div class="box both"></div>
-					</div>
-				</div>
+				<p> Out of the targeted skills to improve, we definitely managed to improve creating responsive user interface. Micheal mostly worked on this and took his level from an Expert to Guru. We were not able to do a lot of work in MVC, but we used routing from Backbone.js to improve our skills on creating single page applications from beginner to intermediate. Apart from that, we did see an increase in skills from working on the back-end server, with both improving from beginner from none to intermediate. This also applies to JSON formatted data import and export, again improving from beginner to intermediate.
+				</p> 
+				
 				<table>
 					<caption>Skills table</caption>
 					<tr>
@@ -891,9 +895,9 @@ $.get(apiURL+"/boards",function(data)
 					</tr>
 					<tr>
 						<td>Asynchronous web server communication and updates</td>
-						<td class="michael" />
 						<td />
-						<td class="ali"/>
+						<td />
+						<td class="both"/>
 						<td />
 						<td />
 					</tr>
@@ -933,8 +937,8 @@ $.get(apiURL+"/boards",function(data)
 					</tr>
 					<tr>
 						<td>Web patterns and frameworks such as model-view-controller</td>
-						<td />
-						<td class="both" />
+						<td class="micheal"/>
+						<td class="ali" />
 						<td />
 						<td />
 						<td />
