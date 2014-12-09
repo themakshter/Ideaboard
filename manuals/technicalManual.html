@@ -17,181 +17,36 @@
 			<br>
 			<small>(mak1g11, mrt1g11)</small>
 		</h1>
-		<h2>Initial Skills Table</h2>
-		<p>
-			We have included the table of our skills from the project brief.
-		</p>
-		<table>
-			<caption>Skills table</caption>
-			<tr>
-				<th>Web Development Skills</th>
-				<th class="equi-width">None</th>
-				<th class="equi-width">Beginner</th>
-				<th class="equi-width">Intermediate</th>
-				<th class="equi-width">Expert</th>
-				<th class="equi-width">Guru</th>
-			</tr>
-			<tr>
-				<td>
-					Creating a responsive user interface with HTML5, CSS3 & JavaScript
-				</td>
-				<td />
-				<td />
-				<td class="ali" />
-				<td class="michael" />
-				<td />
-			</tr>
-			<tr>
-				<td>
-					Use of an HTML template engine and standard elements such as web controls or widgets
-				</td>
-				<td />
-				<td class="both" />
-				<td />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>
-					Role-based security and logging for improved management of information security
-				</td>
-				<td class="both" />
-				<td />
-				<td />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>Declarative validation of user input</td>
-				<td />
-				<td class="both" />
-				<td />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>Asynchronous web server communication and updates</td>
-				<td class="both" />
-				<td />
-				<td />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>XML or JSON formatted data import & export</td>
-				<td />
-				<td class="both" />
-				<td />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>Rich content, embedded audio and video, interactive graphics</td>
-				<td />
-				<td class="ali" />
-				<td />
-				<td class="michael" />
-				<td />
-			</tr>
-			<tr>
-				<td>
-					JavaScript libraries / frameworks for single page applications
-				</td>
-				<td />
-				<td class="both" />
-				<td />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>Object-relational mapping tools to simplify database coding</td>
-				<td class="both" />
-				<td />
-				<td />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>Web patterns and frameworks such as model-view-controller</td>
-				<td class="michael" />
-				<td class="ali" />
-				<td />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>Automated tools for testing accessibility and portability</td>
-				<td class="both" />
-				<td />
-				<td />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>Database transactions for isolation and consistency</td>
-				<td />
-				<td class="ali" />
-				<td class="michael" />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>Performance management and scalability</td>
-				<td class="ali" />
-				<td class="michael" />
-				<td />
-				<td />
-				<td />
-			</tr>
-		</table>
-		<br>
-		<div class="legend row">
-			<div class="text-center col-xs-4">Mohammad Ali Khan (mak1g11)</div>
-			<div class="text-center col-xs-4">Michael Terry (mrt1g11)</div>
-			<div class="text-center col-xs-4">Both</div>
-		</div>
-		<div class="row">
-			<div class="text-center col-xs-4">
-				<div class="box ali"></div>
-			</div>
-			<div class="text-center col-xs-4">
-				<div class="box michael"></div>
-			</div>
-			<div class="text-center col-xs-4">
-				<div class="box both"></div>
-			</div>
-		</div>
+
 		<h2>Architecture</h2>
 		<p>
-			For our application, we split it to two basic parts: the front-end and the back-end. In our design, we wanted the backend to just serve as a RESTful API for our front-end, returning JSON objects which would be manipulated front-end. The RESTful API server would also need to be able to carry out POST, PUT and DELETE functions in addition to GET functions. With this in mind, we set to making creating our server.
-		</p>
-		<p>
-			We decided to implement a client server architecture, where the client uses a RESTful API to communicate with the server. This is because:
+			We split our application into two basic parts: the front-end and the back-end. We decided to implement a client-server architecture, where the client uses a RESTful API to communicate with the server. The back-end would serve as a RESTful API for our front-end, returning JSON objects to be manipulated on the web page. The RESTful API server would also need to be able to carry out POST, PUT and DELETE functions in addition to GET the functions. We decided on this because:
 		</p>
 		<ul>
 			<li>
 				We wanted the the users to be able to access their notes from anywhere.
 			</li>
 			<li>
-				A RESTful API back-end is uncoupled from the front-end implementation, this allows any other front-end implementation. This is important as in the future we may build a native mobile application which can use the same back-end as the web application.
+				A RESTful API back-end is de-coupled from the front-end implementation, allowing any sort of front-end implementation. This is important as in the future we may build a native mobile application which can use the same back-end as the web application.
 			</li>
 			<li>
-				RESTful API's are much more simple to interact with than alternatives such as soap
+				RESTful APIs are much more simple to interact with than alternatives such as SOAP.
 			</li>
 		</ul>
+		<p>With these thoughts in mind, we set about making creating our server.</p>
 		<h2>Back end</h2>
 		<h3>Technologies</h3>
 		<p>
-			The main technology we decided to use to create our backend was node.js. This was chosen over a number of technologies such as the MVC ASP.NET and Java Play Frameworks. These two focused a lot more work on server-side and was too heavy-weight for a simple RESTful API. Moreover, node.js was a technology we were working with on our Group Development Project so we also viewed using this as a perfect opportunity to learn a new technology while killing two birds with one stone.
+			The main technology we decided to use to create our backend was <a href="http://nodejs.org/">Node.js</a>. This was chosen over a number of technologies such as the <a href="http://www.asp.net/mvc">MVC ASP.NET</a> and <a href="https://www.playframework.com/">Java Play Framework</a>. These two focused a lot more work on server-side and were too heavy-weight for a simple RESTful API. Moreover, Node.js was a technology we had to work on in our Group Development Project so we viewed using this as a perfect opportunity to learn a new technology while killing two birds with one stone.
 		</p>
 		<h3>Model</h3>
 		<p>
-			For our application, we designed three main structures: Boards, Columns and Notes. A board would have a name, the name of its author and colour, for customisation purposes. Moreover, it would have a list/number of columns. Each column in a board would have a name and a list/number of notes. Lastly, each note would have a title, the note content and colour. A diagram can be seen below:
+			We designed three main structures: Boards, Columns and Notes. A board would have a name, the name of its author and colour, for customisation purposes. Moreover, it would have a list/number of columns. Each column in a board would have a name and a list/number of notes. Lastly, each note would have a title, the note content and colour. A diagram can be seen below:
 		</p>
 		<img class="image-center" src="img/database_design.png" alt="Database Design Image">
 		<h3>Database</h3>
 		<p>
-			As mentioned previously in the brief, we were still considering which database to use for our application. The two choices had been MongoDB and SQL. SQL seemed to fit our design well, and both of us were more comfortable with it, both having used it before. With this in mind, we set to create our tables. Using our models from above, we created Board, Column and Note tables. Column linked to Board with a BoardID as a foreign key and Note linked to a column in the same way. Our table can be seen below.
+			As mentioned previously in the brief, we were still considering which database to use for our application. The two choices had been MongoDB and SQL. SQL seemed to fit our design well, and both of us were more comfortable with it, having used it before. Therefore, using our models from above, we created Board, Board_Column and Note tables. Board_Column linked to Board with a BoardID as a foreign key and Note linked to a Board_Column in the same way. We used Board_Column instead of Column as that conflicted with SQL terms. Our table can be seen below. 
 		</p>
 		<pre>
 		<code class="language-sql">
@@ -240,7 +95,7 @@ CREATE TABLE Note
 		</code>
 	</pre>
 		<p>
-			However, once we started to prototype our application, it was discovered that it would be extremely tricky to work with node.js and MySQL. It was certainly not impossible, but the amount of work required to make things work was deemed too costly to justify using an SQL database. Instead, a document-based database would be ideal, and this was available in the form of MongoDB. Therefore, we switched to MongoDB. In Mongo, we tried to initially just use one document for each record, meaning a board document, containing its values and a list of column documents which in turn contained note documents. The schema of this can be scene below
+			Once we started prototyping our application, we discovered that it would be extremely tricky to work with node.js and MySQL. It was certainly possible, but the amount of effort required to make things work was deemed too costly to justify using an SQL database. Instead, a document-based database would be ideal, and this was available in the form of MongoDB. Therefore, we switched to MongoDB. In Mongo, we tried to initially just use one document for each record, meaning a board document, containing its values and a list of column documents which in turn contained note documents. The schema of this can be scene below. 
 			<p>
 				<pre><code class="language-javascript">
 		var ideaboardSchema = new Schema(
@@ -267,7 +122,7 @@ CREATE TABLE Note
 		);	
 		</code></pre>
 				<p>
-					This seemed to be a good idea but we faced some trouble while making this work as retrieving individual notes or columns within the inner values was tricky. One could easily retrieve the whole list but doing that to make change to only document inside the list was considered inefficient and wasteful. Instead, the design of our database was more or less similar to the SQL one, with the ids of boards stored in column documents etc. The final schema is as follows.
+					This seemed to be a good idea but we faced some trouble while retrieving individual notes or columns from a board. One could easily retrieve the whole list but doing that to change to only one document inside the list was considered inefficient and wasteful. Instead, the re-design of our database was similar to the SQL one, with the ids of boards stored in column documents etc. The final schema is as follows.
 				</p>
 				<pre><code class="language-javascript">
 			var boardSchema = new Schema(
@@ -299,7 +154,7 @@ CREATE TABLE Note
 		</code></pre>
 				<h3>Design</h3>
 				<p>
-					The design of our server was pretty simple. As mentioned before, the back-end was present to server the
+					As mentioned before, the back-end was present to serve the
 					<code>GET</code>
 					,
 					<code>PUT</code>
@@ -307,18 +162,27 @@ CREATE TABLE Note
 					<code>POST</code>
 					and
 					<code>DELETE</code>
-					requests from our web application. To be able to do this, we designed our routes with our structures in mind. We wanted to be able to display all the boards we had, and then, if needed, a specific board requested with id. This would also apply to the columns and notes belonging to each board. With this in mind, we created a number of routes which can be seen below.
-Using
+					requests from our web application. We wanted to be able to display all the boards we had, and then, if needed, a specific board requested with id. This would also apply to the columns and notes belonging to each board. With this in mind, we created a number of routes which can be seen below.</p>
+					<p>
+					Using
 					<code>/boards</code>
-					will return a list of all the boards contained in the database. If we enter an id next,
+					will return a list of all the boards contained in the database.<br>
+					<img src="img/get_boards.png" alt="GET boards request"><br> If we enter an id next,
 					<code>/boards/:boardId</code>
-					, this will give us a board with the requested id. Moivng on,
+					, this will give us a board with the requested id. <br>
+					<img src="img/get_board.png" alt="GET specific board request">
+					<br> Moivng on,
 					<code>/boards/:boardId/columns</code>
-					would give us a list of columns, and calling an id on that will give us a specific column. Lastly, using
+					would give us a list of columns, and calling an id on that will give us a specific column. <br>
+					<img src="img/get_columns.png" alt="GET columns request">
+					<br> Lastly, using
 					<code>/boards/:boardId/columns/:columnId/notes</code>
 					and adding
 					<code>/:noteId</code>
 					to it will give us the notes and a specific note within this board column respectively.
+					<br>
+					<img src="img/get_notes.png" alt="GET notes request">
+					<br>
 				</p>
 				<h3>Server</h3>
 				<h4>Inspiration</h4>
@@ -365,8 +229,7 @@ app.delete('/boards/:boardId/columns/:columnId/notes/:noteId', notes.deleteNote)
 				<p>
 					The tutorial had just one table of wines in their collection, but we had three. With that in mind, we created methods for retrieving, editing and deleting database records. These were written into separate files and imported in the main server file for modularity and a nicer structure.
 				</p>
-				<h4>Database operations</h4>
-				<h5>Connecting to database</h5>
+				<h4>Database operations</h4> <strong>Connecting to database</strong>
 				<p>
 					We added a separate file which handles connecting with the database. This way, we only connect to our database once when start our server, calling
 					<code>db.openDabase()</code>
@@ -448,8 +311,7 @@ var boards = [];
 		collection.insert(notes,{safe:true}, function(err, result){});
 	});
 };
-				</code></pre>
-			<h5>Retrieving records</h5>
+				</code></pre> <strong>Retrieving records</strong>
 			<p>
 				For each type of record (board, column, note), we implemented methods to retrieve specific records or all of them. For the board database, we used standard methods using the tutorial previously mentioned
 			</p>
@@ -508,7 +370,7 @@ exports.findById = function(req,res){
 	});
 };
 			</code></pre>
-			<h5>Adding new records</h5>
+			<strong>Adding new records</strong>
 			<p>Boards</p>
 			<pre><code class="language-javascript">
 exports.addBoard = function(req,res){
@@ -546,7 +408,7 @@ exports.addColumn = function(req, res){
 };
 
 			</code></pre>
-			<h5>Updating records</h5>
+			<strong>Updating records</strong>
 			<p>Boards</p>
 			<pre><code class="language-javascript">
 exports.updateBoard = function(req,res){
@@ -591,7 +453,7 @@ exports.updateColumn = function(req, res){
 	});
 };
 			</code></pre>
-			<h5>Deleting records</h5>
+			<strong>Deleting records</strong>
 			<p>Boards</p>
 			<pre><code class="language-javascript">
 exports.deleteBoard = function(req,res){
@@ -672,15 +534,15 @@ exports.deleteColumn = function(req, res){
 			<h4>
 				<a href='http://backbonejs.org/'>Backbone.js</a>
 			</h4>
-			<h5>Where?</h5>
+			<strong>Where?</strong>
 			<p>
 				To create the in app router allowing history and navigation on a single page web application
 			</p>
-			<h5>Why?</h5>
+			<strong>Why?</strong>
 			<p>
 				We wanted to use a lightweight MVC web framework to give structure to our application and Backbone is very lightweight and we had previous experience with it. However, we found using a MVC framework for our site too cumbersome and simply developed it without with the exception of the in app router which we needed for basic functionality.
 			</p>
-			<h5>Example</h5>
+			<strong>Example</strong>
 			<figure>
 				<!--code blocks cannot be indented otherwise itll mess up formatting -->
 				<pre>
@@ -711,11 +573,11 @@ app_router.on('route:showBoard',function(id)
 			<h4>
 				<a href='http://jquery.com/'>jQuery</a>
 			</h4>
-			<h5>Where?</h5>
+			<strong>Where?</strong>
 			<p>
 				Used throughout the application for DOM manipulation, ajax requests and smoothing over API differences between web browsers.
 			</p>
-			<h5>Why?</h5>
+			<strong>Why?</strong>
 			<ul>
 				<li>Both our team members had extensive experience with jQuery</li>
 				<li>
@@ -728,7 +590,7 @@ app_router.on('route:showBoard',function(id)
 					Other libraries(jQuery notebook and JQuery color picker) we wanted to use were jQuery extensions
 				</li>
 			</ul>
-			<h5>Example</h5>
+			<strong>Example</strong>
 			<pre>
 <code class="language-javascript">
 &lt;!-- DOM manipulation - Creating the divs that hold the notes --&gt;
@@ -745,16 +607,16 @@ $.get(apiURL+'/boards/'+boardID,function(data)
 			<h4>
 				<a href='https://github.com/raphaelcruzeiro/jquery-notebook'>JQuery notebook</a>
 			</h4>
-			<h5>Where</h5>
+			<strong>Where</strong>
 			<p>
 				So that the notes support rich text, when the user highlights a note a bubble allowing editing action applied to the selected text.
 			</p>
 			<img src="img/notebook-example.png">
-			<h5>Why</h5>
+			<strong>Why</strong>
 			<p>
 				Used because the editor for jQeuery notebook only appears when text is selected it fulfilled our goal of creating a natural user interface. ALso it allows all the rich text function we wish to use.
 			</p>
-			<h5>Example</h5>
+			<strong>Example</strong>
 			<figcaption>
 				<figure>
 					<pre>
@@ -776,7 +638,7 @@ $(textArea).on('contentChange', function(e)
 					Code used to initialise jQuery Notebook and attach an event listener to update on text changes
 				</caption>
 			</figcaption>
-			<h5>Problems</h5>
+			<strong>Problems</strong>
 			<p>
 				We encountered incompatibilities between jQuery notebook and Twitter bootstrap with regards to the position of the pop up bubble. Upon discovering this the site already had already been developed using both these libraries. We found however, that these errors only occurred when the parent elements of the notebook used relative positioning so it was relatively simple to work around.
 			</p>
@@ -790,16 +652,16 @@ $(textArea).on('contentChange', function(e)
 			<h4>
 				<a href='http://wanderinghorse.net/computing/javascript/jquery/colorpicker/'>jQuery Color Picker</a>
 			</h4>
-			<h5>Where</h5>
+			<strong>Where</strong>
 			<p>
 				Used to edit the colour of the notes, was slightly modified to support our selection of colours and add context to the callback function
 			</p>
 			<img src="img/colorpicker-example.png" class="img-rounded">
-			<h5>Why</h5>
+			<strong>Why</strong>
 			<p>
 				We chose this because it supports only a limited number of colours rather than a any shade. This means that the UI is simpler and the user can only pick colours that complement other colours and work with the black text.
 			</p>
-			<h5>Example</h5>
+			<strong>Example</strong>
 			<figcaption>
 				<figure>
 					<pre>
@@ -826,7 +688,7 @@ $(colorPicker).empty().addColorPicker(
 			<p>
 				Used for page Layout and design. The top navigation bar is implemented using bootstrap components. We also used some of the bootstrap glypicons for UI elements, because these are vector icons our site supports high-DPI displays. Bootstrap was also used in the project brief and manuals for the site.
 			</p>
-			<h5>Example</h5>
+			<strong>Example</strong>
 			<figcaption>
 				<figure>
 					<pre>
@@ -866,7 +728,150 @@ $.get(apiURL+"/boards",function(data)
 			<p>
 				We developed the site in Google Chrome because we were most productive with their development tools.
 			</p>
-			<h2>Final Skills Table</h2>
+			<h2>Skills Tables</h2>
+			<p>
+				We have included the table of our skills from the project brief.
+			</p>
+			<table>
+				<caption>Skills table</caption>
+				<tr>
+					<th>Web Development Skills</th>
+					<th class="equi-width">None</th>
+					<th class="equi-width">Beginner</th>
+					<th class="equi-width">Intermediate</th>
+					<th class="equi-width">Expert</th>
+					<th class="equi-width">Guru</th>
+				</tr>
+				<tr>
+					<td>
+						Creating a responsive user interface with HTML5, CSS3 & JavaScript
+					</td>
+					<td />
+					<td />
+					<td class="ali" />
+					<td class="michael" />
+					<td />
+				</tr>
+				<tr>
+					<td>
+						Use of an HTML template engine and standard elements such as web controls or widgets
+					</td>
+					<td />
+					<td class="both" />
+					<td />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>
+						Role-based security and logging for improved management of information security
+					</td>
+					<td class="both" />
+					<td />
+					<td />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>Declarative validation of user input</td>
+					<td />
+					<td class="both" />
+					<td />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>Asynchronous web server communication and updates</td>
+					<td class="both" />
+					<td />
+					<td />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>XML or JSON formatted data import & export</td>
+					<td />
+					<td class="both" />
+					<td />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>Rich content, embedded audio and video, interactive graphics</td>
+					<td />
+					<td class="ali" />
+					<td />
+					<td class="michael" />
+					<td />
+				</tr>
+				<tr>
+					<td>
+						JavaScript libraries / frameworks for single page applications
+					</td>
+					<td />
+					<td class="both" />
+					<td />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>Object-relational mapping tools to simplify database coding</td>
+					<td class="both" />
+					<td />
+					<td />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>Web patterns and frameworks such as model-view-controller</td>
+					<td class="michael" />
+					<td class="ali" />
+					<td />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>Automated tools for testing accessibility and portability</td>
+					<td class="both" />
+					<td />
+					<td />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>Database transactions for isolation and consistency</td>
+					<td />
+					<td class="ali" />
+					<td class="michael" />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>Performance management and scalability</td>
+					<td class="ali" />
+					<td class="michael" />
+					<td />
+					<td />
+					<td />
+				</tr>
+			</table>
+			<br>
+			<div class="legend row">
+				<div class="text-center col-xs-4">Mohammad Ali Khan (mak1g11)</div>
+				<div class="text-center col-xs-4">Michael Terry (mrt1g11)</div>
+				<div class="text-center col-xs-4">Both</div>
+			</div>
+			<div class="row">
+				<div class="text-center col-xs-4">
+					<div class="box ali"></div>
+				</div>
+				<div class="text-center col-xs-4">
+					<div class="box michael"></div>
+				</div>
+				<div class="text-center col-xs-4">
+					<div class="box both"></div>
+				</div>
+			</div>
 			<table>
 				<caption>Skills table</caption>
 				<tr>
@@ -1007,7 +1012,7 @@ $.get(apiURL+"/boards",function(data)
 					<div class="box both"></div>
 				</div>
 			</div>
-			<br><br>
-		</div>
+			<br>
+			<br></div>
 </body>
 	</html>
