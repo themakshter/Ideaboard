@@ -32,4 +32,8 @@
 {
 	font-size: 6rem;
 }
+img
+{
+	max-width: 960px;
+}
 
