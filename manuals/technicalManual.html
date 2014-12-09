@@ -458,8 +458,17 @@ exports.findAll = function(req,res){
 		});
 	});
 };</code></pre>
-
-				<h2>Front end</h2>
+<h3>Testing</h3>
+<p>To an extent, we tested our server using <a href="http://curl.haxx.se/">cURL</a>, follwing instructions from the tutorial. Some example tests can be seen below</p>
+<ul>
+	<li>Get all boards: <code>curl- i -X GET htp://localhost:3000/boards</code> </li>
+	<li>Get board with _id value of 5478fec3e929b4f0311c4a9b: <code>curl -i -X GET http://localhost:3000/boards/5478fec3e929b4f0311c4a9b</code></li>
+	<li>Delete board with _id value of 5478fec3e929b4f0311c4a9b:
+<code>curl -i -X DELETE http://localhost:3000/boards/5478fec3e929b4f0311c4a9b</code></li>
+<li>Add a new board:
+<code>curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "New Board", "author": "New Author"}' http://localhost:3000/boards</code></li>
+<li>Modify board with _id value of 5486e09273ac4cbc289c1124:
+<code>curl -i -X PUT -H 'Content-Type: application/json' -d '{"name": "Board name new", "year": "Author change"}' http://localhost:3000/boards/5486e09273ac4cbc289c1124</code>
 				<h3>User Interface</h3>
 				<p>
 					IdeaBoard uses a natural user interface, a natural user interface is one which is initially invisible, but whilst the user explores the application they discover and learn the supported functions. As such upon first seeing the board the user sees only a series of notes, however, upon hovering over with a mouse they can see UI interface elements to change colour and delete notes. When the user selects text a menu appears under their cursor allowing them to:
