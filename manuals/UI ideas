@@ -1,9 +1,0 @@
-UI ideas
-
-IdeaBoard uses a nautral user interface, a natural user interface is one which appears invisible whilst the user explores the application they discover and learn the supported functions. As such at first glance the interface to edit the notes is invisible, however, upon hovering over with a mouse they can see UI interface elements to change colour and delete notes. When the user selects text a menu appears under their cursor allowing them to 
-<ul>
-	<li>Create bullet points and numbered lists</li>
-	<li>Make text bold or italic</li>
-	<li>Create heading</li>
-	<li>Make links</li>
-</ul>
