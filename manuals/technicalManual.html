@@ -3,15 +3,27 @@
 <head>
 	<title>Technical Manual</title>
 	<meta name="viewport" content="width-device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link type="text/css" rel="stylesheet" href="css/jquery.tocify.css" />
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" href="css/prism.css">
 	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+	<script src="js/jquery.tocify.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script src="js/prism.js"></script>
 </head>
 <body>
-	<div class="container">
+				<script type="text/javascript">
+//Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+              $(function() {
+                  //Calls the tocify method on your HTML div.
+                  $("#toc").tocify();
+              });
+				</script>
+	<div class="row">
+		<div class="col-md-3"><div ID="toc"></div></div>
+		<div class="col-md-9">	<div class="container">
 		<h1>
 			Ideaboard Technical Manual
 			<br>
@@ -19,6 +31,7 @@
 		</h1>
 
 		<h2>Architecture</h2>
+
 		<p>
 			We split our application into two basic parts: the front-end and the back-end. We decided to implement a client-server architecture, where the client uses a RESTful API to communicate with the server. The back-end would serve as a RESTful API for our front-end, returning JSON objects to be manipulated on the web page. The RESTful API server would also need to be able to carry out POST, PUT and DELETE functions in addition to GET the functions. We decided on this because:
 		</p>
@@ -38,6 +51,7 @@
 		</p>
 		<h2>Back end</h2>
 		<h3>Technologies</h3>
+
 		<p>
 			The main technology we decided to use to create our backend was
 			<a href="http://nodejs.org/">Node.js</a>
@@ -648,13 +662,13 @@ $(colorPicker).empty().addColorPicker(
 					<figure>
 						<pre>
 <code class="language-javascript">
-boardList.append('<h1 class="text-center">Available Boards</h1><br>');
+boardList.append("&lt;h1 class="text-center"&gt;Available Boards</h1>&lt;br&gt;");
 $.get(apiURL+"/boards",function(data)
 {
 	var boards = '<ul class="list-inline">';
 	$.each(data,function(key,value)
 	{
-		boards+= "<li class='boardLink ' data-boardID='"+value._id+"'><a class='board plain thumbnail text-center' href='#boards/"+value._id+"'><h3>"+value.name+"<br><small>"+value.author+"</small></h3></a></li>";
+		boards+= "&ltli class='boardLink ' data-boardID='"+value._id+"'&gt;&lta class='board plain thumbnail text-center' href='#boards/"+value._id+"'&gt;&lth3&gt;"+value.name+"&ltbr&gt;<small&gt;"+value.author+"&lt/small&gt;&lt/h3&gt;&lt/a&gt;&lt/li&gt;";
 	});
 	boards+="</ul>";
 	boardList.append(boards);
@@ -968,6 +982,8 @@ $.get(apiURL+"/boards",function(data)
 					</div>
 				</div>
 				<br>
-				<br></div>
+				<br></div></div>
+	</div>
+
 </body>
 		</html>
