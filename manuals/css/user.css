@@ -7,13 +7,29 @@
 	width: 100%;
 	position: relative;
 	background-color: rgba(0,0,0,50);
+	height: 700px;
+	background-image:url(../img/noteBoard.jpg);
+	background-size: 100% auto;
+	background-position: center;
 }
 .header-div .contents
 {
 	position: absolute;
-	top:40%;
+	top:50%;
+	left:50%;
+	transform: translate(-50%, -50%);
 	text-align: center;
 	color:white;
 	margin-left: auto;
 	margin-right: auto;
 }
+.header-div small
+{
+	color:white!important;
+	font-size: 4rem;
+}
+.header-div h1
+{
+	font-size: 6rem;
+}
+
