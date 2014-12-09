@@ -1,4 +1,4 @@
-	var apiURL = 'http://localhost:3000';
+	var apiURL = document.URL;
 	var timeLastUpdated = new Date();
 	var container = $("#container");
 	var currentBoardID;
@@ -45,21 +45,21 @@
 			{
 				var name = $("#boardNameInput").val();
 				var author = $("#authorInput").val();
-				var message = 
+				var message =
 				{
 					"name": name,
 					"author":author,
 					"color":""
 				};
-				$.post(apiURL+"/boards/",message,function(data)
+				$.post(apiURL+"boards/",message,function(data)
 				{
 					var boardID = data._id;
-					var colmsg = 
+					var colmsg =
 					{
 						"board":boardID,
 						'name':''
 					};
-					$.post(apiURL+'/boards/'+boardID+'/columns',colmsg,function(data)
+					$.post(apiURL+'boards/'+boardID+'/columns',colmsg,function(data)
 					{
 						var colID = data._id;
 						var notemsg =
@@ -69,7 +69,7 @@
 							'contents':'',
 							'colour':''
 						};
-						$.post(apiURL+'/boards/'+boardID+'/columns/'+colID+'/notes',notemsg,function()
+						$.post(apiURL+'boards/'+boardID+'/columns/'+colID+'/notes',notemsg,function()
 						{
 							app_router.navigate("boards/"+boardID,{trigger: true});
 
@@ -92,7 +92,8 @@
 		var boardList = container.children().first();
 
 		boardList.append('<h1 class="text-center">Available Boards</h1><br>');
-		$.get(apiURL+"/boards",function(data)
+		console.log(apiURL);
+		$.get(apiURL+"boards",function(data)
 		{
 			var boards = '<ul class="list-inline">';
 			$.each(data,function(key,value)
@@ -103,11 +104,11 @@
 			boardList.append(boards);
 			$('.deleteBoard').click(function()
 			{
-				var boardLink = $(this).parents('.boardLink')
+				var boardLink = $(this).parents('.boardLink');
 				var id = boardLink.attr('data-boardID');
 				$.ajax(
 				{
-					url:apiURL+'/boards/'+id,
+					url:apiURL+'boards/'+id,
 					type:'DELETE'
 				});
 				boardLink.remove();
@@ -122,12 +123,12 @@
 		container.empty();
 		container.append('<div class="board mainBoard" data-boardID="'+boardID+'"></div>');
 		container = container.children().first();
-		$.get(apiURL+'/boards/'+boardID,function(data)
+		$.get(apiURL+'boards/'+boardID,function(data)
 		{
 			$(".userField").text(data.author);
 			$(".boardField").text(data.name);
 		});
-		$.get(apiURL+'/boards/'+boardID+"/columns",function(data)
+		$.get(apiURL+'boards/'+boardID+"/columns",function(data)
 		{
 			$(data).each(function(index,value)
 			{
@@ -142,7 +143,7 @@
 		container.append('<div class="newColumnButton"><span class="glyphicon glyphicon-plus"></span></div>');
 		$('.newColumnButton').click(function()
 		{
-			$.post(apiURL+'/boards/'+currentBoardID+'/columns',
+			$.post(apiURL+'boards/'+currentBoardID+'/columns',
 			{
 				'board':currentBoardID,
 				'name':'New Column'
@@ -150,8 +151,8 @@
 			function(data){
 				var container = $('.board');
 				$('.newColumnButton').remove();
-				makeColumn(data,container)
-				makeNewColumnButton(container)
+				makeColumn(data,container);
+				makeNewColumnButton(container);
 				var newColumnButton = $('.newColumnButton');
 				window.scrollBy(300,0);
 			});
@@ -167,12 +168,12 @@
 		colContainer.append("<div class=\"notesContainer\">");
 		var notesContainer = colContainer.children().first();
 		var notes = [];
-		$.get(apiURL+'/boards/'+currentBoardID+"/columns/"+colID,function(data)
+		$.get(apiURL+'boards/'+currentBoardID+"/columns/"+colID,function(data)
 		{
 			var colName = data.name;
 			if (colName === "")
 			{
-				colName = "Name ..."
+				colName = "Name ...";
 			}
 			colContainer.prepend("<span class='glyphicon glyphicon-remove deleteColumn' />");
 			var deleteColumn = colContainer.children().first();
@@ -182,7 +183,7 @@
 			{
 				var title = e.target.value;
 				var colID = $(this).parents('.boardColumn').attr('data-columnid');
-				var message = 
+				var message =
 				{
 						"_id":colID,
 						"board":currentBoardID,
@@ -190,7 +191,7 @@
 				};
 				$.ajax(
 				{
-					url: apiURL+'/boards/'+currentBoardID+'/columns/'+colID,
+					url: apiURL+'boards/'+currentBoardID+'/columns/'+colID,
 					data:message,
 					type:'PUT'
 				});
@@ -202,13 +203,13 @@
 				column.remove();
 				$.ajax(
 				{
-					url:apiURL+'/boards/'+currentBoardID+'/columns/'+colid,
+					url:apiURL+'boards/'+currentBoardID+'/columns/'+colid,
 					type:'DELETE'
 				});
 
 			});
 		});
-		$.get(apiURL+'/boards/'+currentBoardID+"/columns/"+colID+"/notes",function(data)
+		$.get(apiURL+'boards/'+currentBoardID+"/columns/"+colID+"/notes",function(data)
 		{
 			console.log(data);
 			$(data).each(function(index,value)
@@ -252,7 +253,7 @@
 			var colID = noteCon.parents('.boardColumn').attr('data-columnid');
 			$.ajax(
 			{
-				url:apiURL+'/boards/'+currentBoardID+'/columns/'+colID+'/notes/'+noteId,
+				url:apiURL+'boards/'+currentBoardID+'/columns/'+colID+'/notes/'+noteId,
 				type: 'DELETE'
 			});
 		});
@@ -290,14 +291,13 @@
 	}
 	function createNote(colID)
 	{
-		$.post(apiURL+"/boards/"+currentBoardID+"/columns/"+colID+"/notes",
+		$.post(apiURL+"boards/"+currentBoardID+"/columns/"+colID+"/notes",
 		{
 			"name":"New Note",
 			"contents":"",
 			"column":colID,
 			"color":"#FFFFFF"
-		}
-		,function(data)
+		},function(data)
 		{
 			console.log(data);
 			var container = $('.boardColumn[data-columnid="'+colID+'"] .notesContainer');
@@ -319,7 +319,7 @@
 			"color":color
 		};
 		$.ajax({
-			url:apiURL+'/boards/'+boardID+"/columns/"+colID+"/notes/"+id,
+			url:apiURL+'boards/'+boardID+"/columns/"+colID+"/notes/"+id,
 			type:'PUT',
 			data:JSON.stringify(message),
 			success:function(data,textStatus,jqXHR)
