@@ -17,28 +17,27 @@
 			<br>
 			<small>(mak1g11, mrt1g11)</small>
 		</h1>
-		
+
 		<h2>Architecture</h2>
 		<p>
-			We split our application into two basic parts: the front-end and the back-end. We decided to implement a client server architecture, where the client uses a RESTful API to communicate with the server. The backend would serve as a RESTful API for our front-end, returning JSON objects which would be manipulated front-end. The RESTful API server would also need to be able to carry out POST, PUT and DELETE functions in addition to GET functions.
-			. Some of the reasons for our decision include:
+			We split our application into two basic parts: the front-end and the back-end. We decided to implement a client-server architecture, where the client uses a RESTful API to communicate with the server. The back-end would serve as a RESTful API for our front-end, returning JSON objects to be manipulated on the web page. The RESTful API server would also need to be able to carry out POST, PUT and DELETE functions in addition to GET the functions. We decided on this because:
 		</p>
 		<ul>
 			<li>
 				We wanted the the users to be able to access their notes from anywhere.
 			</li>
 			<li>
-				A RESTful API back-end is uncoupled from the front-end implementation, this allows any other front-end implementation. This is important as in the future we may build a native mobile application which can use the same back-end as the web application.
+				A RESTful API back-end is de-coupled from the front-end implementation, allowing any sort of front-end implementation. This is important as in the future we may build a native mobile application which can use the same back-end as the web application.
 			</li>
 			<li>
-				RESTful API's are much more simple to interact with than alternatives such as soap
+				RESTful APIs are much more simple to interact with than alternatives such as SOAP.
 			</li>
 		</ul>
-		<p>With this in mind, we set about making creating our server.</p>
+		<p>With these thoughts in mind, we set about making creating our server.</p>
 		<h2>Back end</h2>
 		<h3>Technologies</h3>
 		<p>
-			The main technology we decided to use to create our backend was node.js. This was chosen over a number of technologies such as the MVC ASP.NET and Java Play Frameworks. These two focused a lot more work on server-side and was too heavy-weight for a simple RESTful API. Moreover, node.js was a technology we were working with on our Group Development Project so we also viewed using this as a perfect opportunity to learn a new technology while killing two birds with one stone.
+			The main technology we decided to use to create our backend was <a href="http://nodejs.org/">Node.js</a>. This was chosen over a number of technologies such as the <a href="http://www.asp.net/mvc">MVC ASP.NET</a> and <a href="https://www.playframework.com/">Java Play Framework</a>. These two focused a lot more work on server-side and were too heavy-weight for a simple RESTful API. Moreover, Node.js was a technology we had to work on in our Group Development Project so we viewed using this as a perfect opportunity to learn a new technology while killing two birds with one stone.
 		</p>
 		<h3>Model</h3>
 		<p>
@@ -221,8 +220,7 @@ app.delete('/boards/:boardId/columns/:columnId/notes/:noteId', notes.deleteNote)
 				<p>
 					The tutorial had just one table of wines in their collection, but we had three. With that in mind, we created methods for retrieving, editing and deleting database records. These were written into separate files and imported in the main server file for modularity and a nicer structure.
 				</p>
-				<h4>Database operations</h4>
-				<strong>Connecting to database</strong>
+				<h4>Database operations</h4> <strong>Connecting to database</strong>
 				<p>
 					We added a separate file which handles connecting with the database. This way, we only connect to our database once when start our server, calling
 					<code>db.openDabase()</code>
@@ -304,8 +302,7 @@ var boards = [];
 		collection.insert(notes,{safe:true}, function(err, result){});
 	});
 };
-				</code></pre>
-			<strong>Retrieving records</strong>
+				</code></pre> <strong>Retrieving records</strong>
 			<p>
 				For each type of record (board, column, note), we implemented methods to retrieve specific records or all of them. For the board database, we used standard methods using the tutorial previously mentioned
 			</p>
@@ -723,149 +720,149 @@ $.get(apiURL+"/boards",function(data)
 				We developed the site in Google Chrome because we were most productive with their development tools.
 			</p>
 			<h2>Skills Tables</h2>
-		<p>
-			We have included the table of our skills from the project brief.
-		</p>
-		<table>
-			<caption>Skills table</caption>
-			<tr>
-				<th>Web Development Skills</th>
-				<th class="equi-width">None</th>
-				<th class="equi-width">Beginner</th>
-				<th class="equi-width">Intermediate</th>
-				<th class="equi-width">Expert</th>
-				<th class="equi-width">Guru</th>
-			</tr>
-			<tr>
-				<td>
-					Creating a responsive user interface with HTML5, CSS3 & JavaScript
-				</td>
-				<td />
-				<td />
-				<td class="ali" />
-				<td class="michael" />
-				<td />
-			</tr>
-			<tr>
-				<td>
-					Use of an HTML template engine and standard elements such as web controls or widgets
-				</td>
-				<td />
-				<td class="both" />
-				<td />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>
-					Role-based security and logging for improved management of information security
-				</td>
-				<td class="both" />
-				<td />
-				<td />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>Declarative validation of user input</td>
-				<td />
-				<td class="both" />
-				<td />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>Asynchronous web server communication and updates</td>
-				<td class="both" />
-				<td />
-				<td />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>XML or JSON formatted data import & export</td>
-				<td />
-				<td class="both" />
-				<td />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>Rich content, embedded audio and video, interactive graphics</td>
-				<td />
-				<td class="ali" />
-				<td />
-				<td class="michael" />
-				<td />
-			</tr>
-			<tr>
-				<td>
-					JavaScript libraries / frameworks for single page applications
-				</td>
-				<td />
-				<td class="both" />
-				<td />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>Object-relational mapping tools to simplify database coding</td>
-				<td class="both" />
-				<td />
-				<td />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>Web patterns and frameworks such as model-view-controller</td>
-				<td class="michael" />
-				<td class="ali" />
-				<td />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>Automated tools for testing accessibility and portability</td>
-				<td class="both" />
-				<td />
-				<td />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>Database transactions for isolation and consistency</td>
-				<td />
-				<td class="ali" />
-				<td class="michael" />
-				<td />
-				<td />
-			</tr>
-			<tr>
-				<td>Performance management and scalability</td>
-				<td class="ali" />
-				<td class="michael" />
-				<td />
-				<td />
-				<td />
-			</tr>
-		</table>
-		<br>
-		<div class="legend row">
-			<div class="text-center col-xs-4">Mohammad Ali Khan (mak1g11)</div>
-			<div class="text-center col-xs-4">Michael Terry (mrt1g11)</div>
-			<div class="text-center col-xs-4">Both</div>
-		</div>
-		<div class="row">
-			<div class="text-center col-xs-4">
-				<div class="box ali"></div>
+			<p>
+				We have included the table of our skills from the project brief.
+			</p>
+			<table>
+				<caption>Skills table</caption>
+				<tr>
+					<th>Web Development Skills</th>
+					<th class="equi-width">None</th>
+					<th class="equi-width">Beginner</th>
+					<th class="equi-width">Intermediate</th>
+					<th class="equi-width">Expert</th>
+					<th class="equi-width">Guru</th>
+				</tr>
+				<tr>
+					<td>
+						Creating a responsive user interface with HTML5, CSS3 & JavaScript
+					</td>
+					<td />
+					<td />
+					<td class="ali" />
+					<td class="michael" />
+					<td />
+				</tr>
+				<tr>
+					<td>
+						Use of an HTML template engine and standard elements such as web controls or widgets
+					</td>
+					<td />
+					<td class="both" />
+					<td />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>
+						Role-based security and logging for improved management of information security
+					</td>
+					<td class="both" />
+					<td />
+					<td />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>Declarative validation of user input</td>
+					<td />
+					<td class="both" />
+					<td />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>Asynchronous web server communication and updates</td>
+					<td class="both" />
+					<td />
+					<td />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>XML or JSON formatted data import & export</td>
+					<td />
+					<td class="both" />
+					<td />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>Rich content, embedded audio and video, interactive graphics</td>
+					<td />
+					<td class="ali" />
+					<td />
+					<td class="michael" />
+					<td />
+				</tr>
+				<tr>
+					<td>
+						JavaScript libraries / frameworks for single page applications
+					</td>
+					<td />
+					<td class="both" />
+					<td />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>Object-relational mapping tools to simplify database coding</td>
+					<td class="both" />
+					<td />
+					<td />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>Web patterns and frameworks such as model-view-controller</td>
+					<td class="michael" />
+					<td class="ali" />
+					<td />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>Automated tools for testing accessibility and portability</td>
+					<td class="both" />
+					<td />
+					<td />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>Database transactions for isolation and consistency</td>
+					<td />
+					<td class="ali" />
+					<td class="michael" />
+					<td />
+					<td />
+				</tr>
+				<tr>
+					<td>Performance management and scalability</td>
+					<td class="ali" />
+					<td class="michael" />
+					<td />
+					<td />
+					<td />
+				</tr>
+			</table>
+			<br>
+			<div class="legend row">
+				<div class="text-center col-xs-4">Mohammad Ali Khan (mak1g11)</div>
+				<div class="text-center col-xs-4">Michael Terry (mrt1g11)</div>
+				<div class="text-center col-xs-4">Both</div>
 			</div>
-			<div class="text-center col-xs-4">
-				<div class="box michael"></div>
+			<div class="row">
+				<div class="text-center col-xs-4">
+					<div class="box ali"></div>
+				</div>
+				<div class="text-center col-xs-4">
+					<div class="box michael"></div>
+				</div>
+				<div class="text-center col-xs-4">
+					<div class="box both"></div>
+				</div>
 			</div>
-			<div class="text-center col-xs-4">
-				<div class="box both"></div>
-			</div>
-		</div>
 			<table>
 				<caption>Skills table</caption>
 				<tr>
@@ -1006,7 +1003,7 @@ $.get(apiURL+"/boards",function(data)
 					<div class="box both"></div>
 				</div>
 			</div>
-			<br><br>
-		</div>
+			<br>
+			<br></div>
 </body>
 	</html>
