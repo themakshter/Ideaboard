@@ -2,21 +2,6 @@ var mongo = require('mongodb');
 
 var	BSON = mongo.BSONPure;
 
-exports.findAllAlt = function(req,res){
-	var boardId = req.params.boardId;
-	console.log("Columns for board with id: " + boardId);
-	db.collection('columns', function(err, collection){
-		collection.findOne({'board': new BSON.ObjectID(boardId)},function(err, item){
-			if(err)	{
-				console.log(err);
-			}else{
-				res.send(item);
-			}
-		});
-	});
-};
-
-
 exports.findById = function(req,res){
 	var id = req.params.columnId;
 	console.log("Retrieving column : " + id);
@@ -50,7 +35,7 @@ exports.addColumn = function(req, res){
 			if(err){
 				res.send({"err":"An error occurred - " + err});
 			}else{
-				console.log("Succes : " + JSON.stringify(results[0]));
+				console.log("Success : " + JSON.stringify(results[0]));
 				res.send(results[0]);
 			}
 		});
