@@ -65,7 +65,7 @@
 		<p>
 			We designed three main structures: Boards, Columns and Notes. A board would have a name, the name of its author and colour, for customisation purposes. Moreover, it would have a list/number of columns. Each column in a board would have a name and a list/number of notes. Lastly, each note would have a title, the note content and colour. A diagram can be seen below:
 		</p>
-		<img class="image-center" src="img/database_design.png" alt="Database Design Image">
+		<img class="image-center img-responsive" src="img/database_design.png" alt="Database Design Image">
 		<h3>Database</h3>
 		<p>
 			As mentioned previously in the brief, we were still considering which database to use for our application. The two choices had been MongoDB and SQL. SQL seemed to fit our design well, and both of us were more comfortable with it, having used it before. Therefore, using our models from above, we created Board, Board_Column and Note tables. Board_Column linked to Board with a BoardID as a foreign key and Note linked to a Board_Column in the same way. We used Board_Column instead of Column as that conflicted with SQL terms. Our table can be seen below.
@@ -185,19 +185,19 @@ CREATE TABLE Note
 					<code>/boards</code>
 					will return a list of all the boards contained in the database.
 					<br>
-					<img src="img/get_boards.png" alt="GET boards request">
+					<img class=" img-responsive" src="img/get_boards.png" alt="GET boards request">
 					<br>
 					If we enter an id next,
 					<code>/boards/:boardId</code>
 					, this will give us a board with the requested id.
 					<br>
-					<img src="img/get_board.png" alt="GET specific board request">
+					<img class=" img-responsive"src="img/get_board.png" alt="GET specific board request">
 					<br>
 					Moivng on,
 					<code>/boards/:boardId/columns</code>
 					would give us a list of columns, and calling an id on that will give us a specific column.
 					<br>
-					<img src="img/get_columns.png" alt="GET columns request">
+					<img class=" img-responsive" src="img/get_columns.png" alt="GET columns request">
 					<br>
 					Lastly, using
 					<code>/boards/:boardId/columns/:columnId/notes</code>
@@ -205,7 +205,7 @@ CREATE TABLE Note
 					<code>/:noteId</code>
 					to it will give us the notes and a specific note within this board column respectively.
 					<br>
-					<img src="img/get_notes.png" alt="GET notes request">
+					<img class=" img-responsive" src="img/get_notes.png" alt="GET notes request">
 					<br></p>
 				<h3>Server</h3>
 				<h4>Inspiration</h4>
@@ -493,12 +493,12 @@ exports.findAll = function(req,res){
 				</p>
 				<figcaption>
 					<figure>
-						<img src="img/narrowboards.png"></figure>
+						<img class=" img-responsive" src="img/narrowboards.png"></figure>
 					<caption>the board selection screen on a narrow screen</caption>
 				</figcaption>
 				<figcaption>
 					<figure>
-						<img src="img/wideboards.png"></figure>
+						<img class=" img-responsive" src="img/wideboards.png"></figure>
 					<caption>Board selection screen on a wide screen</caption>
 				</figcaption>
 				<h3>Front-end libraries</h3>
@@ -590,7 +590,7 @@ $.get(apiURL+'/boards/'+boardID,function(data)
 				<p>
 					So that the notes support rich text, when the user highlights a note a bubble allowing editing action applied to the selected text.
 				</p>
-				<img src="img/notebook-example.png">
+				<img class=" img-responsive" src="img/notebook-example.png">
 				<br><strong>Why?</strong>
 				<p>
 					Used because the editor for jQeuery notebook only appears when text is selected it fulfilled our goal of creating a natural user interface. ALso it allows all the rich text function we wish to use.
@@ -622,7 +622,7 @@ $(textArea).on('contentChange', function(e)
 					We encountered incompatibilities between jQuery notebook and Twitter bootstrap with regards to the position of the pop up bubble. Upon discovering this the site already had already been developed using both these libraries. We found however, that these errors only occurred when the parent elements of the notebook used relative positioning so it was relatively simple to work around.
 				</p>
 				<figure>
-					<img src="img/notebook-position.png" class="img-rounded">
+					<img class=" img-responsive" src="img/notebook-position.png" class="img-rounded">
 					<figcaption>
 						jQuery notebook with relatively positioned columns causing the bubble appear up and to the right of selected text (during development)
 					</figcaption>
@@ -635,7 +635,7 @@ $(textArea).on('contentChange', function(e)
 				<p>
 					Used to edit the colour of the notes, was slightly modified to support our selection of colours and add context to the callback function
 				</p>
-				<img src="img/colorpicker-example.png" class="img-rounded">
+				<img class=" img-responsive" src="img/colorpicker-example.png" class="img-rounded">
 				<br><strong>Why?</strong>
 				<p>
 					We chose this because it supports only a limited number of colours rather than a any shade. This means that the UI is simpler and the user can only pick colours that complement other colours and work with the black text.
