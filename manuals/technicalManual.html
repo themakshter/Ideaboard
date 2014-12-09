@@ -8,12 +8,19 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" href="css/prism.css">
 	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
 	<script src="js/jquery.tocify.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script src="js/prism.js"></script>
 </head>
 <body>
+				<script type="text/javascript">
+//Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+              $(function() {
+                  //Calls the tocify method on your HTML div.
+                  $("#toc").tocify();
+              });
+				</script>
 	<div class="row">
 		<div class="col-md-3"><div ID="toc"></div></div>
 		<div class="col-md-9">	<div class="container">
@@ -24,6 +31,7 @@
 		</h1>
 
 		<h2>Architecture</h2>
+
 		<p>
 			We split our application into two basic parts: the front-end and the back-end. We decided to implement a client-server architecture, where the client uses a RESTful API to communicate with the server. The back-end would serve as a RESTful API for our front-end, returning JSON objects to be manipulated on the web page. The RESTful API server would also need to be able to carry out POST, PUT and DELETE functions in addition to GET the functions. We decided on this because:
 		</p>
@@ -43,6 +51,7 @@
 		</p>
 		<h2>Back end</h2>
 		<h3>Technologies</h3>
+
 		<p>
 			The main technology we decided to use to create our backend was
 			<a href="http://nodejs.org/">Node.js</a>
@@ -975,12 +984,6 @@ $.get(apiURL+"/boards",function(data)
 				<br>
 				<br></div></div>
 	</div>
-			<script type="text/javascript">
-//Executes your code when the DOM is ready.  Acts the same as $(document).ready().
-              $(function() {
-                  //Calls the tocify method on your HTML div.
-                  $("#toc").tocify();
-              });
-				</script>
+
 </body>
 		</html>
