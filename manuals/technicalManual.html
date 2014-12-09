@@ -53,7 +53,7 @@
 		<h3>Technologies</h3>
 
 		<p>
-			The main technology we decided to use to create our backend was
+			The main technology we decided to use to create our back-end was
 			<a href="http://nodejs.org/">Node.js</a>
 			. This was chosen over a number of technologies such as the
 			<a href="http://www.asp.net/mvc">MVC ASP.NET</a>
@@ -472,7 +472,7 @@ exports.findAll = function(req,res){
 				<h2>Front-end</h2>
 				<h3>User Interface</h3>
 				<p>
-					IdeaBoard uses a natural user interface, a natural user interface is one which is initially invisible, but whilst the user explores the application they discover and learn the supported functions. As such upon first seeing the board the user sees only a series of notes, however, upon hovering over with a mouse they can see UI interface elements to change colour and delete notes. When the user selects text a menu appears under their cursor allowing them to:
+					IdeaBoard uses a natural user interface; an interface which is initially invisible, but whilst the user explores the application they discover and learn the supported functions. As such, upon first seeing the board the user sees only a series of notes but when hover over the notes with a mouse they can see UI interface elements to change colour and delete notes. When the user selects text a menu appears under their cursor allowing them to:
 				</p>
 				<ul>
 					<li>Create bullet points and numbered lists</li>
@@ -489,12 +489,12 @@ exports.findAll = function(req,res){
 				</p>
 
 				<p>
-					Despite not implementing a mobile version of the site we have implemented a responsive design to be flexible to different display sizes. Our responsive design was implmented using the Bootstrap css framework. Below is an example of the board selection screen responding to width changes.
+					Despite not implementing a mobile version of the site we have implemented a responsive design to be flexible to different display sizes. Our responsive design was implemented using the Bootstrap framework. Below is an example of the board selection screen responding to width changes.
 				</p>
 				<figcaption>
 					<figure>
 						<img class=" img-responsive" src="img/narrowboards.png"></figure>
-					<caption>the board selection screen on a narrow screen</caption>
+					<caption>The board selection screen on a narrow screen</caption>
 				</figcaption>
 				<figcaption>
 					<figure>
@@ -573,7 +573,7 @@ app_router.on('route:showBoard',function(id)
 				<pre>
 <code class="language-javascript">
 &lt;!-- DOM manipulation - Creating the divs that hold the notes --&gt;
-colContainer.append("<div class=\"notesContainer\">");
+colContainer.append("&lt;div class=\"notesContainer\"&gt;");
 
 &lt;!-- An Ajax call to get the board name and author--&gt;
 $.get(apiURL+'/boards/'+boardID,function(data)
@@ -593,7 +593,7 @@ $.get(apiURL+'/boards/'+boardID,function(data)
 				<img class=" img-responsive" src="img/notebook-example.png">
 				<br><strong>Why?</strong>
 				<p>
-					Used because the editor for jQeuery notebook only appears when text is selected it fulfilled our goal of creating a natural user interface. ALso it allows all the rich text function we wish to use.
+					Used because the editor for jQeuery notebook only appears when text is selected it fulfilled our goal of creating a natural user interface. Also it allows all the rich text function we wish to use.
 				</p>
 				<strong>Example</strong>
 				<figcaption>
