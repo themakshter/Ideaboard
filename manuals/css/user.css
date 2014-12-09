@@ -37,4 +37,8 @@ img
 	max-width: 960px;
 	display: block;
 }
-
+figcaption
+{
+	font-style: italic!important;
+	font-weight: bold;
+}
