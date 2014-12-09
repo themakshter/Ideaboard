@@ -17,7 +17,9 @@ app.configure(function () {
     app.use(express.static(path.join(__dirname, 'public')));
 });
 
-db.openDatabase("ideaboardDB");
+//db.openDatabase("ideaboardDB");
+db.connectToDatabase("mongodb://heroku_app32367096:1o3ei9s8rlmundbe3mm5j9u90h@ds061370.mongolab.com:61370/heroku_app32367096");
+
 
 //boards
 app.get('/boards', boards.findAll);

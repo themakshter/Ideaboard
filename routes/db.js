@@ -4,6 +4,17 @@ var Server = mongo.Server,
 	Db = mongo.Db,
 	BSON = mongo.BSONPure;
 
+exports.connectToDatabase = function(databaseURI){
+	mongo.connect(databaseURI,{safe:true},function(error, database){
+	console.log("connected, db: " + database);
+            db = database;
+            db.addListener("error", function(error){
+            console.log("Error connecting to MongoLab");
+        });
+	});
+};
+
+
 var server = new Server('localhost',27017, {auto_reconnect: true});
 
 exports.openDatabase = function(dbName){
