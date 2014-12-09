@@ -7,9 +7,9 @@
 	width: 100%;
 	position: relative;
 	background-color: rgba(0,0,0,50);
-	height: 700px;
+	height: 90vh;
 	background-image:url(../img/noteBoard.jpg);
-	background-size: 100% auto;
+	background-size: cover;
 	background-position: center;
 }
 .header-div .contents
@@ -35,5 +35,6 @@
 img
 {
 	max-width: 960px;
+	display: block;
 }
 
