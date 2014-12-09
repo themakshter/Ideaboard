@@ -60,7 +60,7 @@ exports.updateBoard = function(req,res){
 
 exports.deleteBoard = function(req,res){
 	var id = req.params.boardId;
-	console.log("Deeleting board : " + id);
+	console.log("Deleting board : " + id);
 	db.collection('boards', function(err, collection){
 		collection.remove({"_id":new BSON.ObjectID(id)}, {safe:true}, function(err, result){
 			if(err){
