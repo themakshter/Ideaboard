@@ -662,13 +662,13 @@ $(colorPicker).empty().addColorPicker(
 					<figure>
 						<pre>
 <code class="language-javascript">
-boardList.append('<h1 class="text-center">Available Boards</h1><br>');
+boardList.append("&lt;h1 class="text-center"&gt;Available Boards</h1>&lt;br&gt;");
 $.get(apiURL+"/boards",function(data)
 {
 	var boards = '<ul class="list-inline">';
 	$.each(data,function(key,value)
 	{
-		boards+= "<li class='boardLink ' data-boardID='"+value._id+"'><a class='board plain thumbnail text-center' href='#boards/"+value._id+"'><h3>"+value.name+"<br><small>"+value.author+"</small></h3></a></li>";
+		boards+= "&ltli class='boardLink ' data-boardID='"+value._id+"'&gt;&lta class='board plain thumbnail text-center' href='#boards/"+value._id+"'&gt;&lth3&gt;"+value.name+"&ltbr&gt;<small&gt;"+value.author+"&lt/small&gt;&lt/h3&gt;&lt/a&gt;&lt/li&gt;";
 	});
 	boards+="</ul>";
 	boardList.append(boards);
