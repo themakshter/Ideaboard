@@ -1,3 +1,4 @@
+require('newrelic');
 //calling all the required files
 var express = require("express");
 	path = require('path');
@@ -5,6 +6,7 @@ var express = require("express");
 	boards = require("./routes/boards.js");
 	columns = require("./routes/columns.js");
 	notes = require("./routes/notes.js");
+
 
 var port = 3000;
 
