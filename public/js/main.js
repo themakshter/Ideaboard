@@ -1,7 +1,10 @@
-	var apiURL = document.URL;
+	var parts = document.URL.split("/");
+	var apiURL = parts[0]+"//"+parts[2]+"/";
+	console.log(apiURL);
 	var timeLastUpdated = new Date();
 	var container = $("#container");
 	var currentBoardID;
+
 	var AppRouter = Backbone.Router.extend(
 	{
 		routes:
