@@ -92,7 +92,6 @@
 		var boardList = container.children().first();
 
 		boardList.append('<h1 class="text-center">Available Boards</h1><br>');
-		console.log(apiURL);
 		$.get(apiURL+"boards",function(data)
 		{
 			var boards = '<ul class="list-inline">';

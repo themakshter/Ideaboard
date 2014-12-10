@@ -6,7 +6,7 @@ var Server = mongo.Server,
 
 exports.connectToDatabase = function(databaseURI){
 	mongo.connect(databaseURI,{safe:true},function(error, database){
-	console.log("connected, db: " + database);
+	console.log("connected to the database");
             db = database;
             db.addListener("error", function(error){
             console.log("Error connecting to MongoLab");
