@@ -1,4 +1,5 @@
 require('newrelic');
+require('dotenv').config();
 //calling all the required files
 var express = require("express");
 	path = require('path');
@@ -19,8 +20,10 @@ app.configure(function () {
     app.use(express.static(path.join(__dirname, 'public')));
 });
 
-//db.openDatabase("ideaboardDB");
-db.connectToDatabase("mongodb://heroku_app32370393:c8sg6ppveh639803aago9vjkn9@ds061370.mongolab.com:61370/heroku_app32370393");
+
+
+const connectionString = process.env.DB_CONNECTION_STRING;
+db.connectToDatabase(connectionString);
 
 
 //boards

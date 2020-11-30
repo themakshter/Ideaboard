@@ -1,11 +1,12 @@
 {
-	"name":"ideaboard",
-	"description":"IdeaBoard Note-Taking Application",
-	"version":"0.0.1",
+	"name": "ideaboard",
+	"description": "IdeaBoard Note-Taking Application",
+	"version": "0.0.1",
 	"private": true,
-	"dependencies":{
-		"express":"3.x",
+	"dependencies": {
+		"dotenv": "8.2.0",
+		"express": "3.x",
 		"mongodb": ">=0.9.6-7",
-		"newrelic":"1.x"		
+		"newrelic": "1.x"
 	}
 }

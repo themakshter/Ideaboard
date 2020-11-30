@@ -7,7 +7,7 @@ exports.findAllAlt = function(req, res){
 	var columnId = req.params.columnId;
 	console.log("Notes for column with id:" + columnId + " for board with id : " + boardId);
 	db.collection('notes',function(err, collection){
-		collection.findOne({'column': new BSON.ObjectID(columnId)},function(err,item){
+		collection.findOne({'column': new mongo.ObjectID(columnId)},function(err,item){
 			if(err){
 				console.log(err);
 			}else{
@@ -21,7 +21,7 @@ exports.findById = function(req, res){
 	var id = req.params.noteId;
 	console.log("Retrieving note : " + id);
 	db.collection('notes', function(err, collection){
-		collection.findOne({"_id":new BSON.ObjectID(id)},function(err, item){
+		collection.findOne({"_id":new mongo.ObjectID(id)},function(err, item){
 			if(err){
 				console.log(err);
 			}else{
@@ -36,7 +36,7 @@ exports.findAll = function(req, res){
 	var columnId = req.params.columnId;
 	console.log("Notes for column with id:" + columnId + " for board with id : " + boardId);
 	db.collection('notes',function(err, collection){
-		collection.find({'column': new BSON.ObjectID(columnId)}).toArray(function(err,items){
+		collection.find({'column': new mongo.ObjectID(columnId)}).toArray(function(err,items){
 			res.send(items);
 		});
 	});
@@ -45,7 +45,7 @@ exports.findAll = function(req, res){
 exports.addNote = function(req, res){
 	var note = req.body;
 	console.log("Adding note : " + JSON.stringify(note));
-	note.column = new BSON.ObjectID(note.column);
+	note.column = new mongo.ObjectID(note.column);
 	db.collection('notes', function(err,collection){
 		collection.insert(note,{safe:true},function(err, result){
 			if(err){
@@ -62,10 +62,10 @@ exports.updateNote = function(req, res){
 	var note = req.body;
 	var id = req.params.noteId;
 	delete note._id;
-	note.column = new BSON.ObjectID(note.column);
+	note.column = new mongo.ObjectID(note.column);
 	console.log("Updating note : " + id + "\n"+JSON.stringify(note));
 	db.collection('notes', function(err, collection){
-		collection.update({"_id":new BSON.ObjectID(id)},note,{safe:true},function(err, result){
+		collection.update({"_id":new mongo.ObjectID(id)},note,{safe:true},function(err, result){
 			if(err){
 				console.log(err);
 				res.send({"error":"An error has occurred "});
@@ -82,7 +82,7 @@ exports.deleteNote = function(req, res){
 	var id = req.params.noteId;
 	console.log("Deleting note : " + id);
 	db.collection('notes',  function(err, collection){
-		collection.remove({"_id":new BSON.ObjectID(id)}, {safe:true}, function(err, result){
+		collection.remove({"_id":new mongo.ObjectID(id)}, {safe:true}, function(err, result){
 			if(err){
 				res.send({"error":"An error has occurred - " + err});
 			}else{

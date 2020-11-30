@@ -10,7 +10,7 @@ var populateDBalt = function(){
 	var notes = [];
 	
 	for(var i = 0; i<5;i++){
-		var boardId = new BSON.ObjectID();
+		var boardId = new mongo.ObjectID();
 		boards.push({
 			name:"testBoard"+i,
 			author:"testAuthor"+i,
@@ -18,7 +18,7 @@ var populateDBalt = function(){
 		});
 		var tempColumns = [];
 		for(var j = 0;j < 4; j++){
-			var columnId = new BSON.ObjectID();
+			var columnId = new mongo.ObjectID();
 			tempColumns.push(
 			{
 				_id: columnId,
@@ -26,7 +26,7 @@ var populateDBalt = function(){
 			});
 			var tempNotes = [];
 			for(var k = 0;k < 3;k++){
-				var noteId = new BSON.ObjectID();
+				var noteId = new mongo.ObjectID();
 				tempNotes.push(
 				{
 					_id: noteId,
@@ -58,7 +58,7 @@ var boards = [];
 	var notes = [];
 	
 	for(var i = 0; i<5;i++){
-		var boardId = new BSON.ObjectID();
+		var boardId = new mongo.ObjectID();
 		boards.push({
 			name:"testBoard"+i,
 			author:"testAuthor"+i,
@@ -66,7 +66,7 @@ var boards = [];
 		});
 		var tempColumns = [];
 		for(var j = 0;j < 4; j++){
-			var columnId = new BSON.ObjectID();
+			var columnId = new mongo.ObjectID();
 			columns.push(
 			{
 				_id: columnId,
@@ -74,7 +74,7 @@ var boards = [];
 				name: "testBoard"+i+"testColumn"+j
 			});
 			for(var k = 0;k < 3;k++){
-				var noteId = new BSON.ObjectID();
+				var noteId = new mongo.ObjectID();
 				notes.push(
 				{
 					_id: noteId,

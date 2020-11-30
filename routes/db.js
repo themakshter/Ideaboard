@@ -7,8 +7,8 @@ var Server = mongo.Server,
 exports.connectToDatabase = function(databaseURI){
 	mongo.connect(databaseURI,{safe:true},function(error, database){
 	console.log("connected to the database");
-            db = database;
-            db.addListener("error", function(error){
+						db = database.db();
+						db.addListener("error", function(error){
             console.log("Error connecting to MongoLab");
         });
 	});
@@ -21,7 +21,7 @@ exports.openDatabase = function(dbName){
 	db = new Db(dbName,server);
 	db.open(function(err, db){
 	if(!err){
-		console.log("Connected to '" +dbName+ "' database ");
+		console.log("Connected to '" + dbName + "' database ");
 		db.collection('boards',{strict:true}, function(err, collection){
 			if(err){
 				console.log("The 'boards' collection doesn't exist. Creating it with sample data...");
@@ -38,7 +38,7 @@ var boards = [];
 	var notes = [];
 	
 	for(var i = 0; i<5;i++){
-		var boardId = new BSON.ObjectID();
+		var boardId = new mongo.ObjectID();
 		boards.push({
 			_id: boardId,
 			name:"testBoard"+i,
@@ -47,7 +47,7 @@ var boards = [];
 		});
 		var tempColumns = [];
 		for(var j = 0;j < 5; j++){
-			var columnId = new BSON.ObjectID();
+			var columnId = new mongo.ObjectID();
 			columns.push(
 			{
 				_id: columnId,
@@ -55,7 +55,7 @@ var boards = [];
 				name: "testBoard"+i+"testColumn"+j
 			});
 			for(var k = 0;k < 5;k++){
-				var noteId = new BSON.ObjectID();
+				var noteId = new mongo.ObjectID();
 				notes.push(
 				{
 					_id: noteId,
